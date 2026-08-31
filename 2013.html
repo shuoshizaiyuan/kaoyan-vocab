@@ -823,8 +823,7 @@ function switchArticle(k){
 }
 function goHome(){
   if(location.protocol === 'file:'){
-    alert('本地文件没有总页面。网上总页：
-https://shuoshizaiyuan.github.io/kaoyan-vocab/');
+    alert('本地文件没有总页面。网上总页：\nhttps://shuoshizaiyuan.github.io/kaoyan-vocab/');
     return;
   }
   location.href = 'index.html';
@@ -920,9 +919,7 @@ function downloadFromCloud(done){
 }
 function toggleCloud(){
   if(getSyncToken()){
-    if(confirm('当前已开启云同步（自动保存 / 自动读取）。
-
-点「确定」= 更换同步码；点「取消」= 保持现状。')){
+    if(confirm('当前已开启云同步（自动保存 / 自动读取）。\n\n点「确定」= 更换同步码；点「取消」= 保持现状。')){
       var t = prompt('粘贴新的 GitHub 密钥（github_pat_ 开头）：');
       if(t && t.trim()){ setSyncToken(t.trim()); setSyncMode('cloud'); toast('☁ 同步码已更新'); }
     }
