@@ -919,15 +919,17 @@ function downloadFromCloud(done){
   });
 }
 function toggleCloud(){
-  if(getSyncMode() === 'cloud'){
-    if(confirm('关闭云同步？本地进度保留，之后不再自动上传。')){
-      setSyncMode('local');
-      syncBtnLabel();
-      toast('已切换为本地模式');
+  if(getSyncToken()){
+    if(confirm('当前已开启云同步（自动保存 / 自动读取）。
+
+点「确定」= 更换同步码；点「取消」= 保持现状。')){
+      var t = prompt('粘贴新的 GitHub 密钥（github_pat_ 开头）：');
+      if(t && t.trim()){ setSyncToken(t.trim()); setSyncMode('cloud'); toast('☁ 同步码已更新'); }
     }
+    syncBtnLabel();
     return;
   }
-  var t = prompt('输入你的 GitHub 密钥（格式 ghp_ 或 github_pat_ 开头）：');
+  var t = prompt('输入你的 GitHub 密钥（github_pat_ 开头；总页门户上也有统一设置入口）：');
   if(!t || !t.trim()) return;
   setSyncToken(t.trim());
   setSyncMode('cloud');
@@ -939,7 +941,7 @@ function toggleCloud(){
 }
 function syncBtnLabel(){
   var b = document.getElementById('cloudBtn');
-  if(b) b.textContent = (getSyncMode() === 'cloud') ? '☁ 云同步：开' : '☁ 云同步：关';
+  if(b) b.textContent = getSyncToken() ? '☁ 云同步：开' : '☁ 云同步：关';
 }
 var _baseSave = save;
 save = function(){ _baseSave(); maybeAutoSync(); };
@@ -950,7 +952,7 @@ function maybeAutoSync(){
   _syncTimer = setTimeout(function(){ uploadToCloud(null); }, 4000);
 }
 syncBtnLabel();
-if(getSyncMode() === 'cloud'){ downloadFromCloud(null); }
+if(getSyncToken()){ downloadFromCloud(null); }
 function importProgress(ev){
   var f = ev.target.files && ev.target.files[0];
   if(!f) return;
