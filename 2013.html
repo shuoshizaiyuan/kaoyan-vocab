@@ -137,6 +137,9 @@ footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:30px}
       <span class="chip" id="pKnown"></span>
       <span class="chip" id="pHidden"></span>
       <span id="viewBanner" class="banner hidden"></span>
+      <span style="flex:1"></span>
+      <button class="btn ghost" onclick="exportProgress()">⬇ 备份进度</button>
+      <label class="btn ghost" style="cursor:pointer;margin:0">⬆ 恢复进度<input type="file" accept=".json,application/json" style="display:none" onchange="importProgress(event)"></label>
     </div>
   </div>
 
@@ -647,6 +650,35 @@ function switchArticle(k){
   load();
   buildLemmaInfo(); applyView();
   toast('已切换到 ' + ART[k].header + '：词卡、轮次、掌握记录各自独立保存');
+}
+/* ===== 进度备份 / 恢复（跨设备迁移进度）===== */
+function exportProgress(){
+  var d = new Date();
+  var ymd = d.getFullYear() + ('0'+(d.getMonth()+1)).slice(-2) + ('0'+d.getDate()).slice(-2);
+  var blob = new Blob([JSON.stringify(state)], {type:'application/json'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = ART[CUR].header.replace(/ /g,'') + '_进度备份_' + ymd + '.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+  toast('已备份 ' + ART[CUR].header + ' 进度（' + state.rounds.length + ' 轮）');
+}
+function importProgress(ev){
+  var f = ev.target.files && ev.target.files[0];
+  if(!f) return;
+  var rd = new FileReader();
+  rd.onload = function(){
+    try{
+      var s = JSON.parse(rd.result);
+      if(!(s && s.rounds && s.shown && s.clicks)) throw 0;
+      state = s;
+      save();
+      applyView();
+      toast('已恢复 ' + ART[CUR].header + ' 进度（' + state.rounds.length + ' 轮）');
+    }catch(e){ toast('备份文件格式不对，导入失败'); }
+  };
+  rd.readAsText(f);
+  ev.target.value = '';
 }
 </script>
 </body>
