@@ -137,6 +137,7 @@ footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:30px}
       <span class="chip" id="pKnown"></span>
       <span class="chip" id="pHidden"></span>
       <span id="viewBanner" class="banner hidden"></span>
+      <button class="btn ghost" onclick="goHome()">🏠 返回总页</button>
       <span style="flex:1"></span>
       <button class="btn ghost" onclick="exportProgress()">⬇ 备份进度</button>
       <label class="btn ghost" style="cursor:pointer;margin:0">⬆ 恢复进度<input type="file" accept=".json,application/json" style="display:none" onchange="importProgress(event)"></label>
@@ -818,6 +819,14 @@ function switchArticle(k){
   load();
   buildLemmaInfo(); applyView();
   toast('已切换到 ' + ART[k].header + '：词卡、轮次、掌握记录各自独立保存');
+}
+function goHome(){
+  if(location.protocol === 'file:'){
+    alert('本地文件没有总页面。网上总页：
+https://shuoshizaiyuan.github.io/kaoyan-vocab/');
+    return;
+  }
+  location.href = 'index.html';
 }
 /* ===== 进度备份 / 恢复（跨设备迁移进度）===== */
 function exportProgress(){
