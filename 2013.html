@@ -773,20 +773,32 @@ var ART = {
 };
 var CUR = 'T1';
 function $$w(){ return Array.prototype.slice.call(document.querySelectorAll('.artpanel:not(.hidden) w')); }
+function isEmptyState(s){
+  return s && s.rounds && Array.isArray(s.rounds) && s.rounds.length === 0
+      && Array.isArray(s.shown) && s.shown.length === 0
+      && s.clicks && Object.keys(s.clicks).length === 0;
+}
 function load(){
+  var inited = null;
+  try{ inited = localStorage.getItem(LS_KEY + '_inited'); }catch(e){}
   try{
     var raw = localStorage.getItem(LS_KEY);
     if(raw){
       var s = JSON.parse(raw);
-      if(s && s.rounds && s.shown && s.clicks){ state = s; return; }
+      if(s && s.rounds && s.shown && s.clicks){
+        if(!isEmptyState(s)){ state = s; return; }   // 有真实进度 -> 用本地
+        if(inited){ state = s; return; }             // 空进度 + 已初始化过（用户清空过/空轮）-> 尊重
+        // 空进度但从未初始化 -> 落空，用内置默认进度顶上
+      }
     }
   }catch(e){}
   if(DEFAULT_STATES && DEFAULT_STATES[CUR]){
     state = JSON.parse(JSON.stringify(DEFAULT_STATES[CUR]));
+    try{ localStorage.setItem(LS_KEY + '_inited', '1'); }catch(e){}
     save();
-  } else {
-    state = {rounds:[], shown:[], clicks:{}, view:null};
+    return;
   }
+  state = {rounds:[], shown:[], clicks:{}, view:null};
 }
 function toggleAns(k){
   var box = document.getElementById('answerBox' + k);
