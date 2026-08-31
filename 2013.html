@@ -143,6 +143,7 @@ footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:30px}
       <label class="btn ghost" style="cursor:pointer;margin:0">⬆ 恢复进度<input type="file" accept=".json,application/json" style="display:none" onchange="importProgress(event)"></label>
       <button class="btn ghost" onclick="exportSyncCode()">📋 复制同步码</button>
       <button class="btn ghost" onclick="importSyncCode()">📥 粘贴同步码</button>
+      <button class="btn ghost" id="cloudBtn" onclick="toggleCloud()">☁ 云同步：关</button>
     </div>
   </div>
 
@@ -870,6 +871,86 @@ function importSyncCode(){
     if(full[CUR] && full[CUR].rounds){ state = JSON.parse(JSON.stringify(full[CUR])); save(); applyView(); }
   }catch(e){ toast('同步码无效，请完整复制后再试'); }
 }
+/* ===== 云同步（GitHub API，本地/云 双模式；密钥只存在本设备 localStorage）===== */
+var SYNC_MODE_KEY = 'wb_sync_mode_v1';
+var SYNC_TOKEN_KEY = 'wb_sync_token_v1';
+var SYNC_FILE = 'progress.json';
+function getSyncMode(){ try{ return localStorage.getItem(SYNC_MODE_KEY) || 'local'; }catch(e){ return 'local'; } }
+function getSyncToken(){ try{ return localStorage.getItem(SYNC_TOKEN_KEY) || ''; }catch(e){ return ''; } }
+function setSyncMode(m){ try{ localStorage.setItem(SYNC_MODE_KEY, m); }catch(e){} }
+function setSyncToken(t){ try{ localStorage.setItem(SYNC_TOKEN_KEY, t); }catch(e){} }
+function syncApi(method, payload, cb){
+  var token = getSyncToken();
+  var xhr = new XMLHttpRequest();
+  xhr.open(method, 'https://api.github.com/repos/shuoshizaiyuan/kaoyan-vocab/contents/' + SYNC_FILE);
+  xhr.setRequestHeader('Accept', 'application/vnd.github+json');
+  if(token) xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+  if(payload) xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function(){ cb && cb(xhr.status, xhr.responseText); };
+  xhr.onerror = function(){ cb && cb(0, ''); };
+  xhr.send(payload ? JSON.stringify(payload) : null);
+}
+function b64e(s){ return btoa(unescape(encodeURIComponent(s))); }
+function b64d(s){ return decodeURIComponent(escape(atob(s))); }
+function uploadToCloud(done){
+  var full = collectAllStates();
+  syncApi('GET', null, function(st, resp){
+    var sha = '';
+    if(st === 200){ try{ sha = JSON.parse(resp).sha; }catch(e){} }
+    var body = {message:'sync progress', content:b64e(JSON.stringify(full)), branch:'main'};
+    if(sha) body.sha = sha;
+    syncApi('PUT', body, function(st2){
+      if(st2 === 200 || st2 === 201){ if(done) done(true); }
+      else { toast('☁ 上传失败（' + st2 + '），请检查密钥'); if(done) done(false); }
+    });
+  });
+}
+function downloadFromCloud(done){
+  syncApi('GET', null, function(st, resp){
+    if(st !== 200){ if(done) done(false); return; }
+    try{
+      var full = JSON.parse(b64d(JSON.parse(resp).content));
+      var n = 0;
+      for(var k in ART){ if(full[k] && full[k].rounds){ localStorage.setItem(ART[k].ls, JSON.stringify(full[k])); n++; } }
+      toast('☁ 已从云端拉取 ' + n + ' 篇文章进度');
+      if(full[CUR] && full[CUR].rounds){ state = JSON.parse(JSON.stringify(full[CUR])); save(); applyView(); }
+      if(done) done(true);
+    }catch(e){ if(done) done(false); }
+  });
+}
+function toggleCloud(){
+  if(getSyncMode() === 'cloud'){
+    if(confirm('关闭云同步？本地进度保留，之后不再自动上传。')){
+      setSyncMode('local');
+      syncBtnLabel();
+      toast('已切换为本地模式');
+    }
+    return;
+  }
+  var t = prompt('输入你的 GitHub 密钥（格式 ghp_ 或 github_pat_ 开头）：');
+  if(!t || !t.trim()) return;
+  setSyncToken(t.trim());
+  setSyncMode('cloud');
+  syncBtnLabel();
+  toast('☁ 正在连接云端…');
+  downloadFromCloud(function(ok){
+    uploadToCloud(null);
+  });
+}
+function syncBtnLabel(){
+  var b = document.getElementById('cloudBtn');
+  if(b) b.textContent = (getSyncMode() === 'cloud') ? '☁ 云同步：开' : '☁ 云同步：关';
+}
+var _baseSave = save;
+save = function(){ _baseSave(); maybeAutoSync(); };
+var _syncTimer = null;
+function maybeAutoSync(){
+  if(getSyncMode() !== 'cloud') return;
+  clearTimeout(_syncTimer);
+  _syncTimer = setTimeout(function(){ uploadToCloud(null); }, 4000);
+}
+syncBtnLabel();
+if(getSyncMode() === 'cloud'){ downloadFromCloud(null); }
 function importProgress(ev){
   var f = ev.target.files && ev.target.files[0];
   if(!f) return;
