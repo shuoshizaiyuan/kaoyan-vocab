@@ -844,7 +844,7 @@ function exportProgress(){
 function collectAllStates(){
   var full = {};
   for(var k in ART){
-    try{ var raw = localStorage.getItem(ART[k].ls); if(raw){ full[k] = JSON.parse(raw); } }catch(e){}
+    try{ var raw = localStorage.getItem(ART[k].ls); if(raw){ full[ART[k].ls] = JSON.parse(raw); } }catch(e){}
   }
   return full;
 }
@@ -864,10 +864,10 @@ function importSyncCode(){
   try{
     var full = JSON.parse(txt);
     var n = 0;
-    for(var k in ART){ if(full[k] && full[k].rounds){ localStorage.setItem(ART[k].ls, JSON.stringify(full[k])); n++; } }
+    for(var k in ART){ if(full[ART[k].ls] && full[ART[k].ls].rounds){ localStorage.setItem(ART[k].ls, JSON.stringify(full[ART[k].ls])); n++; } }
     if(n === 0){ toast('同步码里没有识别到进度，请确认完整复制'); return; }
     toast('已导入 ' + n + ' 篇文章进度，刷新页面生效');
-    if(full[CUR] && full[CUR].rounds){ state = JSON.parse(JSON.stringify(full[CUR])); save(); applyView(); }
+    if(full[ART[CUR].ls] && full[ART[CUR].ls].rounds){ state = JSON.parse(JSON.stringify(full[ART[CUR].ls])); save(); applyView(); }
   }catch(e){ toast('同步码无效，请完整复制后再试'); }
 }
 /* ===== 云同步（GitHub API，本地/云 双模式；密钥只存在本设备 localStorage）===== */
@@ -910,9 +910,9 @@ function downloadFromCloud(done){
     try{
       var full = JSON.parse(b64d(JSON.parse(resp).content));
       var n = 0;
-      for(var k in ART){ if(full[k] && full[k].rounds){ localStorage.setItem(ART[k].ls, JSON.stringify(full[k])); n++; } }
+      for(var k in ART){ if(full[ART[k].ls] && full[ART[k].ls].rounds){ localStorage.setItem(ART[k].ls, JSON.stringify(full[ART[k].ls])); n++; } }
       toast('☁ 已从云端拉取 ' + n + ' 篇文章进度');
-      if(full[CUR] && full[CUR].rounds){ state = JSON.parse(JSON.stringify(full[CUR])); save(); applyView(); }
+      if(full[ART[CUR].ls] && full[ART[CUR].ls].rounds){ state = JSON.parse(JSON.stringify(full[ART[CUR].ls])); save(); applyView(); }
       if(done) done(true);
     }catch(e){ if(done) done(false); }
   });
