@@ -945,41 +945,92 @@ function syncBtnLabel(){
 }
 /* ===== 轮次/进度清除（仅操作当前文章或整年数据，不碰框架与内容）===== */
 function blankState(){ return {rounds:[], shown:[], clicks:{}, view:null}; }
+/* 危险操作确认弹窗：确认按钮默认灰色，勾选「我已知悉上述情况」后才可点 */
+function dangerConfirm(opt, onOk){
+  var old = document.getElementById('dangerDlg');
+  if(old && old.parentNode){ old.parentNode.removeChild(old); }
+  var dlg = document.createElement('div');
+  dlg.id = 'dangerDlg';
+  dlg.setAttribute('style', 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,.5);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px');
+  var box = document.createElement('div');
+  box.setAttribute('style', 'background:#ffffff;border-radius:16px;padding:22px 24px;max-width:460px;width:100%;box-shadow:0 16px 48px rgba(15,23,42,.3);font-family:inherit;color:#1f2937;box-sizing:border-box');
+  var esc = function(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+  var html = ''
+    + '<div style="font-size:17px;font-weight:700;margin-bottom:10px">' + esc(opt.title) + '</div>'
+    + '<div style="font-size:14px;line-height:1.9;color:#475569">' + esc(opt.desc) + '</div>'
+    + '<div style="font-size:13.5px;line-height:1.7;color:#92400e;background:#fef3c7;border:1px solid #fcd34d;border-radius:10px;padding:10px 12px;margin:12px 0 14px">⚠️ 此操作<b>不可撤销</b>，执行后无法恢复。</div>'
+    + '<label style="display:flex;align-items:flex-start;gap:9px;font-size:14px;color:#374151;cursor:pointer;margin-bottom:18px;line-height:1.6"><input type="checkbox" id="dangerChk" style="width:17px;height:17px;margin-top:2px;flex:none"> <span>我已知悉上述情况，确认要执行该操作</span></label>'
+    + '<div style="display:flex;gap:10px;justify-content:flex-end;align-items:center">'
+    + '<button id="dangerCancel" style="padding:9px 18px;border:1px solid #d1d5db;background:#fff;color:#374151;border-radius:9px;font-size:14px;cursor:pointer">取消</button>'
+    + '<button id="dangerOk" disabled style="padding:9px 20px;border:none;background:#cbd5e1;color:#f8fafc;border-radius:9px;font-size:14px;font-weight:700;cursor:not-allowed">' + esc(opt.btnText || '确认执行') + '</button>'
+    + '</div>';
+  box.innerHTML = html;
+  dlg.appendChild(box);
+  document.body.appendChild(dlg);
+  var chk = document.getElementById('dangerChk');
+  var ok = document.getElementById('dangerOk');
+  var cancel = document.getElementById('dangerCancel');
+  function close(){ if(dlg.parentNode){ dlg.parentNode.removeChild(dlg); } }
+  chk.onchange = function(){
+    ok.disabled = !chk.checked;
+    if(chk.checked){ ok.style.background = '#dc2626'; ok.style.cursor = 'pointer'; }
+    else { ok.style.background = '#cbd5e1'; ok.style.cursor = 'not-allowed'; }
+  };
+  cancel.onclick = close;
+  ok.onclick = function(){ if(ok.disabled) return; close(); onOk && onOk(); };
+  dlg.onclick = function(e){ if(e.target === dlg){ close(); } };
+}
 function undoRound(){
   if(!state.rounds || state.rounds.length === 0){ toast('本篇还没有已完成的轮次可退回'); return; }
   var last = state.rounds[state.rounds.length - 1];
-  if(!confirm('确定退回上一轮？\n将撤销第 ' + state.rounds.length + ' 轮（本轮点开 ' + (last.shown ? last.shown.length : 0) + ' 个词）。')) return;
-  state.rounds.pop();
-  state.shown = [];
-  state.view = null;
-  save(); applyView();
-  toast('已退回：现在处于第 ' + (state.rounds.length + 1) + ' 轮·进行中');
+  var n = state.rounds.length;
+  var cnt = (last && last.shown) ? last.shown.length : 0;
+  dangerConfirm({
+    title: '退回一轮',
+    desc: '点击确认按钮将撤销「' + ART[CUR].header + '」最近的一轮练习（第 ' + n + ' 轮，共点开 ' + cnt + ' 个词），该轮的词卡点开记录将被移除，页面退回上一轮完成后的状态。',
+    btnText: '确认退回'
+  }, function(){
+    state.rounds.pop();
+    state.shown = [];
+    state.view = null;
+    save(); applyView();
+    toast('已退回：现在处于第 ' + (state.rounds.length + 1) + ' 轮·进行中');
+  });
 }
 function clearArticle(){
   if(!state.rounds.length && !Object.keys(state.clicks).length){ toast('本篇本来就是干净的'); return; }
-  if(!confirm('确定清空 ' + ART[CUR].header + ' 的全部进度？\n（词卡点开记录、轮次、掌握情况将全部归零，且不可恢复）')) return;
-  if(!confirm('再次确认：真的要彻底清空 ' + ART[CUR].header + ' 吗？')) return;
-  try{ localStorage.removeItem(LS_KEY); localStorage.setItem(LS_KEY + '_inited', '1'); }catch(e){}
-  state = blankState();
-  save(); applyView();
-  toast(ART[CUR].header + ' 已彻底清空，从第 1 轮重新开始');
+  var name = ART[CUR].header;
+  dangerConfirm({
+    title: '清空本篇进度',
+    desc: '点击确认按钮将彻底清空「' + name + '」的全部练习进度：所有轮次记录、点开过的词卡记录、掌握情况与统计都会归零，页面回到从未练过的全新状态。清空后从第 1 轮重新开始，此操作不可恢复。',
+    btnText: '确认清空'
+  }, function(){
+    try{ localStorage.removeItem(LS_KEY); localStorage.setItem(LS_KEY + '_inited', '1'); }catch(e){}
+    state = blankState();
+    save(); applyView();
+    toast(name + ' 已彻底清空，从第 1 轮重新开始');
+  });
 }
 function clearYear(){
   var names = [];
   for(var k in ART){ names.push(ART[k].header); }
-  if(!confirm('确定清空整个年份（' + names.join('、') + '）的全部进度？\n所有文章将归零，不可恢复。')) return;
-  if(!confirm('再次确认：真的要清空整年全部 4 篇吗？')) return;
-  var n = 0;
-  for(var k in ART){
-    try{
-      localStorage.removeItem(ART[k].ls);
-      localStorage.setItem(ART[k].ls + '_inited', '1');
-      n++;
-    }catch(e){}
-  }
-  state = blankState();
-  save(); applyView();
-  toast('整年 ' + n + ' 篇已全部清空，从零开始');
+  dangerConfirm({
+    title: '清空整年进度',
+    desc: '点击确认按钮将彻底清空本页面（' + names.join('、') + '）全部 ' + names.length + ' 篇文章的练习进度：每篇的轮次、点词记录、掌握统计全部归零，所有文章回到全新状态。此操作不可恢复，请三思。',
+    btnText: '确认清空整年'
+  }, function(){
+    var n = 0;
+    for(var k in ART){
+      try{
+        localStorage.removeItem(ART[k].ls);
+        localStorage.setItem(ART[k].ls + '_inited', '1');
+        n++;
+      }catch(e){}
+    }
+    state = blankState();
+    save(); applyView();
+    toast('整年 ' + n + ' 篇已全部清空，从零开始');
+  });
 }
 var _baseSave = save;
 save = function(){ _baseSave(); maybeAutoSync(); };
