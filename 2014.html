@@ -444,7 +444,7 @@ footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:30px}
 <div id="toast"></div>
 
 <script>
-var LS_KEY = 'wb2014text1_v1';
+var LS_KEY = 'wb2014text1_v2';
 function $(s){ return document.querySelector(s); }
 function $$(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
 
@@ -766,10 +766,10 @@ applyView();
 /* ===== 多文章扩展（各篇词卡、轮次、掌握记录完全独立保存）===== */
 var DEFAULT_STATES = {};
 var ART = {
-  T1: {ls:'wb2014text1_v1', csv:'2014年考研英语一Text1_单词掌握情况', header:'Text 1'},
-  T2: {ls:'wb2014text2_v1', csv:'2014年考研英语一Text2_单词掌握情况', header:'Text 2'},
-  T3: {ls:'wb2014text3_v1', csv:'2014年考研英语一Text3_单词掌握情况', header:'Text 3'},
-  T4: {ls:'wb2014text4_v1', csv:'2014年考研英语一Text4_单词掌握情况', header:'Text 4'}
+  T1: {ls:'wb2014text1_v2', csv:'2014年考研英语一Text1_单词掌握情况', header:'Text 1'},
+  T2: {ls:'wb2014text2_v2', csv:'2014年考研英语一Text2_单词掌握情况', header:'Text 2'},
+  T3: {ls:'wb2014text3_v2', csv:'2014年考研英语一Text3_单词掌握情况', header:'Text 3'},
+  T4: {ls:'wb2014text4_v2', csv:'2014年考研英语一Text4_单词掌握情况', header:'Text 4'}
 };
 var CUR = 'T1';
 function $$w(){ return Array.prototype.slice.call(document.querySelectorAll('.artpanel:not(.hidden) w')); }
