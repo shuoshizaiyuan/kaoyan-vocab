@@ -959,7 +959,7 @@ function clearArticle(){
   if(!state.rounds.length && !Object.keys(state.clicks).length){ toast('本篇本来就是干净的'); return; }
   if(!confirm('确定清空 ' + ART[CUR].header + ' 的全部进度？\n（词卡点开记录、轮次、掌握情况将全部归零，且不可恢复）')) return;
   if(!confirm('再次确认：真的要彻底清空 ' + ART[CUR].header + ' 吗？')) return;
-  try{ localStorage.removeItem(LS_KEY); localStorage.removeItem(LS_KEY + '_inited'); }catch(e){}
+  try{ localStorage.removeItem(LS_KEY); localStorage.setItem(LS_KEY + '_inited', '1'); }catch(e){}
   state = blankState();
   save(); applyView();
   toast(ART[CUR].header + ' 已彻底清空，从第 1 轮重新开始');
@@ -973,7 +973,7 @@ function clearYear(){
   for(var k in ART){
     try{
       localStorage.removeItem(ART[k].ls);
-      localStorage.removeItem(ART[k].ls + '_inited');
+      localStorage.setItem(ART[k].ls + '_inited', '1');
       n++;
     }catch(e){}
   }
