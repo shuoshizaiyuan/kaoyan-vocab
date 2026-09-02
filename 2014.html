@@ -144,6 +144,9 @@ footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:30px}
       <button class="btn ghost" onclick="exportSyncCode()">📋 复制同步码</button>
       <button class="btn ghost" onclick="importSyncCode()">📥 粘贴同步码</button>
       <button class="btn ghost" id="cloudBtn" onclick="toggleCloud()">☁ 云同步：关</button>
+      <button class="btn ghost" onclick="undoRound()">↩ 退回一轮</button>
+      <button class="btn ghost" onclick="clearArticle()">🗑 清空本篇</button>
+      <button class="btn ghost" onclick="clearYear()">🧹 清空整年</button>
     </div>
   </div>
 
@@ -935,6 +938,44 @@ function toggleCloud(){
 function syncBtnLabel(){
   var b = document.getElementById('cloudBtn');
   if(b) b.textContent = getSyncToken() ? '☁ 云同步：开' : '☁ 云同步：关';
+}
+/* ===== 轮次/进度清除（仅操作当前文章或整年数据，不碰框架与内容）===== */
+function blankState(){ return {rounds:[], shown:[], clicks:{}, view:null}; }
+function undoRound(){
+  if(!state.rounds || state.rounds.length === 0){ toast('本篇还没有已完成的轮次可退回'); return; }
+  var last = state.rounds[state.rounds.length - 1];
+  if(!confirm('确定退回上一轮？\n将撤销第 ' + state.rounds.length + ' 轮（本轮点开 ' + (last.shown ? last.shown.length : 0) + ' 个词）。')) return;
+  state.rounds.pop();
+  state.shown = [];
+  state.view = null;
+  save(); applyView();
+  toast('已退回：现在处于第 ' + (state.rounds.length + 1) + ' 轮·进行中');
+}
+function clearArticle(){
+  if(!state.rounds.length && !Object.keys(state.clicks).length){ toast('本篇本来就是干净的'); return; }
+  if(!confirm('确定清空 ' + ART[CUR].header + ' 的全部进度？\n（词卡点开记录、轮次、掌握情况将全部归零，且不可恢复）')) return;
+  if(!confirm('再次确认：真的要彻底清空 ' + ART[CUR].header + ' 吗？')) return;
+  try{ localStorage.removeItem(LS_KEY); localStorage.removeItem(LS_KEY + '_inited'); }catch(e){}
+  state = blankState();
+  save(); applyView();
+  toast(ART[CUR].header + ' 已彻底清空，从第 1 轮重新开始');
+}
+function clearYear(){
+  var names = [];
+  for(var k in ART){ names.push(ART[k].header); }
+  if(!confirm('确定清空整个年份（' + names.join('、') + '）的全部进度？\n所有文章将归零，不可恢复。')) return;
+  if(!confirm('再次确认：真的要清空整年全部 4 篇吗？')) return;
+  var n = 0;
+  for(var k in ART){
+    try{
+      localStorage.removeItem(ART[k].ls);
+      localStorage.removeItem(ART[k].ls + '_inited');
+      n++;
+    }catch(e){}
+  }
+  state = blankState();
+  save(); applyView();
+  toast('整年 ' + n + ' 篇已全部清空，从零开始');
 }
 var _baseSave = save;
 save = function(){ _baseSave(); maybeAutoSync(); };
