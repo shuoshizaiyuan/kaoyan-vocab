@@ -50,8 +50,7 @@
 </style>
 </head>
 <body>
-  <a class="backlink" href="index.html">← 返回速刷入口</a>
-  <div class="syncset">GitHub 同步密钥(PAT)：<input id="patInput" type="password" placeholder="粘贴 fine-grained PAT（study-log-data 仓库 Contents 读写）" style="width:360px"><button onclick="savePat()">保存密钥</button> <span id="syncStatus"></span></div>
+  <a class="backlink" href="../index.html">← 返回总门户</a>
   <div class="toolbar">
     <button class="primary" onclick="exportRound()">导出本轮完成情况</button>
     <button class="warn" onclick="saveRound()">保存本轮 → 进入下一轮</button>
@@ -160,18 +159,6 @@
   var SYNC_FILE = 'site-data/speed-brush.json';
   function hubPat() { return localStorage.getItem('hub_pat') || ''; }
   function hubRepo() { return localStorage.getItem('hub_repo') || 'shuoshizaiyuan/study-log-data'; }
-  function savePat() {
-    var v = document.getElementById('patInput').value.trim();
-    if (!v) { alert('请先粘贴 PAT 再保存。'); return; }
-    localStorage.setItem('hub_pat', v);
-    document.getElementById('patInput').value = '';
-    document.getElementById('syncStatus').textContent = '密钥已保存到本机浏览器 ✓';
-  }
-  (function () {
-    var p = hubPat();
-    var u = document.getElementById('syncStatus');
-    if (u) u.textContent = p ? '密钥已配置 ✓' : '尚未配置密钥（填一次即可，三页共用）';
-  })();
   var LIST_KEYS = { 1: 'kaoyan-full1-v2-state', 2: 'kaoyan-full2-v2-state', 3: 'kaoyan-full3-v2-state' };
   function readListState(n) { try { return JSON.parse(localStorage.getItem(LIST_KEYS[n])) || { round: 1, mastered: {}, history: [] }; } catch (e) { return { round: 1, mastered: {}, history: [] }; } }
   function writeListState(n, s) { localStorage.setItem(LIST_KEYS[n], JSON.stringify(s)); }
