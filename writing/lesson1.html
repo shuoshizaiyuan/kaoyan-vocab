@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>考研英语写作 · 大作文第一课 功能句样板（前三句式）</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#eef6ef; color:#1f2a24; font-family:"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.75; }
+  .wrap { max-width:900px; margin:0 auto; padding:28px 20px 60px; }
+  header { background:linear-gradient(135deg,#1b5e20,#2e7d32 60%,#388e3c); color:#fff; border-radius:16px; padding:26px 32px; margin-bottom:18px; box-shadow:0 4px 14px rgba(27,94,32,.25); }
+  header h1 { font-size:1.45rem; letter-spacing:.5px; }
+  header p { margin-top:6px; color:#dcedc8; font-size:.92rem; }
+  .legend { background:#fff; border-radius:12px; padding:14px 20px; font-size:.86rem; color:#43554a; box-shadow:0 1px 5px rgba(0,0,0,.06); margin-bottom:24px; }
+  .legend b { color:#1b5e20; }
+  .legend span.chip { display:inline-block; background:#e8f5e9; border-radius:6px; padding:2px 10px; margin:3px 6px 3px 0; }
+  .card { background:#fff; border-radius:14px; padding:26px 30px; margin-bottom:26px; box-shadow:0 2px 10px rgba(0,0,0,.07); border-top:5px solid #2e7d32; }
+  .card h2 { color:#1b5e20; font-size:1.2rem; margin-bottom:4px; }
+  .pos { display:inline-block; background:#e8f5e9; color:#1b5e20; font-size:.8rem; border-radius:6px; padding:2px 10px; margin:4px 8px 10px 0; }
+  .lead { font-size:.9rem; color:#5c6f63; margin-bottom:16px; }
+  .badge { display:inline-block; font-size:.85rem; font-weight:700; border-radius:20px; padding:3px 16px; margin:18px 0 10px; }
+  .b1 { background:#e8f5e9; color:#1b5e20; border:1px solid #a5d6a7; }
+  .b2 { background:#fff3e0; color:#e65100; border:1px solid #ffcc80; }
+  .b3 { background:#e0f2f1; color:#00695c; border:1px solid #80cbc4; }
+  .sentence { background:#f6faf6; border-left:4px solid #66bb6a; border-radius:8px; padding:14px 20px; font-size:1.06rem; line-height:2.15; margin-bottom:8px; }
+  .zh { color:#6b7f71; font-size:.9rem; margin-bottom:12px; }
+  .a { color:#8a9a8f; font-size:.82em; font-weight:400; }
+  .s { font-weight:700; }
+  .s sup { font-size:.68em; font-weight:700; }
+  .c1 { color:#0b7285; } .c2 { color:#b02a37; } .c3 { color:#5f3dc4; }
+  .c4 { color:#d9480f; } .c5 { color:#087f5b; } .c6 { color:#a61e4d; }
+  .frame { background:#fffdf3; border:1.5px dashed #f9a825; border-radius:8px; padding:14px 20px; font-size:1.02rem; line-height:2.15; margin-bottom:8px; }
+  .blank { font-weight:700; border-bottom:2px dashed; padding:0 4px; }
+  table { width:100%; border-collapse:collapse; font-size:.92rem; margin:10px 0 14px; }
+  th { background:#e8f5e9; color:#1b5e20; text-align:left; padding:8px 12px; border:1px solid #dce8dd; }
+  td { padding:8px 12px; border:1px solid #e4ece5; vertical-align:top; }
+  td:first-child { white-space:nowrap; font-weight:600; color:#33513b; }
+  .rep { background:#fafcf9; border:1px solid #e4ece5; border-radius:10px; padding:12px 18px; font-size:.94rem; }
+  .rep .line { padding:5px 0; border-bottom:1px dashed #e4ece5; }
+  .rep .line:last-child { border-bottom:none; }
+  .nope { background:#fdf0ef; border-left:3px solid #c62828; border-radius:6px; padding:6px 12px; margin:5px 0; color:#7f1d1d; }
+  .nope b { color:#b02a37; }
+  .note { font-size:.85rem; color:#6b7f71; background:#f2f7f2; border-radius:8px; padding:10px 16px; margin-top:10px; }
+  .use { background:#e0f2f1; border-radius:10px; padding:12px 18px; font-size:.93rem; margin-top:12px; }
+  .use b { color:#00695c; }
+  .variants { margin-top:14px; }
+  .v { background:#fafcf9; border:1px solid #e4ece5; border-radius:10px; padding:10px 18px; margin:10px 0; font-size:.95rem; }
+  .v .vsen { line-height:2.1; font-size:1.02rem; }
+  .v .vzh { color:#6b7f71; font-size:.88rem; margin:2px 0 4px; }
+  .v .vwhy { background:#e8f5e9; border-radius:6px; padding:6px 12px; color:#33513b; font-size:.9rem; margin-top:6px; }
+  .v .vwhy b { color:#1b5e20; }
+  details.morph { margin:8px 0 14px; }
+  details.morph summary { cursor:pointer; font-size:.84rem; color:#1b5e20; background:#e8f5e9; display:inline-block; border-radius:14px; padding:2px 14px; user-select:none; border:1px solid #a5d6a7; }
+  details.morph summary:hover { background:#c8e6c9; }
+  details.morph table { margin-top:8px; }
+  details.morph td, details.morph th { font-size:.87rem; }
+  details.morph td:nth-child(1) { font-weight:700; color:#33513b; }
+  .blk .m { border-bottom:2px dashed transparent; }
+  .blk .m sup.mn { display:none; font-size:.66em; font-weight:700; background:#1b5e20; color:#fff; border-radius:4px; padding:0 3px; margin-left:2px; }
+  .blk.morph-open .m, .blk:has(details.morph[open]) .m { background:#d5eed8; border-bottom:2px dashed #2e7d32; }
+  .blk.morph-open .m sup.mn, .blk:has(details.morph[open]) .m sup.mn { display:inline-block; }
+  .rules { background:#f6faf6; border-radius:10px; padding:12px 18px; font-size:.93rem; margin-top:12px; }
+  .rules b { color:#1b5e20; }
+  .foot { font-size:.85rem; color:#5c6f63; }
+  .foot table td:first-child { color:#8a9a8f; font-weight:400; }
+  code { background:#eef3ee; border-radius:4px; padding:1px 6px; font-size:.9em; }
+</style>
+</head>
+<body>
+<a href="index.html" style="display:inline-block;margin:14px 0 0 20px;font-size:13px;color:#1b5e20;text-decoration:none;border-bottom:1px dotted #1b5e20;">← 返回写作入口</a>
+<div class="wrap">
+
+<header>
+  <h1>考研英语写作 · 大作文第一课 功能句九句式（完全体）<span style="font-size:.75em;">（v3 · 全九句式版）</span></h1>
+  <p>第一段 4 个句式 + 第二段 5 个句式 = 全课 9 个句式；温室花朵篇 ↔ 贝克汉姆篇同位置共用同一框架，<b>一个句式只记一次，不重复计算</b> ｜ 按 skill《kaoyan-essay-course-notes》完全体工艺产出</p>
+</header>
+
+<div class="legend">
+  <b>阅读说明</b>：
+  <span class="chip">每个英文单词后灰色括号 = 该单词中文批注</span>
+  <span class="chip"><b>彩色词</b> = 老师讲过可替换/禁用的词，<b>圈号</b>与下方「替换清单」一一对应</span>
+  <span class="chip"><b>❌ 红条</b> = 老师明确否掉的写法，必带原因</span>
+  <span class="chip">每个句式三段：① 温室原句精讲 → ② 挖空框架 → ③ 贝克汉姆篇第二遍应用（不重复拆框架）</span>
+  <span class="chip"><b>结构变体区</b>：每个变体句逐词批注 + 中文翻译 +「为什么这样变」</span>
+  <span class="chip"><b>🔍 变形披露</b>：每句下方可折叠条——收起时=原样；点开后句中变形词自动<b>绿底高亮 + 虚线</b>并挂出编号小牌，编号对应表里的行</span>
+</div>
+
+<!-- ============ 句式一 ============ -->
+<div class="card">
+  <h2>句式一 · 开篇总起句</h2>
+  <span class="pos">位置：第一段第 1 句（两篇同位，同一框架）</span>
+  <p class="lead">思路链：先给整句 → 逐成分讲 → 给一串可换词 → 否掉错误用法 → 换题型接着用。</p>
+
+  <span class="badge b1">① 老师原句精讲（温室花朵篇）</span>
+  <div class="blk">
+  <div class="sentence">
+    These<span class="a">（这些）</span> <span class="m">are<sup class="mn">①</sup></span><span class="a">（是）</span> two<span class="a">（两幅）</span> simple<span class="a">（简单的）</span> but<span class="a">（但是）</span>
+    <span class="s c1">quite<sup>①</sup></span><span class="a">（非常）</span>
+    <span class="s c2 m">enlightening<sup>②</sup><sup class="mn">③</sup></span><span class="a">（具有启发性的）</span>
+    <span class="s c3 m">drawings<sup>③</sup><sup class="mn">②</sup></span><span class="a">（图画）</span>.
+  </div>
+  <p class="zh">【中文】所给的是两幅简单但是非常有启发性的图画。</p>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>are</td><td>be /biː/</td><td>be → are</td><td>主语 These 是复数，be 动词用 are（单数才用 is）</td></tr>
+      <tr><td>drawings</td><td>draw /drɔː/ → drawing /ˈdrɔːɪŋ/</td><td>加 s 变复数</td><td>two"两幅"，数大于 1 名词必须复数；drawing 本身 = 动词 draw（画）+ ing 名词化</td></tr>
+      <tr><td>enlightening</td><td>enlighten /ɪnˈlaɪtn/（启发）</td><td>+ ing 形容词化</td><td>动词加 ing 变形容词"令人……的"，修饰名词 drawings；同类的还有 thought-provoking</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <table>
+    <tr><th>成分</th><th>英文</th><th>老师怎么讲</th></tr>
+    <tr><td>所给的是</td><td>These are</td><td>指题目所给的图画；✅ 也可倒装写 <code>Given / Presented / Provided are two drawings</code>（两个图画"被给出 / 呈现 / 提供"出来，被动思路倒过来写）</td></tr>
+    <tr><td>两幅</td><td>two</td><td>考试给两幅用 two；给一幅必须改 <code>this is</code>；"一组"可写 <code>a set of</code>（一组就不可能是一个，所以谓语仍是复数 are）</td></tr>
+    <tr><td>转折</td><td>but</td><td>"简单 ↔ 有启发性"形成反差，是这句的骨架逻辑</td></tr>
+    <tr><td>名词收尾</td><td>drawings</td><td>看考什么换什么：图表 → chart；文字材料 → article；详见下方【套用】</td></tr>
+  </table>
+
+  <div class="rep">
+    <div class="line"><span class="s c1">① quite（非常）</span>：very / so / exceedingly / particularly / pretty / much —— 一堆词都能换</div>
+    <div class="line"><span class="s c2">② enlightening（具有启发性的）</span>：thought-provoking（发人深省的）/ meaningful（有意义的）/ significant（重要的）</div>
+    <div class="line"><span class="s c3">③ drawings（图画）</span>：chart（图表）——❗图表是单数，必须改成 <code>this is</code>；article（文章）</div>
+    <div class="nope">❌ <b>负面画面写 enlightening</b>：画面是讽刺、荒谬的，"有启发性"不贴切，必须换负面评价词 —— 老师第二遍写贝克汉姆篇时当场否掉（见 Part ③）</div>
+  </div>
+
+  <div class="use"><b>【套用】同一框架跨题型</b>：图表 → <code>This is a simple but quite meaningful chart.</code>；文章读后感 → <code>This is a simple but quite enlightening article.</code>；推荐一本书 → <code>This is a very simple but very important book.</code>；推荐一部电影 → <code>This is a simple but fascinating movie.</code>（改个名词和评价词就行）</div>
+
+  <div class="variants">
+    <div class="v">
+      <p class="vsen">This<span class="a">（这）</span> is<span class="a">（是）</span> a<span class="a">（一幅）</span> simple<span class="a">（简单的）</span> but<span class="a">（但是）</span> quite<span class="a">（非常）</span> enlightening<span class="a">（具有启发性的）</span> drawing<span class="a">（图画）</span>.</p>
+      <p class="vzh">【中文】这是一幅简单但非常有启发性的图画。</p>
+      <p class="vwhy"><b>为什么</b>：材料只有一幅时，主语变单数——this 换 these、is 换 are、two 换 a、名词去 s；中间的形容词串一个不动（<b>前面和最后变、中间不变</b>）。</p>
+    </div>
+    <div class="v">
+      <p class="vsen">These<span class="a">（这些）</span> are<span class="a">（是）</span> a set of<span class="a">（一组）</span> simple<span class="a">（简单的）</span> but<span class="a">（但是）</span> quite<span class="a">（非常）</span> enlightening<span class="a">（具有启发性的）</span> drawings<span class="a">（图画）</span>.</p>
+      <p class="vzh">【中文】这些是一组简单但非常有启发性的图画。</p>
+      <p class="vwhy"><b>为什么</b>："一组"用 a set of 表达；一组不可能是"一个"，所以谓语仍是复数 are、名词仍加 s。</p>
+    </div>
+    <div class="v">
+      <p class="vsen">Given<span class="a">（所给的）</span> are<span class="a">（是）</span> two<span class="a">（两幅）</span> simple<span class="a">（简单的）</span> but<span class="a">（但是）</span> quite<span class="a">（非常）</span> enlightening<span class="a">（具有启发性的）</span> drawings<span class="a">（图画）</span>.</p>
+      <p class="vzh">【中文】所给的是两幅简单但非常有启发性的图画。</p>
+      <p class="vwhy"><b>为什么</b>：原句思路是"图画<b>被</b>给出"（two drawings are given），把 given 提到句首构成<b>倒装</b>；presented（呈现的）/ provided（提供的）同理可换。好处：开头不撞句，句式有变化。</p>
+    </div>
+    <div class="v">
+      <p class="vsen">This<span class="a">（这）</span> is<span class="a">（是）</span> a<span class="a">（一张）</span> simple<span class="a">（简单的）</span> but<span class="a">（但是）</span> quite<span class="a">（非常）</span> meaningful<span class="a">（有意义的）</span> chart<span class="a">（图表）</span>.</p>
+      <p class="vzh">【中文】这是一张简单但非常有意义的图表。</p>
+      <p class="vwhy"><b>为什么</b>：图表 chart 通常单数 → 用 this is + a；文章 article 元音音开头 → an article；名词按考试给什么换什么，骨架不动。</p>
+    </div>
+  </div>
+
+  <span class="badge b2">② 挖空框架</span>
+  <div class="frame">
+    These<span class="a">（这些）</span> are<span class="a">（是）</span> two<span class="a">（两幅）</span> simple<span class="a">（简单的）</span> but<span class="a">（但是）</span>
+    <span class="blank c1">①〔程度词〕</span>
+    <span class="blank c2">②〔评价形容词：正面/负面〕</span>
+    <span class="blank c3">③〔图画类名词〕</span>.
+  </div>
+  <p class="zh">【用法】考试给什么填什么：漫画 drawings / 图表 chart / 照片 photos / 文章 article；画面正面填 enlightening 一串，画面负面填 ironic 一串。</p>
+
+  <span class="badge b3">③ 第二遍应用（贝克汉姆篇 · 不重复拆框架）</span>
+  <div class="blk">
+  <div class="sentence">
+    These<span class="a">（这些）</span> <span class="m">are<sup class="mn">①</sup></span><span class="a">（是）</span> two<span class="a">（两幅）</span> simple<span class="a">（简单的）</span> but<span class="a">（但是）</span>
+    <span class="s c1 m">exceedingly<sup>①</sup><sup class="mn">②</sup></span><span class="a">（非常）</span>
+    <span class="s c2 m">ironic<sup>②</sup><sup class="mn">③</sup></span><span class="a">（具有讽刺性的）</span> and<span class="a">（和）</span>
+    <span class="s c2">absurd</span><span class="a">（荒谬的）</span> <span class="m">photos<sup class="mn">④</sup></span><span class="a">（照片）</span>.
+  </div>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>are</td><td>be /biː/</td><td>be → are</td><td>主语 These 复数 → are</td></tr>
+      <tr><td>exceedingly</td><td>exceed /ɪkˈsiːd/（超过）</td><td>exceed → exceeding → exceedingly</td><td>修饰形容词 ironic 必须用副词；+ly 是形容词变副词的标志（老师课上讲过 -ly 这条链）</td></tr>
+      <tr><td>ironic</td><td>irony /ˈaɪrəni/（讽刺，名词）</td><td>名词 → 形容词</td><td>修饰名词 photos 需要形容词；irony→ironic 是不规则派生</td></tr>
+      <tr><td>photos</td><td>photo /ˈfəʊtəʊ/</td><td>加 s 变复数</td><td>two 复数；photo 是缩略词，o 结尾直接 +s（对照 potato→potatoes 加 es）</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <div class="rules">
+    <b>老师第二遍怎么讲</b>：先问"能不能照抄 enlightening？"→ ❌ 不行，"你觉得这两幅照片有什么启发性呢？"必须换负面词。
+    ②负面评价词串：ironic（讽刺性的）/ absurd（荒谬的）/ ridiculous（可笑的）/ satirical（挖苦嘲讽的）—— 想到几个写几个，可挑两个用 and 连（exceedingly ironic and absurd）。
+    ①程度词：老师点了一个专门配负面词的 rather（相当）；照常用 exceedingly 也对。
+    two photos；"一组照片"也可 a set of photos（一组≠一个，仍是复数 are）。
+  </div>
+</div>
+
+<!-- ============ 句式二 ============ -->
+<div class="card">
+  <h2>句式二 · 第一幅图画描述句</h2>
+  <span class="pos">位置：第一段第 2 句（两篇同位，同一框架）</span>
+  <p class="lead">思路链（四种语法概念连用）：① 介词短语表环境 → ② there be 引出人/物 → ③ 动词 ing 表伴随 → ④ with 结构表身上/周围事物。</p>
+
+  <span class="badge b1">① 老师原句精讲（温室花朵篇）</span>
+  <div class="blk">
+  <div class="sentence">
+    <span class="s c1">Inside<sup>①</sup></span><span class="a">（在…内部）</span> a<span class="a">（一座）</span> huge<span class="a">（巨大的）</span> warm<span class="a">（温暖的）</span> greenhouse<span class="a">（温室）</span>,
+    there<span class="a">（有）</span> <span class="m">is<sup class="mn">①</sup></span><span class="a">（有）</span> a<span class="a">（一朵）</span> little<span class="a">（小的）</span> and<span class="a">（而）</span>
+    <span class="s c2">delicate<sup>②</sup></span><span class="a">（精致的）</span> flower<span class="a">（花朵）</span>,
+    <span class="m">growing<sup class="mn">②</sup></span><span class="a">（正在成长）</span>
+    <span class="s c3 m">vigorously<sup>③</sup></span><span class="a">（茁壮地）</span> and<span class="a">（并且）</span>
+    <span class="s c4 m">blossoming<sup>④</sup></span><span class="a">（正在开花）</span>,
+    with<span class="a">（带有）</span> the<span class="a">（那座）</span> house<span class="a">（温室）</span> <span class="m">protecting<sup class="mn">⑤</sup></span><span class="a">（保护着）</span> it<span class="a">（它）</span> from<span class="a">（免受）</span> the<span class="a">（外部的）</span> outside<span class="a">（外部的）</span>
+    <span class="s c5">severe<sup>⑤</sup></span><span class="a">（恶劣的）</span> weather<span class="a">（天气）</span>.
+  </div>
+  <p class="zh">【中文】在一座巨大而温暖的温室里，有一朵小而精致的花朵，正茁壮成长、开着花，温室保护着它免受外面恶劣的天气。</p>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>is</td><td>be /biː/</td><td>be → is</td><td>there be 的 be 跟主语单复数走：a flower 单数 → is</td></tr>
+      <tr><td>growing</td><td>grow /ɡrəʊ/（成长）</td><td>+ ing</td><td>谓语（is）之外的动作写 -ing 分词表伴随，花"主动成长"</td></tr>
+      <tr><td>vigorously</td><td>vigor /ˈvɪɡə/（n. 力量）</td><td>vigor → vigorous（+ous 形容词）→ vigorously（+ly 副词）</td><td>修饰动词 growing 用副词，两级派生（老师课上讲过这条链）</td></tr>
+      <tr><td>blossoming</td><td>blossom /ˈblɒsəm/（开花）</td><td>+ ing</td><td>与 growing 并列的伴随动作，同用 -ing</td></tr>
+      <tr><td>protecting</td><td>protect /prəˈtekt/（保护）</td><td>+ ing</td><td>with 结构：house 与"保护"是主动关系 → -ing；被动则用 -ed（见左图句 written）</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <table>
+    <tr><th>语法点</th><th>英文</th><th>老师怎么讲</th></tr>
+    <tr><td>① 介词短语表环境</td><td>Inside a huge warm greenhouse</td><td>inside 可换 in；huge 表规模、体积巨大；环境放句首</td></tr>
+    <tr><td>② there be 引出人/物</td><td>there is a little and delicate flower</td><td>温室写完后，用 there be 引出花朵；delicate = 精致</td></tr>
+    <tr><td>③ 动词 ing 表伴随</td><td>growing vigorously and blossoming</td><td>谓语（is）之外的动作写成 ing；vigor（n. 力量）→ vigorous（adj. 有力的）→ vigorously（adv. 茁壮地）</td></tr>
+    <tr><td>④ with 结构（身上/周围事物）</td><td>with the house protecting it from the outside severe weather</td><td>公式 = with + 名词 + ing/ed/介词短语；house 第二次出现用 the；房子与"保护"是主动关系 → protecting；it 指代小花</td></tr>
+  </table>
+
+  <div class="rules">
+    <b>老师交代的结构性规则</b>：四种语法概念写其中 1~4 个都行，顺序可以随便调，不必全写（课上为了练才全部写全）；不会写的伴随动作（如 blossoming）可以整个不写，只写"茁壮成长"就够。
+  </div>
+
+  <div class="rep">
+    <div class="line"><span class="s c1">① Inside（在…内部）</span>：in</div>
+    <div class="line"><span class="s c2">② delicate（精致的）</span>：pretty / beautiful（漂亮的）—— 上考场不会写"精致"就降级</div>
+    <div class="line"><span class="s c3">③ vigorously（茁壮地）</span>：healthily（健康地）—— 不会写"茁壮"就写"健康地成长"</div>
+    <div class="line"><span class="s c4">④ blossoming（开花）</span>：blooming（bloom 也是开花，主动词写 blooming 也行）｜ 不会写就整段不写</div>
+    <div class="line"><span class="s c5">⑤ severe（恶劣的）</span>：bad / terrible / awful / harsh（残酷的）—— 凡是表示不好的都行</div>
+    <div class="nope">❌ <b>opening flower</b>：open = 打开，写出来是"小花在成长的同时自己把自己撕开了"</div>
+    <div class="nope">❌ <b>growing flower</b>：grow 在这里会被读成"种植"，变成"这朵花正在种另一朵花"——"收起你野狗一般的想象力"</div>
+  </div>
+
+  <div class="use"><b>【套用】口头练习 · 粉红房间造句</b>（老师带练，四个语法点一次用全）：<br>
+    <code>In a pink room, there is a young and handsome teacher, sitting in front of a computer and giving a lesson to students, with a sweet smile on his face.</code><br>
+    【中文】在一个粉红色的房间里，有一位年轻而帅气的老师，坐在电脑前给学生上课，脸上带着甜美的笑容。</div>
+
+  <div class="variants">
+    <div class="v">
+      <p class="vsen">There<span class="a">（有）</span> is<span class="a">（有）</span> a<span class="a">（一朵）</span> little<span class="a">（小的）</span> and<span class="a">（而）</span> delicate<span class="a">（精致的）</span> flower<span class="a">（花朵）</span> inside<span class="a">（在…内部）</span> a<span class="a">（一座）</span> huge<span class="a">（巨大的）</span> warm<span class="a">（温暖的）</span> greenhouse<span class="a">（温室）</span>.</p>
+      <p class="vzh">【中文】有一朵小而精致的花朵，在一座巨大而温暖的温室里。</p>
+      <p class="vwhy"><b>为什么</b>：地点介词短语既能放<b>句首</b>（老师写法：先铺环境再引主角），也能放<b>句末</b>紧贴名词；意思相同，句首写法更像"先给镜头、再给主角"。</p>
+    </div>
+    <div class="v">
+      <p class="vsen">Inside<span class="a">（在…内部）</span> a<span class="a">（一座）</span> huge<span class="a">（巨大的）</span> warm<span class="a">（温暖的）</span> greenhouse<span class="a">（温室）</span>, there<span class="a">（有）</span> is<span class="a">（有）</span> a<span class="a">（一朵）</span> little<span class="a">（小的）</span> and<span class="a">（而）</span> delicate<span class="a">（精致的）</span> flower<span class="a">（花朵）</span>.</p>
+      <p class="vzh">【中文】在一座巨大而温暖的温室里，有一朵小而精致的花朵。</p>
+      <p class="vwhy"><b>为什么</b>：四个语法点（环境 / there be / ing 伴随 / with 结构）里只有 there be 是<b>主件</b>，其余都是可选配件——不会写的（如 blossoming）整段不写，写 1~4 个部件都成立，顺序可调。</p>
+    </div>
+    <div class="v">
+      <p class="vsen">with<span class="a">（带有）</span> the name<span class="a">（名字）</span> of<span class="a">（的）</span> Beckham<span class="a">（贝克汉姆）</span> written<span class="a">（被写上的）</span> on<span class="a">（在…上）</span> his<span class="a">（他的）</span> face<span class="a">（脸）</span>.</p>
+      <p class="vzh">【中文】贝克汉姆的名字被写在他的脸上（with 结构片段）。</p>
+      <p class="vwhy"><b>为什么</b>：with + 名词 + 动词，看名词和动词的关系——<b>主动用 ing</b>（房子主动保护 → protecting）、<b>被动用 ed 过去分词</b>（名字被写上去 → written）。温室句和左图句正好一正一反两个实例。</p>
+    </div>
+  </div>
+
+  <span class="badge b2">② 挖空框架</span>
+  <div class="frame">
+    Inside a<span class="a">（介词框架：inside / in 均可，固定不挖）</span>
+    <span class="blank c1">①〔场景：图画中环境的具体内容〕</span>, there is<span class="a">（存在句框架，固定不挖）</span> a<span class="a">（一个）</span>
+    <span class="blank c2">②〔对象的形容词：一个或多个，可用 and 连接〕</span>
+    <span class="blank c3">③〔对象：场景中的主角〕</span>,
+    <span class="blank c4">④〔对象的动作：-ing 形式，可多个用 and 并列〕</span>, with<span class="a">（with 结构框架，固定不挖）</span>
+    <span class="blank c5">⑤〔场景回指：①场景的简略版〕</span>
+    <span class="blank c6">⑥〔该要素对对象起到的作用：动作-ing＋it＋from 短语，一体填〕</span>.
+  </div>
+  <p class="zh">【填写示范】Inside a <b>huge warm greenhouse</b>, there is a <b>little and delicate</b> <b>flower</b>, <b>growing vigorously and blossoming</b>, with <b>the house</b> <b>protecting it from the outside severe weather</b>.</p>
+  <p class="zh">【用法】框架（Inside a / there is a / with）永远固定不挖；六个空填的全是<b>从图画里看出来的内容</b>。⑤是①的简略回指（前面写了 huge warm greenhouse，这里只写 the house）；⑥里 it 回指③对象，动作、对象、from 短语一体成一个空。</p>
+
+  <span class="badge b3">③ 第二遍应用（贝克汉姆篇 · 左图，不重复拆框架）</span>
+  <div class="blk">
+  <div class="sentence">
+    In<span class="a">（在）</span> the<span class="a">（那张）</span> left<span class="a">（左边的）</span> picture<span class="a">（图画）</span>, there<span class="a">（有）</span> <span class="m">is<sup class="mn">①</sup></span><span class="a">（有）</span> a<span class="a">（一个）</span>
+    <span class="s c1">youngster<sup>①</sup></span><span class="a">（年轻人）</span>, with<span class="a">（带有）</span> the name<span class="a">（名字）</span> of<span class="a">（的）</span> Beckham<span class="a">（贝克汉姆）</span>
+    <span class="s c2 m">written<sup>②</sup></span><span class="a">（被写上的）</span> on<span class="a">（在…上）</span> his<span class="a">（他的）</span> face<span class="a">（脸）</span>.
+  </div>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>is</td><td>be /biː/</td><td>be → is</td><td>主语 a youngster 单数 → is</td></tr>
+      <tr><td>written</td><td>write /raɪt/（写）</td><td>write → wrote（过去式）→ written（过去分词）</td><td>with 结构里 name 与 write 是<b>被动关系</b>（名字"被写上去"）→ 用过去分词；write 是不规则动词，❗没有 writed</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <div class="rules">
+    <b>老师第二遍怎么讲</b>：<br>
+    · 左图没有环境 → "在左图中"本身就充当环境（picture 既能表示图画也能表示照片）。<br>
+    · 中文思路不顺要会调：直译"一张巨大而丑陋的脸"是人身攻击、下不了笔 → 改写成"有一个年轻人"，瞬间变简单。<br>
+    · ①youngster：young man / young person / young guy / teenager 都行。<br>
+    · ②written 被动：名字是"被写上去"的，不是自己长出来的 → with + 名词 + 过去分词（ed 形式）。
+  </div>
+  <div class="rep">
+    <div class="nope">❌ <b>a young people</b>：people = 人们，复数，不能配 a；一个人要说 a young man / person / guy</div>
+    <div class="nope">❌ <b>young gay</b>：凭图画无法证明他是 gay，无中生有不能写；别把 young guy 近音写成 young gay</div>
+    <div class="nope">❌ <b>in his face</b>：in 表示"里面"，那就不是写在脸上，是刻到肉里了 → 只能用 on his face</div>
+  </div>
+</div>
+
+<!-- ============ 句式三 ============ -->
+<div class="card">
+  <h2>句式三 · 第二幅画面描述句</h2>
+  <span class="pos">位置：第一段第 3 句（两篇同位）</span>
+  <p class="lead">思路链：同为"第二幅画面"，温室篇用让步反差框架（although… 枯萎），贝克汉姆篇用双动作伴随框架（sits…, spending…）；共同骨架 = 主体 + 动作 + 伴随结构（with / ing）。框架以温室篇为主拆。</p>
+
+  <span class="badge b1">① 老师原句精讲（温室花朵篇 · 风雨图）</span>
+  <div class="blk">
+  <div class="sentence">
+    Although<span class="a">（尽管）</span> it<span class="a">（它）</span> <span class="m">seems<sup class="mn">①</sup></span><span class="a">（看上去）</span>
+    <span class="s c1">quite<sup>①</sup></span><span class="a">（非常）</span> <span class="m">healthy<sup class="mn">②</sup></span><span class="a">（健康的）</span> and<span class="a">（而）</span> strong<span class="a">（强壮的）</span> in the house<span class="a">（在温室里）</span>,
+    this<span class="a">（这株）</span> plant<span class="a">（植物）</span>
+    <span class="s c2 m">withers<sup>②</sup><sup class="mn">③</sup></span><span class="a">（枯萎）</span> after<span class="a">（在…之后）</span> it<span class="a">（它）</span> <span class="m">is</span><span class="a">（被）</span>
+    <span class="s c3 m">put<sup>③</sup><sup class="mn">④</sup></span><span class="a">（放置）</span> in the rain<span class="a">（在风雨中）</span>,
+    with<span class="a">（带有）</span> its<span class="a">（它的）</span>
+    <span class="s c4">petals<sup>④</sup></span><span class="a">（花瓣）</span> <span class="m">falling<sup class="mn">⑤</sup></span><span class="a">（飘落）</span> in the wind<span class="a">（在风中）</span>.
+  </div>
+  <p class="zh">【中文】尽管它在温室里看上去非常健康强壮，但被放到风雨中之后，这株植物就枯萎了，花瓣在风中飘落。</p>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>seems</td><td>seem /siːm/（看上去）</td><td>+ s</td><td>主语 it 第三人称单数、一般现在时 → 动词加 s（三单）</td></tr>
+      <tr><td>healthy</td><td>health /helθ/（n. 健康）</td><td>health → healthy（名词变形容词）</td><td>seem 是系动词，后面接形容词作表语</td></tr>
+      <tr><td>withers</td><td>wither /ˈwɪðə/（枯萎）</td><td>+ s</td><td>主语 this plant 三单 → 加 s</td></tr>
+      <tr><td>is put</td><td>put /pʊt/（放置）</td><td>be + put（过去分词）</td><td>"它<b>被</b>放进"→ 被动语态 be + 过去分词；put 三态同形（原形 = 过去式 = 过去分词），❗没有 putted</td></tr>
+      <tr><td>falling</td><td>fall /fɔːl/（落下）</td><td>+ ing</td><td>with 结构：petals 与 fall 是主动关系（花瓣自己落）→ -ing</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <table>
+    <tr><th>成分</th><th>英文</th><th>老师怎么讲</th></tr>
+    <tr><td>让步状语从句</td><td>Although it seems quite healthy and strong in the house</td><td>although = 尽管，表反差：温室里健康 ↔ 风雨中枯萎</td></tr>
+    <tr><td>主句谓语</td><td>this plant withers</td><td>plant = 植物；withers = 枯萎（缩水了、蔫了）</td></tr>
+    <tr><td>时间状语</td><td>after it is put in the rain</td><td>put 原形 = 过去式 = 过去分词，被动就是 it is put；❗不存在 putted 这个词</td></tr>
+    <tr><td>with 结构再使用</td><td>with its petals falling in the wind</td><td>its 也可写 the（特指）；花瓣飘落 = 身边/周围的事物；老师原话："你写了一句诗一般的语言"</td></tr>
+  </table>
+
+  <div class="rep">
+    <div class="line"><span class="s c1">① quite（非常）</span>：very / so / exceedingly / much / pretty / particularly（小作文背过的替换串接着用）</div>
+    <div class="line"><span class="s c2">② withers（枯萎）</span>：dies（死掉）/ becomes dead（变得死亡）/ passes away（去世）—— 不会写"枯萎"就写"很快就死掉了"</div>
+    <div class="line"><span class="s c3">③ after it is put in the rain（被放到风雨中）</span>：after the greenhouse is removed（温室被移除之后）—— 两种都行</div>
+    <div class="line"><span class="s c4">④ petals（花瓣）</span>：its leaves（叶子）—— 不会写"花瓣"就写叶子随风飘落（leaf 复数 leaves）｜水平不高，整个 with 结构可以不写</div>
+    <div class="nope">❌ <b>putted</b>：不存在这个词，put 三态同形；老师课上故意把它"改错"再让你纠，是钓鱼执法（教学的艺术），正确 = it is put</div>
+  </div>
+
+  <div class="variants">
+    <div class="v">
+      <p class="vsen">...after<span class="a">（在…之后）</span> the greenhouse<span class="a">（温室）</span> is<span class="a">（被）</span> removed<span class="a">（移除）</span>.</p>
+      <p class="vzh">【中文】……在温室被移除之后。</p>
+      <p class="vwhy"><b>为什么</b>："被放进风雨"和"温室被移除"是<b>同一件事的两个视角</b>——主语从 it 换成 the greenhouse，动词从 put（放置）换成 remove（移除），都表"失去保护"，任选其一。</p>
+    </div>
+    <div class="v">
+      <p class="vsen">with<span class="a">（带有）</span> the<span class="a">（那些）</span> petals<span class="a">（花瓣）</span> falling<span class="a">（飘落）</span> in the wind<span class="a">（在风中）</span>.</p>
+      <p class="vzh">【中文】花瓣在风中飘落。</p>
+      <p class="vwhy"><b>为什么</b>：its = 它的（强调"花的花瓣"，指代更紧），the = 特指"那片花瓣"（更客观），两者都成立。</p>
+    </div>
+    <div class="v">
+      <p class="vsen">Although<span class="a">（尽管）</span> it<span class="a">（它）</span> seems<span class="a">（看上去）</span> quite<span class="a">（非常）</span> healthy<span class="a">（健康的）</span> and<span class="a">（而）</span> strong<span class="a">（强壮的）</span> in the house<span class="a">（在温室里）</span>, this plant<span class="a">（这株植物）</span> withers<span class="a">（枯萎）</span> after it is put in the rain<span class="a">（被放进风雨之后）</span>.</p>
+      <p class="vzh">【中文】尽管它在温室里看上去非常健康强壮，但被放进风雨之后就枯萎了。</p>
+      <p class="vwhy"><b>为什么</b>：with 结构是画面装饰（"诗一般的语言"），属于可选配件；去掉后主句仍完整——水平不够时优先保完整。</p>
+    </div>
+    <div class="v">
+      <p class="vsen">In a barber's shop<span class="a">（在一家理发馆里）</span> sits<span class="a">（坐着）</span> another<span class="a">（另一个）</span> young<span class="a">（年轻的）</span> man<span class="a">（男子）</span>.</p>
+      <p class="vzh">【中文】在一家理发馆里坐着另一个年轻男子。</p>
+      <p class="vwhy"><b>为什么</b>：<b>全倒装</b>公式 = 介词短语 + 谓语动词 + 主语；把环境提前突出场景，与正常语序（In the right one, another young man sits...）意思完全等价，属加分项——听不懂就写正常语序。</p>
+    </div>
+  </div>
+
+  <span class="badge b2">② 挖空框架</span>
+  <div class="frame">
+    Although<span class="a">（让步框架，固定不挖）</span> it<span class="a">（回指对象，不挖）</span> seems<span class="a">（系动词框架，不挖）</span>
+    <span class="blank c1">①〔程度副词〕</span>
+    <span class="blank c2">②〔对象在原场景中的状态：形容词，可多个用 and 并列〕</span>
+    <span class="blank c3">③〔场景回指：in the + 场景简略版〕</span>,
+    this<span class="a">（回指，不挖）</span>
+    <span class="blank c4">④〔对象〕</span>
+    <span class="blank c5">⑤〔对象的动作：三单动词〕</span> after<span class="a">（时间框架，不挖）</span> it<span class="a">（回指对象，不挖）</span>
+    <span class="blank c6">⑥〔对象遭遇的变化：被动 be＋过去分词＋介词短语，一体填〕</span>,
+    with<span class="a">（with 结构框架，不挖）</span> its<span class="a">（它的，可换 the）</span>
+    <span class="blank c7">⑦〔对象的局部/周围事物〕</span>
+    <span class="blank c8">⑧〔该局部的动作：-ing＋介词短语，一体填〕</span>.
+  </div>
+  <p class="zh">【填写示范】Although it seems <b>quite</b> <b>healthy and strong</b> <b>in the house</b>, this <b>plant</b> <b>withers</b> after it <b>is put in the rain</b>, with its <b>petals</b> <b>falling in the wind</b>.</p>
+  <p class="zh">【用法】反差逻辑通用：“尽管在〔③场景〕里很〔①②状态〕，一旦〔⑥遭遇的变化〕，〔④对象〕就〔⑤动作〕，连〔⑦局部〕都〔⑧局部动作〕。”③⑥⑧按句式二同款规则：场景回指用简略版、遭遇和局部动作一体成空。</p>
+
+  <span class="badge b3">③ 第二遍应用（贝克汉姆篇 · 右图，不重复拆框架）</span>
+  <div class="blk">
+  <div class="sentence">
+    In the right one<span class="a">（右图）</span>, another<span class="a">（另一个）</span> young<span class="a">（年轻的）</span> man<span class="a">（男子）</span>
+    <span class="s c1 m">sits<sup>①</sup></span><span class="a">（坐）</span> in a <span class="m">barber's<sup class="mn">②</sup></span> shop<span class="a">（在理发馆里）</span>,
+    <span class="s c2 m">spending<sup>②</sup><sup class="mn">③</sup></span><span class="a">（花费）</span> 300 yuan<span class="a">（三百元）</span> in<span class="a">（在…方面）</span>
+    <span class="s c3 m">designing<sup>③</sup><sup class="mn">④</sup></span><span class="a">（设计）</span> a hair style<span class="a">（一款发型）</span> as cool as<span class="a">（像…一样酷）</span> <span class="m">Beckham's<sup class="mn">⑤</sup></span><span class="a">（贝克汉姆的）</span>.
+  </div>
+  <p class="zh">【中文】在右图中，另一个年轻男子坐在理发馆里，花 300 元设计一款像贝克汉姆一样酷的发型。</p>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>sits</td><td>sit /sɪt/（坐）</td><td>+ s</td><td>主语 another young man 三单 → 加 s（❗丢 s = 老师点名的低级失误）</td></tr>
+      <tr><td>barber's</td><td>barber /ˈbɑːbə/（理发师）</td><td>+ 's 所有格</td><td>名词所有格表"理发师的（店）"</td></tr>
+      <tr><td>spending</td><td>spend /spend/（花）</td><td>+ ing</td><td>两个动作同时发生且主语一致（人"坐" & 人"花"），动作之一写 -ing 表伴随</td></tr>
+      <tr><td>designing</td><td>design /dɪˈzaɪn/（设计）</td><td>+ ing</td><td>spend money <b>in doing</b> sth：in 后面动词用 -ing；与 spending 并列伴随</td></tr>
+      <tr><td>Beckham's</td><td>Beckham /ˈbekəm/（贝克汉姆）</td><td>+ 's 所有格</td><td>表"贝克汉姆的（发型）"；撇 s 省了意思就变成"像贝克汉姆本人一样酷"</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <div class="rules">
+    <b>老师第二遍怎么讲</b>：<br>
+    · In the right one：one 替换前文出现过的 picture / photo，避免重复；another = 三个及以上之中的"另一个"。<br>
+    · barber's shop：barber（理发师）+ shop = "理发师的商店"；有难度的全倒装加分项：<code>In a barber's shop sits another young man.</code>（公式 = 介词短语 + 谓语动词 + 主语；听不懂就写正常语序）。
+  </div>
+  <div class="rep">
+    <div class="line"><span class="s c1">① sits（坐）</span>：is sitting（现在进行时，两种都收）｜一般现在时三单 s 不能丢</div>
+    <div class="line"><span class="s c2">② spending（花钱）</span>：句型 spend money <b>in doing sth / on sth</b>；两个动作同时发生且主语一致 → 动作之一写 ing 表伴随</div>
+    <div class="line"><span class="s c3">③ designing（设计）</span>：❗"做个小背头"不能逐字直译，实义 = 设计一款像贝克汉姆一样酷的发型</div>
+    <div class="nope">❌ <b>丢三单 s（sit）</b>：主语是男生，"非常低级的失误"（老师课上点名）</div>
+    <div class="nope">❌ <b>the right picture</b>：picture 前文用过，用 one 替换避免重复</div>
+    <div class="nope">❌ <b>再写 youngster</b>：上一句已经用过，重复</div>
+    <div class="nope">❌ <b>cost</b>：cost 的主语一般是商品（这个东西花了多少钱），"人花钱"不能用 cost</div>
+    <div class="nope">❌ <b>making a Beckham's hair</b>：等于"脑袋重新整一下 / 顶着一个贝克汉姆"，理发馆干不了这活</div>
+    <div class="nope">❌ <b>making a hair of Beckham</b>：等于"头上顶着一个小人儿，人形像贝克汉姆"</div>
+    <div class="nope">❌ <b>Beckham's 丢了撇 s</b>：省了意思变成"像贝克汉姆本人一样酷"，不是"像贝克汉姆的发型一样酷"——撇 s 不能省，省略就完蛋</div>
+  </div>
+</div>
+
+<!-- ============ 句式四 ============ -->
+<div class="card">
+  <h2>句式四 · 文字说明句</h2>
+  <span class="pos">位置：第一段第 4 句（本课仅温室篇示范；照片篇没有文字说明，未单独教）</span>
+  <p class="lead">思路链：被动引出图画里的文字 → which say 显示内容 → 引语本身又是一条背过的功能句（温室花朵真题句）。</p>
+
+  <span class="badge b1">① 老师原句精讲（温室花朵篇）</span>
+  <div class="blk">
+  <div class="sentence">
+    Finally<span class="a">（最后）</span>, <span class="s c1">several<sup>①</sup></span><span class="a">（若干）</span> Chinese<span class="a">（中国的）</span> characters<span class="a">（汉字）</span>
+    <span class="m">can be noticed<sup class="mn">①</sup></span><span class="a">（能被注意到）</span>, which<span class="a">（其内容）</span>
+    <span class="s c2 m">say<sup>②</sup><sup class="mn">②</sup></span><span class="a">（显示）</span>
+    "<span class="a">Flowers（花朵） in（在…里） the（那座） greenhouse（温室）</span>
+    cannot<span class="a">（不能）</span> <span class="s c3">stand<sup>③</sup></span><span class="a">（经受住）</span> <span class="a">wind and rain（风雨）</span>."
+  </div>
+  <p class="zh">【中文】最后，若干汉字能被注意到，其内容显示："温室中的花朵经不起风雨。"</p>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>can be noticed</td><td>notice /ˈnəʊtɪs/（注意到）</td><td>can + be + noticed（过去分词）</td><td>汉字"<b>被</b>注意到" → 情态动词 + 被动语态；notice 规则动词直接加 ed</td></tr>
+      <tr><td>say</td><td>say /seɪ/（显示；写的是）</td><td>原形（不加 s）</td><td>主语 several Chinese characters 是<b>复数</b>，一般现在时复数动词用原形；这里 say 不是"人说"，是"内容显示"，❗别写成 says</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <table>
+    <tr><th>成分</th><th>英文</th><th>老师怎么讲</th></tr>
+    <tr><td>顺序</td><td>Finally</td><td>交代第一段描述顺序（最后写文字说明）</td></tr>
+    <tr><td>若干</td><td>several</td><td>✅ 可换 certain / a number of / a few</td></tr>
+    <tr><td>能被注意到</td><td>can be noticed</td><td>被动句；字数不够可加 <code>below the drawing</code>（在漫画下方）——老师当时没写，嫌第一段字太多</td></tr>
+    <tr><td>其内容显示</td><td>which say</td><td>say = 显示 ✅ read / show / indicate；从句主语复数所以 say 无 s</td></tr>
+    <tr><td>引语内容</td><td>Flowers in the greenhouse cannot stand wind and rain</td><td>直接抄图画文字说明；flowers 单复数都行（the flower or flowers）；stand 后接恶劣的东西 = 经受住、活下来</td></tr>
+  </table>
+
+  <div class="rules">
+    <b>老师交代的结构性规则</b>：被动可改主动（<code>We can notice several Chinese characters, which say...</code>）；功能句顺序可颠倒——整篇开篇先写"若干汉字被注意到、其内容是……"，再倒回去描述图画，也是"牛奔"的组合；描述时可直接用原文所给的单词。
+  </div>
+
+  <div class="rep">
+    <div class="line"><span class="s c1">① several（若干）</span>：certain / a number of / a few —— 都行</div>
+    <div class="line"><span class="s c2">② say（显示）</span>：read / show / indicate —— 走在街上看到告示"其内容是"就可用 which say</div>
+    <div class="line"><span class="s c3">③ stand（经受住）</span>：withstand / tolerate（忍受）/ put up with / survive（survive 后直接加名词，"在…中存活"）</div>
+    <div class="nope">❌ <b>a variety of Chinese characters</b>："各种汉字"——图画下方一共就两三个字，数量明确就不能写"各种"（"你的汉语有问题，不是英语有问题"）</div>
+    <div class="nope">❌ <b>say 加 s</b>：主语是复数的汉字，say 必须用原形</div>
+  </div>
+
+  <div class="use"><b>【套用】读后感型作文（文字材料评论）</b>：第一段 = 描述文章的主要内容——把原文的句子、单词拿出来<b>抄 + 改写</b>就行，连描述都不用自己写（三种作文里最简单，考研至今没考过就是因为太简单）；第二、三段与图画作文<b>没有任何区别</b>。</div>
+
+  <div class="variants">
+    <div class="v">
+      <p class="vsen">We<span class="a">（我们）</span> can<span class="a">（能）</span> notice<span class="a">（注意到）</span> several<span class="a">（若干）</span> Chinese characters<span class="a">（汉字）</span>, which<span class="a">（其内容）</span> say<span class="a">（显示）</span> "Flowers in the greenhouse cannot stand wind and rain"<span class="a">（温室中的花朵经不起风雨）</span>.</p>
+      <p class="vzh">【中文】我们能注意到若干汉字，其内容显示"温室中的花朵经不起风雨"。</p>
+      <p class="vwhy"><b>为什么</b>：被动改主动——主语换成 we，notice 用原形，意思不变；两种写法都对。</p>
+    </div>
+    <div class="v">
+      <p class="vsen">Finally, several Chinese characters <span class="a">can be noticed</span> <b>below the drawing</b><span class="a">（在漫画下方）</span>, which say "...".</p>
+      <p class="vzh">【中文】最后，漫画下方若干汉字能被注意到，内容显示"……"。</p>
+      <p class="vwhy"><b>为什么</b>：第一段字数不够时补位置 <code>below the drawing</code>；老师没写是因为嫌原句字太多——字多就省、字少就加。</p>
+    </div>
+    <div class="v">
+      <p class="vsen">Several Chinese characters can be noticed, which say "...". Inside a huge warm greenhouse, there is a little and delicate flower...</p>
+      <p class="vzh">【中文】若干汉字能被注意到，内容是"……"；巨大温暖的温室里有一朵小而精致的花……</p>
+      <p class="vwhy"><b>为什么</b>：把文字说明句提到句首当开篇、图画描述倒到后面——功能句顺序可自由组合，摆脱模板束缚；只要写的是主题相关内容就行。</p>
+    </div>
+  </div>
+
+  <span class="badge b2">② 挖空框架</span>
+  <div class="frame">
+    Finally<span class="a">（顺序框架，固定不挖）</span>,
+    <span class="blank c1">①〔若干：several / certain / a number of / a few〕</span>
+    <span class="blank c2">②〔文字内容：图画上的文字，如 Chinese characters〕</span>
+    can be noticed<span class="a">（被动框架，固定不挖）</span>, which<span class="a">（引出框架，不挖）</span>
+    <span class="blank c3">③〔显示动词：say / read / show / indicate〕</span>
+    "<span class="blank c4">④〔引语内容：直接抄题干文字说明，一字不用自己想〕</span>".
+  </div>
+  <p class="zh">【填写示范】Finally, <b>several</b> <b>Chinese characters</b> can be noticed, which <b>say</b> "<b>Flowers in the greenhouse cannot stand wind and rain</b>".</p>
+  <p class="zh">【用法】④永远抄题干原文；③注意从句主语复数时动词用原形。本句的④本身就是一条功能句（温室花朵真题句），里头的 stand 可换 withstand 一串。</p>
+
+  <span class="badge b3">③ 第二遍应用（照片篇 · 未单独教）</span>
+  <div class="rules">
+    <b>老师怎么交代</b>：照片篇（贝克汉姆）没有文字说明，本句本课未做第二遍示范；有文字说明的图画/漫画/图表题按 ①② 框架直接套。读后感型作文的迁移见上方【套用】。
+  </div>
+</div>
+
+<!-- ============ 句式五 ============ -->
+<div class="card">
+  <h2>句式五 · 特征概括句</h2>
+  <span class="pos">位置：第二段第 1 句（两篇同位，同一框架）</span>
+  <p class="lead">思路链：先给整句 → 讲 contemporary 替换串 → 否掉 nowadays → 讲"能不能套到偶像崇拜"（能用则用、不能硬套）。</p>
+
+  <span class="badge b1">① 老师原句精讲（温室花朵篇）</span>
+  <div class="blk">
+  <div class="sentence">
+    The<span class="a">（那）</span> <span class="s c1">contemporary<sup>①</sup></span><span class="a">（当今的）</span> Chinese<span class="a">（中国的）</span> family<span class="a">（家庭）</span>
+    <span class="s c2 m">is characterized<sup>②</sup><sup class="mn">①</sup></span><span class="a">（以…为特征）</span> by<span class="a">（以）</span> one family<span class="a">（一个家庭）</span>, one child<span class="a">（一个孩子）</span>.
+  </div>
+  <p class="zh">【中文】当今中国家庭的突出特征就是一个家庭只有一个孩子。</p>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>is characterized</td><td>characterize /ˈkærəktəraɪz/（以…为特征）</td><td>be + characterized（过去分词）+ by</td><td>家庭"<b>以…为特征</b>" → 被动语态 be characterized by 固定搭配；派生链 character（性格）→ characteristic（典型的）→ characterize（动词）</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <table>
+    <tr><th>成分</th><th>英文</th><th>老师怎么讲</th></tr>
+    <tr><td>当今的</td><td>contemporary</td><td>✅ present-day / today's / current；❗都是<b>形容词</b></td></tr>
+    <tr><td>突出特征是</td><td>is characterized by</td><td>✅ 可换 is marked by</td></tr>
+    <tr><td>一家一个孩</td><td>one family, one child</td><td>改造自 2008 奥运口号 one world one dream（同一个世界，同一个梦想）</td></tr>
+  </table>
+
+  <div class="rep">
+    <div class="line"><span class="s c1">① contemporary（当今的）</span>：present-day / today's / current —— 都要形容词</div>
+    <div class="line"><span class="s c2">② is characterized by（突出特征是）</span>：is marked by</div>
+    <div class="nope">❌ <b>Nowadays 开头</b>：nowadays 是<b>副词</b>，这里的位置要形容词 contemporary，词性不对不能用</div>
+  </div>
+
+  <div class="rules">
+    <b>老师交代的结构性规则</b>：功能句能用就用，<b>不能合理套用就不硬套</b>（反面教材见 ③ 段）；汉语思路要结合图画信息提炼，不能空泛。
+  </div>
+
+  <div class="use"><b>【套用】套回第一段</b>：<code>The first drawing is characterized by only one flower in a huge warm greenhouse.</code>（第一个图画的突出特征是巨大温室里只有一朵花）——老师确认"牛奔呐，也可以"。开篇第一句直接写第二段的现象句也可以。</div>
+
+  <div class="variants">
+    <div class="v">
+      <p class="vsen">The<span class="a">（那）</span> first<span class="a">（第一个）</span> drawing<span class="a">（图画）</span> is characterized by<span class="a">（突出特征是）</span> only one flower<span class="a">（只有一朵花）</span> in a huge warm greenhouse<span class="a">（在巨大温暖的温室里）</span>.</p>
+      <p class="vzh">【中文】第一个图画的突出特征是巨大温暖的温室里只有一朵花。</p>
+      <p class="vwhy"><b>为什么</b>：主语换成具体对象 the first drawing（单数 → is）；"特征"直接从图画核心信息提炼——同一框架，装什么图都行。</p>
+    </div>
+    <div class="v">
+      <p class="vsen">Admittedly<span class="a">（不得不承认）</span>, an increasing number of parents<span class="a">（越来越多的家长）</span> now<span class="a">（如今）</span> prepare almost everything for their children<span class="a">（给孩子准备了几乎所有的一切）</span>.</p>
+      <p class="vzh">【中文】不得不承认，如今越来越多的家长给孩子准备了几乎所有的一切。</p>
+      <p class="vwhy"><b>为什么</b>：整篇开篇第一句也可以直接写现象（家长 = 温室、孩子 = 花朵的映射），第一段既写描述又带出寓意，只要与主题相关就行。</p>
+    </div>
+  </div>
+
+  <span class="badge b2">② 挖空框架</span>
+  <div class="frame">
+    The
+    <span class="blank c1">①〔被概括的主体：哪类人 / 哪个对象，配形容词〕</span>
+    is characterized by<span class="a">（框架：突出特征是，可换 is marked by）</span>
+    <span class="blank c2">②〔特征：核心概括短语，从图画信息提炼〕</span>.
+  </div>
+  <p class="zh">【填写示范】The <b>contemporary Chinese family</b> is characterized by <b>one family, one child</b>.</p>
+  <p class="zh">【用法】主体和特征都要"图里来"：①从图画归纳出真实人群，②用短促的概括语（可仿 one world one dream 的对仗式）。</p>
+
+  <span class="badge b3">③ 第二遍应用（贝克汉姆篇 · 不重复拆框架）</span>
+  <div class="rules">
+    <b>老师第二遍怎么讲</b>：问"能不能写如今的年轻人突出的特征就是<b>愚蠢、傻</b>——对偶像盲目崇拜？"→ ❌ 不行，攻击一大片人、还把自己也攻击了。<br>
+    ✅ 正确思路：这两个粉丝突出的特征 = 他们<b>对偶像的狂热</b>（老师确认"牛奔呐"，课上以汉语思路定稿）。<br>
+    参考套写（老师未在讲义写出整句，按框架补）：These two fans are characterized by their craze for the idol.
+  </div>
+  <div class="rep">
+    <div class="nope">❌ <b>"如今的年轻人突出的特征就是愚蠢、傻"</b>：以偏概全攻击整个群体，且把自己也骂进去了——功能句能用则用，套不上就不硬套</div>
+  </div>
+</div>
+
+<!-- ============ 句式六 ============ -->
+<div class="card">
+  <h2>句式六 · 场景联想句</h2>
+  <span class="pos">位置：第二段第 2 句（两篇同位，同一框架）</span>
+  <p class="lead">思路链：图画场景 → be associated with 联想到现实中的人群 → 图画与现实的桥梁句。</p>
+
+  <span class="badge b1">① 老师原句精讲（温室花朵篇）</span>
+  <div class="blk">
+  <div class="sentence">
+    Such<span class="a">（这样的）</span> <span class="s c1">a thing<sup>①</sup></span><span class="a">（一种场景）</span> <span class="s c2 m">can be associated<sup>②</sup><sup class="mn">①</sup></span><span class="a">（能被联系到）</span> with<span class="a">（与）</span>
+    <span class="s c3">a host of<sup>③</sup></span><span class="a">（很多的）</span> parents<span class="a">（家长）</span> and their kids<span class="a">（和他们的孩子）</span>
+    <span class="s c4">in reality<sup>④</sup></span><span class="a">（在现实中）</span>.
+  </div>
+  <p class="zh">【中文】这样的场景能使我们联想到现实生活中很多的家长和他们的孩子。</p>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>can be associated</td><td>associate /əˈsəʊʃieɪt/（联系）</td><td>can + be + associated（过去分词）+ with</td><td>场景"<b>被</b>联系到"人群 → 固定搭配 be associated with；主动的意思（使人联想），语态上是被动的固定写法，整块当搭配背</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <table>
+    <tr><th>成分</th><th>英文</th><th>老师怎么讲</th></tr>
+    <tr><td>这样的场景</td><td>such a thing</td><td>✅ 可换 such a scenario（情景）；担心字数可写复数 such scenarios</td></tr>
+    <tr><td>能被联系到</td><td>can be associated with</td><td>固定搭配 ✅ linked to / related to / connected to</td></tr>
+    <tr><td>很多的</td><td>a host of</td><td>✅ a lot of / a great many / a large number of</td></tr>
+    <tr><td>在现实中</td><td>in reality</td><td>✅ in the real life</td></tr>
+  </table>
+
+  <div class="rules">
+    <b>老师交代的结构性规则</b>：与句式五 / 句式七连写时意思会重复——<b>两句话都合适就都写上，意思重复了就只写一句</b>。
+  </div>
+
+  <div class="rep">
+    <div class="line"><span class="s c1">① a thing（场景）</span>：a scenario（情景）｜怕字数不够：such scenarios（复数）</div>
+    <div class="line"><span class="s c2">② can be associated with（能联系到）</span>：be linked to / be related to / be connected to</div>
+    <div class="line"><span class="s c3">③ a host of（很多的）</span>：a lot of / a great many / a large number of</div>
+    <div class="line"><span class="s c4">④ in reality（现实中）</span>：in the real life</div>
+  </div>
+
+  <div class="variants">
+    <div class="v">
+      <p class="vsen">Such<span class="a">（这样的）</span> scenarios<span class="a">（场景，复数）</span>, <span class="s c1">apparently</span><span class="a">（显然）</span>, can be associated with<span class="a">（能被联系到）</span> a host of<span class="a">（很多的）</span> crazy fans of stars<span class="a">（很多明星疯狂的粉丝）</span> in reality<span class="a">（在现实中）</span>.</p>
+      <p class="vzh">【中文】这样的场景，显然，能使我们联想到现实中很多明星疯狂的粉丝。</p>
+      <p class="vwhy"><b>为什么</b>：thing → scenarios 复数防字数不够；apparently 做插入语补字数，✅ obviously / evidently / definitely / undoubtedly，也可以整个不写——这些都是"可选配件"。</p>
+    </div>
+  </div>
+
+  <span class="badge b2">② 挖空框架</span>
+  <div class="frame">
+    Such
+    <span class="blank c1">①〔场景：a thing / a scenario / scenarios〕</span>,
+    <span class="blank c2">②〔插入语：apparently 一串，可整段不写〕</span>
+    can be associated with<span class="a">（框架，固定不挖）</span>
+    <span class="blank c3">③〔现实中的人群：a host of + 人〕</span>
+    in reality<span class="a">（框架：在现实中，可换 in the real life）</span>.
+  </div>
+  <p class="zh">【填写示范】Such <b>a thing</b>, <b>apparently</b>, can be associated with <b>a host of parents and their kids</b> in reality.</p>
+  <p class="zh">【用法】③必须是从图画映射出的<b>现实人群</b>（温室→家长和孩子；追星→疯狂的粉丝）；②是字数调节器，可省。</p>
+
+  <span class="badge b3">③ 第二遍应用（贝克汉姆篇 · 不重复拆框架）</span>
+  <div class="blk">
+  <div class="sentence">
+    Such<span class="a">（这样的）</span> <span class="m">scenarios<sup class="mn">①</sup></span><span class="a">（场景，复数）</span>, <span class="s c1">apparently</span><span class="a">（显然）</span>, can be associated with<span class="a">（能被联系到）</span> a host of<span class="a">（很多的）</span> <span class="s c2">crazy</span><span class="a">（疯狂的）</span> <span class="m">fans<sup class="mn">②</sup></span><span class="a">（粉丝）</span> of stars<span class="a">（明星的）</span> in reality<span class="a">（在现实中）</span>.
+  </div>
+  <p class="zh">【中文】这样的场景，显然，能使我们联想到现实中很多明星疯狂的粉丝。</p>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>scenarios</td><td>scenario /səˈnɑːriəʊ/（情景）</td><td>+ s 复数</td><td>怕字数不够把 a thing 升级成复数 scenarios，冠词 a 去掉</td></tr>
+      <tr><td>fans</td><td>fan /fæn/（粉丝）</td><td>+ s 复数</td><td>a host of 修饰复数可数名词 → fans 加 s</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <div class="rep">
+    <div class="line"><span class="s c2">① crazy（疯狂的）</span>：enthusiastic（狂热的）｜粉丝也说 worshipers（崇拜者）</div>
+    <div class="nope">❌ <b>insane（疯癫的）</b>：带"有疾病、魔怔"色彩，形容粉丝太重、不合适——crazy 就够了</div>
+  </div>
+</div>
+
+<!-- ============ 句式七 ============ -->
+<div class="card">
+  <h2>句式七 · 递进列举句</h2>
+  <span class="pos">位置：第二段第 3 句（两篇同位，同一框架）</span>
+  <p class="lead">思路链：Admittedly 客观让步 → 越来越多的人群 + 做了什么 → such as 列举落地。</p>
+
+  <span class="badge b1">① 老师原句精讲（温室花朵篇）</span>
+  <div class="blk">
+  <div class="sentence">
+    <span class="s c1 m">Admittedly<sup>①</sup><sup class="mn">①</sup></span><span class="a">（不得不承认）</span>, <span class="s c3">an increasing number of<sup>③</sup></span><span class="a">（越来越多的）</span> parents<span class="a">（家长）</span>
+    <span class="s c2">now<sup>②</sup></span><span class="a">（如今）</span> <span class="m">prepare<sup class="mn">②</sup></span><span class="a">（准备）</span> almost<span class="a">（几乎）</span> everything<span class="a">（一切）</span> for their children<span class="a">（给他们的孩子）</span>,
+    such as<span class="a">（例如）</span> food<span class="a">（吃的）</span>, <span class="m">clothes<sup class="mn">③</sup></span><span class="a">（衣服）</span>, houses<span class="a">（房子）</span>, tuition<span class="a">（学费）</span>, marriage<span class="a">（婚姻）</span>, and even<span class="a">（甚至）</span> future jobs<span class="a">（未来的工作）</span>.
+  </div>
+  <p class="zh">【中文】不得不承认，如今越来越多的家长为孩子准备了几乎所有的一切，例如吃的、衣服、房子、学费、婚姻，甚至未来的工作。</p>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>Admittedly</td><td>admit /ədˈmɪt/（承认）</td><td>admit → admitted（双写 t）→ admittedly</td><td>句首副词"诚然 / 不得不承认"，表客观事实的让步；+ly 是形容词变副词标志</td></tr>
+      <tr><td>prepare</td><td>prepare /prɪˈpeə/（准备）</td><td>原形</td><td>主语 an increasing number of + 复数名词，数量概念是复数 → 动词用原形（不加 s）</td></tr>
+      <tr><td>clothes</td><td>cloth /klɒθ/（布）→ clothes /kləʊðz/（衣服）</td><td>固定复数形式</td><td>clothes 本身就是复数名词"衣服"，没有单数 clothe 的用法（此词形不作"穿"的动词）</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <table>
+    <tr><th>成分</th><th>英文</th><th>老师怎么讲</th></tr>
+    <tr><td>越来越多</td><td>an increasing number of</td><td>✅ a growing number of；more and more"就别记了"</td></tr>
+    <tr><td>如今（插入语）</td><td>now,</td><td>✅ nowadays, / today, / at present, —— 插入语前后带逗号</td></tr>
+    <tr><td>准备了几乎所有的一切</td><td>prepare almost everything for</td><td>图画与现实映射的核心：家长 = 温室</td></tr>
+    <tr><td>列举</td><td>food, clothes, houses, tuition, marriage, and even future jobs</td><td>tuition 学费——希望工程那篇背过；marriage 婚姻都能安排（"隔壁王叔叔家的小王就挺好的"）；and even 表递进收尾</td></tr>
+  </table>
+
+  <div class="rules">
+    <b>老师交代的结构性规则</b>：后面的列举（such as 串）<b>不写也行</b>——字数控制件；写就写到"甚至"递进一层，画面更足。
+  </div>
+
+  <div class="rep">
+    <div class="line"><span class="s c1">① Admittedly（诚然）</span>：without doubt / with no doubt（不可否认）</div>
+    <div class="line"><span class="s c2">② now（如今）</span>：nowadays / today / at present（插入语都带逗号）</div>
+    <div class="line"><span class="s c3">③ an increasing number of（越来越多）</span>：a growing number of</div>
+  </div>
+
+  <div class="variants">
+    <div class="v">
+      <p class="vsen">Admittedly, an increasing number of parents now prepare almost everything for their children.</p>
+      <p class="vzh">【中文】不得不承认，如今越来越多的家长为孩子准备了几乎所有的一切。</p>
+      <p class="vwhy"><b>为什么</b>：such as 列举串整个删掉后句子仍完整——列举是可选配件，字数不够再加。</p>
+    </div>
+  </div>
+
+  <span class="badge b2">② 挖空框架</span>
+  <div class="frame">
+    <span class="blank c1">①〔让步副词：Admittedly / Without doubt / With no doubt〕</span>, an increasing number of<span class="a">（框架：越来越多，可换 a growing number of）</span>
+    <span class="blank c2">②〔对象人群：家长 / 青少年等复数〕</span>
+    <span class="blank c3">③〔时间插入语：now / nowadays / today，可省〕</span>
+    <span class="blank c4">④〔对人群做的事：谓语 + 内容，如 prepare almost everything for...〕</span>,
+    such as<span class="a">（框架：例如，列举串可整个不写）</span>
+    <span class="blank c5">⑤〔列举：名词串 + and even 递进收尾〕</span>.
+  </div>
+  <p class="zh">【填写示范】<b>Admittedly</b>, an increasing number of <b>parents</b> <b>now</b> <b>prepare almost everything for their children</b>, such as <b>food, clothes, houses, tuition, marriage, and even future jobs</b>.</p>
+  <p class="zh">【用法】①④是每个话题的变量（人群 + 他们在做的事）；⑤是字数配件——可用可不用；an increasing number of 后面动词用<b>原形</b>（复数概念）。</p>
+
+  <span class="badge b3">③ 第二遍应用（贝克汉姆篇 · 不重复拆框架）</span>
+  <div class="blk">
+  <div class="sentence">
+    <span class="s c1">Admittedly<sup>①</sup></span><span class="a">（不得不承认）</span>, an increasing number of<span class="a">（越来越多的）</span> teenagers<span class="a">（青少年）</span>
+    <span class="s c2 m">are fascinated<sup>②</sup><sup class="mn">①</sup></span><span class="a">（着迷的）</span> with<span class="a">（对）</span> <span class="s c3">a variety of<sup>③</sup></span><span class="a">（各种的）</span> <span class="s c4 m">celebrities<sup>④</sup><sup class="mn">②</sup></span><span class="a">（名人）</span> now<span class="a">（如今）</span>,
+    such as<span class="a">（例如）</span> pop singers<span class="a">（流行歌手）</span>, actors<span class="a">（演员）</span>, <span class="s c5">athletic champions<sup>⑤</sup></span><span class="a">（体育冠军）</span> and so on<span class="a">（等等）</span>.
+  </div>
+  <p class="zh">【中文】不得不承认，如今越来越多的青少年对各种名人很着迷，例如流行歌手、演员、体育冠军等等。</p>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>are fascinated</td><td>fascinate /ˈfæsɪneɪt/（使着迷）</td><td>be + fascinated（过去分词）+ with</td><td>"人<b>被</b>弄得着迷" → be fascinated with 固定搭配；主语 teenagers 复数 → are；become / get 也能换 be</td></tr>
+      <tr><td>celebrities</td><td>celebrity /səˈlebrəti/（名人）</td><td>变 y 为 i + es</td><td>辅音字母 + y 结尾的名词复数：celebrity → celebrities</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <div class="rep">
+    <div class="line"><span class="s c2">② fascinated with（对…着迷）</span>：be obsessed with（沉迷）/ be enthusiastic about（对…有热情）/ be passionate（充满热情）</div>
+    <div class="line"><span class="s c3">③ a variety of（各种）</span>：a (great) variety of</div>
+    <div class="line"><span class="s c4">④ celebrities（名人）</span>：renowned figures（知名人物）/ influencers（有影响力的人）/ internet celebrities（网红）｜实在不会就 famous people</div>
+    <div class="line"><span class="s c5">⑤ athletic champions（体育冠军）</span>：sports champions（不会写 athletic 就写 sports）</div>
+    <div class="nope">❌ <b>addicted（上瘾的）</b>：addicted 是"上瘾、沉溺"，一般配酒、drug 这类东西——"对明星着迷"不能用</div>
+  </div>
+</div>
+
+<!-- ============ 句式八 ============ -->
+<div class="card">
+  <h2>句式八 · 原因分析句</h2>
+  <span class="pos">位置：第二段第 4 句（两篇同位，同一框架）</span>
+  <p class="lead">思路链：现象值得关注 → for the reason that 给原因 → 一主一伴（focus 谓语 + ignoring 伴随）收进"忽视的危害"。</p>
+
+  <span class="badge b1">① 老师原句精讲（温室花朵篇）</span>
+  <div class="blk">
+  <div class="sentence">
+    This<span class="a">（这种）</span> <span class="s c1">phenomenon<sup>①</sup></span><span class="a">（现象）</span> is<span class="a">（是）</span> <span class="s c2">particularly<sup>②</sup></span><span class="a">（非常）</span> worth<span class="a">（值得）</span> attention<span class="a">（关注）</span>
+    <span class="s c3">for the reason that<sup>③</sup></span><span class="a">（因为）</span> parents<span class="a">（家长）</span> <span class="s c4">focus only on<sup>④</sup></span><span class="a">（只关心）</span> <span class="m">children's<sup class="mn">②</sup></span><span class="a">（孩子们的）</span> comfort<span class="a">（舒适）</span> and<span class="a">（和）</span> enjoyment<span class="a">（享受）</span>,
+    <span class="m">ignoring<sup class="mn">①</sup></span><span class="a">（忽视着）</span> the significance of<span class="a">（…的重要性）</span> independence<span class="a">（独立）</span> for the young<span class="a">（对年轻人而言）</span>.
+  </div>
+  <p class="zh">【中文】这种现象非常值得关注，因为家长们只关心孩子的舒适和享受，忽视了独立对年轻人的重要性。</p>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>ignoring</td><td>ignore /ɪɡˈnɔː/（忽视）</td><td>去 e + ing</td><td>两个动作同时发生且主语一致：focus 写谓语，ignore 写 <b>-ing 伴随</b></td></tr>
+      <tr><td>children's</td><td>child /tʃaɪld/（孩子）</td><td>child → children（不规则复数）+ 's</td><td>先不规则复数再加撇，所有格"孩子们的"；对照规则复数 parents'（加 s 再加撇）</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <table>
+    <tr><th>成分</th><th>英文</th><th>老师怎么讲</th></tr>
+    <tr><td>这种现象</td><td>this phenomenon</td><td>不会写 phenomenon → this trend / this tendency / this fact（这一事实）</td></tr>
+    <tr><td>非常值得关注</td><td>is particularly worth attention</td><td>particularly 讲过很多遍：very / quite / exceedingly / pretty 一串接着换</td></tr>
+    <tr><td>因为</td><td>for the reason that</td><td>= because（一个单词）；since / as 也行</td></tr>
+    <tr><td>只关心</td><td>focus only on</td><td>only ✅ merely；focus on ✅ care about（care only about）</td></tr>
+    <tr><td>忽视了</td><td>ignoring</td><td>✅ disregard / paying no attention to</td></tr>
+  </table>
+
+  <div class="rep">
+    <div class="line"><span class="s c1">① this phenomenon（这种现象）</span>：this trend / this tendency / this fact —— 一串降级</div>
+    <div class="line"><span class="s c2">② particularly（非常）</span>：very / quite / exceedingly / pretty / much</div>
+    <div class="line"><span class="s c3">③ for the reason that（因为）</span>：because / since / as</div>
+    <div class="line"><span class="s c4">④ focus only on（只关心）</span>：care only about｜only → merely</div>
+  </div>
+
+  <div class="rules">
+    <b>老师交代的结构性规则</b>：这句也能当<b>整篇开篇</b>——"这两张照片非常值得关注，因为它们聚焦的是年轻人对偶像的盲目崇拜"（老师确认可以）；功能句前后顺序可以随意调整。
+  </div>
+
+  <div class="variants">
+    <div class="v">
+      <p class="vsen">These<span class="a">（这两张）</span> photos<span class="a">（照片）</span> are<span class="a">（是）</span> particularly<span class="a">（非常）</span> worth<span class="a">（值得）</span> attention<span class="a">（关注）</span>, for the reason that<span class="a">（因为）</span> they<span class="a">（它们）</span> focus on<span class="a">（聚焦）</span> young people's<span class="a">（年轻人的）</span> blind worship of idols<span class="a">（对偶像的盲目崇拜）</span>.</p>
+      <p class="vzh">【中文】这两张照片非常值得关注，因为它们聚焦的是年轻人对偶像的盲目崇拜。</p>
+      <p class="vwhy"><b>为什么</b>：主语从 this phenomenon 换成具体材料 these two photos（复数 → are）；后半句原因也可以整个不写——功能句拆开自由组合。</p>
+    </div>
+    <div class="v">
+      <p class="vsen">This movie<span class="a">（这部电影）</span> is<span class="a">（是）</span> particularly<span class="a">（非常）</span> worth watching<span class="a">（一看）</span>.</p>
+      <p class="vzh">【中文】这部电影非常值得一看。</p>
+      <p class="vwhy"><b>为什么</b>：框架移植到小作文"推荐电影"：worth + 动名词；后半句原因可省——套用的本质是骨架不变、填内容。</p>
+    </div>
+  </div>
+
+  <span class="badge b2">② 挖空框架</span>
+  <div class="frame">
+    This
+    <span class="blank c1">①〔现象类名词：phenomenon / trend / tendency / fact〕</span>
+    is <span class="blank c2">②〔程度副词：particularly 一串〕</span> worth attention<span class="a">（框架：值得关注）</span>
+    <span class="blank c3">③〔原因连词：for the reason that / because / since / as〕</span>
+    <span class="blank c4">④〔主语人群〕</span>
+    <span class="blank c5">⑤〔只关注的内容：focus merely on...〕</span>,
+    <span class="blank c6">⑥〔忽视的危害：ignoring the significance of...，-ing 伴随一体填〕</span>.
+  </div>
+  <p class="zh">【填写示范】This <b>phenomenon</b> is <b>particularly</b> worth attention <b>for the reason that</b> <b>parents</b> <b>focus only on</b> children's comfort and enjoyment, <b>ignoring the significance of independence for the young</b>.</p>
+  <p class="zh">【用法】⑤⑥一体两面：先说"只看什么"，再说"漏了什么"才成完整因果链；⑥是 -ing 伴随（主语与④一致）。</p>
+
+  <span class="badge b3">③ 第二遍应用（贝克汉姆篇 · 不重复拆框架）</span>
+  <div class="blk">
+  <div class="sentence">
+    This<span class="a">（这种）</span> phenomenon<span class="a">（现象）</span> is<span class="a">（是）</span> particularly<span class="a">（非常）</span> worth<span class="a">（值得）</span> attention<span class="a">（关注）</span> for the reason that<span class="a">（因为）</span> the young<span class="a">（年轻人）</span> focus<span class="a">（关心）</span> <span class="s c1">merely<sup>①</sup></span><span class="a">（仅仅）</span> on<span class="a">（在）</span> <span class="m">stars'<sup class="mn">①</sup></span><span class="a">（明星们的）</span> <span class="s c2">fashionable<sup>②</sup></span><span class="a">（时尚的）</span> and even<span class="a">（甚至）</span> <span class="m">superficial<sup class="mn">②</sup></span><span class="a">（肤浅的）</span> <span class="s c3">appearance<sup>③</sup></span><span class="a">（外表）</span>, ignoring<span class="a">（忽视着）</span> the significance of<span class="a">（…的重要性）</span> learning<span class="a">（学习）</span> their<span class="a">（他们的）</span> <span class="s c4">excellent qualities<sup>④</sup></span><span class="a">（优秀品质）</span>.
+  </div>
+  <p class="zh">【中文】这种现象非常值得关注，因为年轻人只关心明星们时尚甚至肤浅的外表，忽视了学习他们优秀品质的重要性。</p>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>stars'</td><td>star /stɑː/（明星）</td><td>star → stars（复数）+ '</td><td>多个明星的外表 → 先复数再加撇 = 复数所有格；对照单数 star's（一个明星的）——这里肯定写好多个明星</td></tr>
+      <tr><td>superficial</td><td>surface /ˈsɜːfɪs/（表面）</td><td>surface → superficial（adj. 肤浅的）</td><td>修饰 appearance 用形容词；派生自 surface（表面）</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <div class="rep">
+    <div class="line"><span class="s c1">① merely（仅仅）</span>：only</div>
+    <div class="line"><span class="s c2">② fashionable（时尚的）</span>：第一篇"时尚与设计"杂志那篇背过，直接迁移</div>
+    <div class="line"><span class="s c3">③ appearance（外表）</span>：outlook（外在）｜降级：他们的时尚发型穿着</div>
+    <div class="line"><span class="s c4">④ excellent qualities（优秀品质）</span>：virtues（美德）/ merits（优点）</div>
+    <div class="nope">❌ <b>surface（表面）</b>：surface 是桌面、水面那种物理"表面"，人的外表要用 appearance</div>
+  </div>
+</div>
+
+<!-- ============ 句式九 ============ -->
+<div class="card">
+  <h2>句式九 · 危害强调句</h2>
+  <span class="pos">位置：第二段第 5 句 · 收尾（两篇同位，同一框架）</span>
+  <p class="lead">思路链：强调句 It is...that 点出罪魁祸首 → causes 导致 → not to + 动词点出后果。</p>
+
+  <span class="badge b1">① 老师原句精讲（温室花朵篇）</span>
+  <div class="blk">
+  <div class="sentence">
+    It is<span class="a">（正是）</span> the <span class="m">parents'<sup class="mn">②</sup></span><span class="a">（家长们的）</span> <span class="s c1 m">over-protection<sup>①</sup><sup class="mn">③</sup></span><span class="a">（过度保护）</span> that<span class="a">（正是…才）</span> <span class="m">causes<sup class="mn">①</sup></span><span class="a">（导致）</span> young people<span class="a">（年轻人）</span> not to<span class="a">（没能）</span> <span class="s c2">build up<sup>②</sup></span><span class="a">（建立起）</span> <span class="s c3">adequate<sup>③</sup></span><span class="a">（足够的）</span> competence<span class="a">（能力）</span> and<span class="a">（和）</span> confidence<span class="a">（自信）</span> to face society<span class="a">（去面对社会）</span>.
+  </div>
+  <p class="zh">【中文】正是家长们的过度保护，导致年轻人没有建立起足够的能力和自信去面对社会。</p>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>causes</td><td>cause /kɔːz/（导致）</td><td>+ s</td><td>强调句还原：the over-protection causes...——主语是第三人称单数 → 三单 s</td></tr>
+      <tr><td>parents'</td><td>parent /ˈpeərənt/（家长）</td><td>parent → parents（规则复数）+ '</td><td>先复数（家长们）再加撇 = 复数所有格"家长们的"</td></tr>
+      <tr><td>over-protection</td><td>protect /prəˈtekt/（保护）</td><td>over-（过度）+ protect + -ion（名词后缀）</td><td>保护的行为名词化 → protection；再加 over- 表"过度"——两个部件都能认出来</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <table>
+    <tr><th>成分</th><th>英文</th><th>老师怎么讲</th></tr>
+    <tr><td>强调句</td><td>It is...that...</td><td>小作文已经讲过的强调句，直接拿来用；还原后是 The over-protection causes...</td></tr>
+    <tr><td>过度保护</td><td>over-protection</td><td>✅ excessive protection / excessive love；excessive = 过度的、过多的</td></tr>
+    <tr><td>没有建立起</td><td>not to build up</td><td>cause sb not to do；build up ✅ accumulate（积累）/ gain / acquire / get</td></tr>
+    <tr><td>足够的能力和自信</td><td>adequate competence and confidence</td><td>adequate 形容词"足够的"；competence 能力、confidence 自信</td></tr>
+  </table>
+
+  <div class="rep">
+    <div class="line"><span class="s c1">① over-protection（过度保护）</span>：excessive protection / excessive love（正是家长过多的爱）</div>
+    <div class="line"><span class="s c2">② build up（建立）</span>：accumulate / gain / acquire / get</div>
+    <div class="line"><span class="s c3">③ adequate（足够的）</span>：不会写就删掉，直接 competence and confidence</div>
+  </div>
+
+  <div class="rules">
+    <b>老师交代的结构性规则</b>：写危害 = 把"不好"写出来——框架就是 It is + 罪魁祸首 + that causes + 对象 + not to + 后果；换话题只换名词短语。
+  </div>
+
+  <div class="variants">
+    <div class="v">
+      <p class="vsen">It is this blind worship<span class="a">（这种盲目崇拜）</span> that causes them<span class="a">（导致他们）</span> not to gain anything<span class="a">（一无所获）</span>.</p>
+      <p class="vzh">【中文】正是这种盲目崇拜导致他们一无所获。</p>
+      <p class="vwhy"><b>为什么</b>：后半句 not to gain anything = to gain nothing，两种写法都收——"你家设计一个贝克汉姆的头型就牛奔吗？不牛奔"。</p>
+    </div>
+  </div>
+
+  <span class="badge b2">② 挖空框架</span>
+  <div class="frame">
+    It is<span class="a">（强调句框架，固定不挖）</span>
+    <span class="blank c1">①〔罪魁祸首：负面名词短语，配所有格〕</span>
+    that causes<span class="a">（框架：导致，三单跟①走）</span>
+    <span class="blank c2">②〔受害对象：人群〕</span>
+    not to
+    <span class="blank c3">③〔造成的后果：动词原形短语〕</span>.
+  </div>
+  <p class="zh">【填写示范】It is <b>the parents' over-protection</b> that causes <b>young people</b> not to <b>build up adequate competence and confidence to face society</b>.</p>
+  <p class="zh">【用法】收尾句的公式三空：谁的锅 → 谁受害 → 害成什么样；causes 的三单 s 取决于①（单数罪魁祸首）。</p>
+
+  <span class="badge b3">③ 第二遍应用（贝克汉姆篇 · 不重复拆框架）</span>
+  <div class="blk">
+  <div class="sentence">
+    It is<span class="a">（正是）</span> this<span class="a">（这种）</span> <span class="s c1">blind<sup>①</sup></span><span class="a">（盲目的）</span> <span class="s c1">worship<sup>②</sup></span><span class="a">（崇拜）</span> that causes<span class="a">（导致）</span> them<span class="a">（他们）</span> <span class="s c3">not to <span class="m">gain<sup class="mn">①</sup></span> anything<sup>③</sup></span><span class="a">（一无所获）</span>.
+  </div>
+  <p class="zh">【中文】正是这种盲目崇拜导致他们一无所获。</p>
+
+  <details class="morph">
+    <summary>🔍 变形披露（点开：句中标出变形词 + 原型音标 + 为什么这么变）</summary>
+    <table>
+      <tr><th>句中形式</th><th>原型（音标）</th><th>变形</th><th>语法上为什么</th></tr>
+      <tr><td>gain</td><td>gain /ɡeɪn/（得到）</td><td>原形</td><td>cause sb not to <b>do</b>：not to 后接动词原形</td></tr>
+    </table>
+  </details>
+  </div>
+
+  <div class="rep">
+    <div class="line"><span class="s c1">① blind（盲目的）</span>：irrational（不理智的）/ mindless（不长脑子的、无脑的）</div>
+    <div class="line"><span class="s c1">② worship（崇拜）</span>：不会写就写 love——"正是一种盲目的爱"</div>
+    <div class="line"><span class="s c3">③ not to gain anything（一无所获）</span>：to gain nothing —— 两种都收</div>
+    <div class="line"><span class="s c2">④ 收尾升级</span>：causes them <b>to live an absurd life</b>（过上一种荒诞的生活）——absurd / ridiculous 都行</div>
+  </div>
+</div>
+
+<!-- ============ 页脚 ============ -->
+<div class="card foot">
+  <h2 style="font-size:1rem;">附一 · 本页涉及的语音转写纠错对照</h2>
+  <table>
+    <tr><th>转写原稿</th><th>还原</th><th>依据（双锚点）</th></tr>
+    <tr><td>observed</td><td>absurd（荒谬的）</td><td>音近 + 老师当场给"荒谬"义</td></tr>
+    <tr><td>titles</td><td>petals（花瓣）</td><td>音近 + 老师当场解释"花瓣"</td></tr>
+    <tr><td>大爱子</td><td>dies（死掉）</td><td>音近 + 老师给"死掉也行"义</td></tr>
+    <tr><td>of o</td><td>awful（糟糕的）</td><td>音近 + 老师说"凡是表示不好的都可以"</td></tr>
+    <tr><td>return</td><td>written（被写上）</td><td>音近 + 被动语态需要过去分词</td></tr>
+    <tr><td>put it / putty</td><td>it is put（无 putted）</td><td>老师钓鱼执法当场揭晓：put 三态同形</td></tr>
+    <tr><td>IC定理</td><td>exceedingly（非常）</td><td>音近 + 老师给"非常"义</td></tr>
+    <tr><td>澳洲</td><td>although（尽管）</td><td>音近 + 让步状语从句语境</td></tr>
+    <tr><td>win stand</td><td>withstand（经受住）</td><td>音近 + stand 同义替换语境（句式四）</td></tr>
+    <tr><td>close</td><td>clothes（衣服）</td><td>音近 + 列举语境（句式七）</td></tr>
+    <tr><td>求一审</td><td>tuition（学费）</td><td>音近 + 老师当场给"学费"义（句式七）</td></tr>
+  </table>
+  <h2 style="font-size:1rem; margin-top:18px;">附二 · 老师交代的结构性规则（全课通用）</h2>
+  <p>· 第一段写 40~50 个单词就足够，不算少；<br>
+     · 听得懂写不出来很正常，一节课解决不了所有问题，坚持一节一节跟着练；<br>
+     · 不要再问"这样写行不行"——请以老师带你写的句子为标准进行背写；<br>
+     · 功能句前后顺序可以随意调整、自由组合，摆脱模板束缚，想到哪句写哪句，只要是跟主题相关的就可以。</p>
+</div>
+
+</div>
+<script>
+document.querySelectorAll('details.morph').forEach(function(d){
+  var blk = d.closest('.blk');
+  if (!blk) return;
+  var sync = function(){ blk.classList.toggle('morph-open', d.open); };
+  d.addEventListener('toggle', sync);
+  sync();
+});
+</script>
+</body>
+</html>
