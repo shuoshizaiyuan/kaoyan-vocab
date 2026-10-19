@@ -2,45 +2,114 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>其他站点集合</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: "Microsoft YaHei", "Segoe UI", sans-serif; background: #f0f3f8; min-height: 100vh; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 20px; }
-  h1 { color: #1a3a6b; font-size: 30px; margin-bottom: 6px; }
-  .sub { color: #889; margin-bottom: 32px; font-size: 14px; }
-  .cards { display: grid; grid-template-columns: 1fr; gap: 16px; }
-  .card { background: #fff; border-radius: 12px; padding: 24px 26px; display: block; text-decoration: none; box-shadow: 0 2px 10px rgba(26,58,107,.08); transition: transform .12s, box-shadow .12s; }
-  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(26,58,107,.15); }
-  .card h2 { color: #1a3a6b; font-size: 20px; margin-bottom: 6px; }
-  .card p { color: #778; font-size: 14px; line-height: 1.6; }
-  .card .tag { display: inline-block; background: #1a3a6b; color: #fff; font-size: 12px; border-radius: 999px; padding: 3px 10px; margin-bottom: 8px; }
-  .card.reserved { border: 1.5px dashed #c3cdda; box-shadow: none; background: #fafbfd; }
-  .card.reserved h2 { color: #aab; }
-  .card.reserved p { color: #bbc; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft YaHei',system-ui,sans-serif;background:#f0f3f8;color:#1f2937;line-height:1.7;min-height:100vh}
+.wrap{max-width:960px;margin:0 auto;padding:48px 20px 80px}
+.hero{text-align:center;margin-bottom:36px}
+.hero .tag{display:inline-block;background:#e8eef7;color:#1a3a6b;font-size:13px;font-weight:600;padding:5px 14px;border-radius:999px;margin-bottom:14px}
+h1{font-size:32px;color:#12294d;letter-spacing:1px}
+.sub{color:#889;font-size:15px;margin-top:10px}
+.sub b{color:#1a3a6b}
+.topbar{display:flex;justify-content:flex-end;margin-bottom:10px}
+.syncbtn{padding:8px 16px;border:1px solid #c3cdda;border-radius:9px;background:#fff;color:#1a3a6b;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+.syncbtn:hover{border-color:#1a3a6b;background:#f4f7fc}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:8px}
+.card{display:block;background:#fff;border:1px solid #e0e6f0;border-radius:16px;padding:22px 24px;text-decoration:none;color:inherit;box-shadow:0 2px 8px rgba(18,41,77,.05);transition:.18s}
+a.card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(26,58,107,.16);border-color:#9db8dd}
+.card .yr{font-size:13px;font-weight:700;color:#1a3a6b;background:#e8eef7;padding:3px 10px;border-radius:999px}
+.card .t{display:block;font-size:19px;font-weight:700;margin-top:12px;color:#12294d}
+.card .d{display:block;font-size:13px;color:#64748b;margin-top:6px;min-height:38px}
+.card .go{display:inline-block;margin-top:12px;font-size:14px;font-weight:600;color:#1a3a6b}
+.card.reserved{background:#f8fafc;border:1.5px dashed #c9d3e0;box-shadow:none;cursor:default}
+.card.reserved .yr{color:#aab;background:#f1f5f9}
+.card.reserved .t{color:#aab}
+.card.reserved .d{color:#bbc}
+#syncMask{display:none;position:fixed;inset:0;background:rgba(18,41,77,.45);z-index:90}
+#syncBox{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:16px;padding:26px 28px;width:min(480px,92vw);z-index:99;box-shadow:0 18px 50px rgba(18,41,77,.3)}
+#syncBox h3{font-size:18px;color:#12294d;margin-bottom:8px}
+#syncBox p{font-size:13px;color:#64748b;margin-bottom:14px}
+#syncBox input{width:100%;padding:10px 12px;border:1px solid #dbe1ec;border-radius:9px;font-size:14px;font-family:Consolas,monospace}
+#syncBox .row{display:flex;gap:10px;margin-top:14px}
+#syncBox button{padding:9px 18px;border:none;border-radius:9px;background:#1a3a6b;color:#fff;font-size:14px;font-weight:600;cursor:pointer}
+#syncBox button.ghost{background:#fff;color:#475569;border:1px solid #dbe1ec}
+#syncSt{margin-top:10px;font-size:13px;font-weight:600;color:#1a3a6b}
+footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:44px}
 </style>
 </head>
 <body>
-  <div class="wrap">
+<div class="wrap">
+  <header class="hero">
+    <div class="tag">全科目 · 轻量化小工具</div>
     <h1>其他站点集合</h1>
-    <div class="sub">各科目轻量化小工具的总门户 · 新工具持续挂载</div>
-    <div class="cards">
-      <a class="card" href="wordspeed/index.html">
-        <span class="tag">英语</span>
-        <h2>高中频简单词速刷</h2>
-        <p>三份词表轮次速刷：点勾标记已会词 → 按轮保存 → 进度 GitHub 全站同步 → 导出记录交 AI 剔除更新词表。</p>
-      </a>
-      <div class="card reserved">
-        <span class="tag" style="background:#aab">预留</span>
-        <h2>（入口预留 · 待配置）</h2>
-        <p>后续任意科目的轻量化工具都挂在这里，入口结构已留好。</p>
-      </div>
-      <div class="card reserved">
-        <span class="tag" style="background:#aab">预留</span>
-        <h2>（入口预留 · 待配置）</h2>
-        <p>后续任意科目的轻量化工具都挂在这里，入口结构已留好。</p>
-      </div>
+    <p class="sub">选择一个入口进入 · 新工具持续挂载 · <b>进度可跨设备同步</b></p>
+  </header>
+  <div class="topbar"><button class="syncbtn" onclick="openSync()">⚙ 同步设置</button></div>
+
+  <div class="grid">
+    <a class="card" href="wordspeed/list1.html">
+      <span class="yr">英语 · 第1份</span>
+      <span class="t">高频简单词速刷 ①</span>
+      <span class="d">1258 词轮次速刷：点勾标记已会 → 按轮保存缩表 → 导出记录交 AI 剔除更新。</span>
+      <span class="go">进入 →</span>
+    </a>
+    <a class="card" href="wordspeed/list2.html">
+      <span class="yr">英语 · 第2份</span>
+      <span class="t">高频简单词速刷 ②</span>
+      <span class="d">第二份 1258 词，同款轮次机制，进度与另外两份一并全站同步。</span>
+      <span class="go">进入 →</span>
+    </a>
+    <a class="card" href="wordspeed/list3.html">
+      <span class="yr">英语 · 第3份</span>
+      <span class="t">高频简单词速刷 ③</span>
+      <span class="d">第三份 1258 词，同款轮次机制，进度与另外两份一并全站同步。</span>
+      <span class="go">进入 →</span>
+    </a>
+    <div class="card reserved">
+      <span class="yr">预留</span>
+      <span class="t">（入口预留 · 待配置）</span>
+      <span class="d">后续任意科目的轻量化工具挂在这里。</span>
+    </div>
+    <div class="card reserved">
+      <span class="yr">预留</span>
+      <span class="t">（入口预留 · 待配置）</span>
+      <span class="d">后续任意科目的轻量化工具挂在这里。</span>
     </div>
   </div>
+
+  <footer>其他站点集合 · 永久网址 · 挂载规范见部署 skill</footer>
+</div>
+
+<div id="syncMask" onclick="closeSync()"></div>
+<div id="syncBox">
+  <h3>⚙ 全站同步设置</h3>
+  <p>粘贴一次 GitHub 密钥（<code>github_pat_</code> 开头，需 study-log-data 仓库 Contents 读写权限），保存后<b>三个词表页共用</b>：在任何词表页点「上传同步 / 下载合并」即整站同步进度。密钥只存本机浏览器。</p>
+  <input id="patInput" type="password" placeholder="粘贴 github_pat_ 开头的密钥">
+  <div class="row">
+    <button onclick="savePat()">保存密钥</button>
+    <button class="ghost" onclick="clearPat()">清除</button>
+    <button class="ghost" onclick="closeSync()">关闭</button>
+  </div>
+  <div id="syncSt"></div>
+</div>
+<script>
+function openSync(){ document.getElementById('syncMask').style.display='block'; document.getElementById('syncBox').style.display='block'; refreshSt(); }
+function closeSync(){ document.getElementById('syncMask').style.display='none'; document.getElementById('syncBox').style.display='none'; }
+function refreshSt(){
+  var st=document.getElementById('syncSt');
+  try{ st.textContent = localStorage.getItem('hub_pat') ? '✔ 已配置密钥，三个词表页可同步' : '未配置密钥（当前纯本地模式）'; }catch(e){ st.textContent=''; }
+}
+function savePat(){
+  var v=document.getElementById('patInput').value.trim();
+  if(!v){ alert('请先粘贴密钥'); return; }
+  try{ localStorage.setItem('hub_pat', v); document.getElementById('patInput').value=''; refreshSt(); }catch(e){ alert('保存失败：'+e); }
+}
+function clearPat(){
+  try{ localStorage.removeItem('hub_pat'); refreshSt(); }catch(e){ alert('清除失败：'+e); }
+}
+window.addEventListener('load', refreshSt);
+</script>
 </body>
 </html>
