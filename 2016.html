@@ -1062,5 +1062,116 @@ function importProgress(ev){
   ev.target.value = '';
 }
 </script>
+
+<script>
+/* 全站同步补丁：原有代码一行不动，仅在末尾覆盖同名函数；密钥只在浏览器本地使用 */
+var ALL_KEYS = ["wb2012text1_v2", "wb2012text2_v2", "wb2012text3_v2", "wb2012text4_v2", "wb2013text1_v4", "wb2013text2_v3", "wb2012text3_v3", "wb2013text4_v3", "wb2014text1_v2", "wb2014text2_v2", "wb2014text3_v2", "wb2014text4_v2", "wb2015text1_v1", "wb2015text2_v1", "wb2015text3_v1", "wb2015text4_v1", "wb2016text1_v1", "wb2016text2_v1", "wb2016text3_v1", "wb2016text4_v1", "wb2017text1_v1", "wb2017text2_v1", "wb2017text3_v1", "wb2017text4_v1", "wb2018text1_v1", "wb2018text2_v1", "wb2018text3_v1", "wb2018text4_v1", "wb2019text1_v1", "wb2019text2_v1", "wb2019text3_v1", "wb2019text4_v1", "wb2020text1_v1", "wb2020text2_v1", "wb2020text3_v1", "wb2020text4_v1", "wb2022partb_v1", "wb2022partb_ans_v1"];
+var SYNC_REPO = 'shuoshizaiyuan/kaoyan-vocab';
+function wbRich(v){
+  if(!v || typeof v !== 'object') return -1;
+  if(v.rounds && Array.isArray(v.rounds)) return v.rounds.length * 100000 + Object.keys(v.clicks || {}).length;
+  return Object.keys(v).length;
+}
+function wbMerge(base, inc){
+  var out = {}, k;
+  for(k in base){ if(Object.prototype.hasOwnProperty.call(base, k)) out[k] = base[k]; }
+  for(k in inc){
+    if(Object.prototype.hasOwnProperty.call(inc, k)){
+      if(!(k in out) || wbRich(inc[k]) > wbRich(out[k])) out[k] = inc[k];
+    }
+  }
+  return out;
+}
+function wbLocal(){
+  var o = {};
+  for(var i = 0; i < ALL_KEYS.length; i++){
+    try{ var r = localStorage.getItem(ALL_KEYS[i]); if(r) o[ALL_KEYS[i]] = JSON.parse(r); }catch(e){}
+  }
+  return o;
+}
+function collectAllStates(){ return wbLocal(); }
+function syncApi(method, payload, cb){
+  var token = getSyncToken();
+  var xhr = new XMLHttpRequest();
+  xhr.open(method, 'https://api.github.com/repos/' + SYNC_REPO + '/contents/progress.json');
+  xhr.setRequestHeader('Accept', 'application/vnd.github+json');
+  if(token) xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+  if(payload) xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function(){ cb && cb(xhr.status, xhr.responseText); };
+  xhr.onerror = function(){ cb && cb(0, ''); };
+  xhr.send(payload ? JSON.stringify(payload) : null);
+}
+function uploadToCloud(done){
+  var local = wbLocal();
+  syncApi('GET', null, function(st, resp){
+    var cloud = {}, sha = '';
+    if(st === 200){
+      try{ sha = JSON.parse(resp).sha; }catch(e){}
+      try{ cloud = JSON.parse(b64d(JSON.parse(resp).content)); }catch(e){}
+    }
+    var merged = wbMerge(cloud, local);
+    var body = {message:'sync progress (merged)', content:b64e(JSON.stringify(merged)), branch:'main'};
+    if(sha) body.sha = sha;
+    syncApi('PUT', body, function(st2){
+      if(st2 === 200 || st2 === 201){ if(done) done(true); }
+      else { toast('☁ 上传失败（' + st2 + '），请检查密钥'); if(done) done(false); }
+    });
+  });
+}
+function wbRefresh(){
+  try{
+    var cur = localStorage.getItem(LS_KEY);
+    if(cur){
+      var s = JSON.parse(cur);
+      if(s && s.rounds && s.shown && s.clicks){
+        state = s;
+        if(typeof _baseSave === 'function') _baseSave(); else save();
+        if(typeof applyView === 'function') applyView();
+      }
+    }
+  }catch(e){}
+  if(typeof renderPicks === 'function'){
+    try{ picks = JSON.parse(localStorage.getItem('wb2022partb_ans_v1')) || {}; }catch(e){}
+    renderPicks();
+  }
+}
+function downloadFromCloud(done){
+  syncApi('GET', null, function(st, resp){
+    if(st !== 200){ if(done) done(false); return; }
+    try{
+      var cloud = JSON.parse(b64d(JSON.parse(resp).content));
+      var merged = wbMerge(wbLocal(), cloud);
+      for(var i = 0; i < ALL_KEYS.length; i++){
+        var k = ALL_KEYS[i];
+        if(merged[k] !== undefined){ try{ localStorage.setItem(k, JSON.stringify(merged[k])); }catch(e){} }
+      }
+      wbRefresh();
+      if(done) done(true);
+    }catch(e){ if(done) done(false); }
+  });
+}
+function importSyncCode(){
+  var txt = prompt('把另一台设备复制的同步码粘贴到这里：');
+  if(!txt) return;
+  try{
+    var inc = JSON.parse(txt);
+    var merged = wbMerge(wbLocal(), inc), n = 0;
+    for(var i = 0; i < ALL_KEYS.length; i++){
+      var k = ALL_KEYS[i];
+      if(inc[k] !== undefined) n++;
+      if(merged[k] !== undefined){ try{ localStorage.setItem(k, JSON.stringify(merged[k])); }catch(e){} }
+    }
+    if(n === 0){ toast('同步码里没有识别到进度，请确认完整复制'); return; }
+    wbRefresh();
+    toast('已导入 ' + n + ' 项全站进度，刷新页面生效');
+  }catch(e){ toast('同步码无效，请完整复制后再试'); }
+}
+if(typeof savePicks === 'function'){
+  var _wbOrigSavePicks = savePicks;
+  savePicks = function(){ _wbOrigSavePicks(); if(typeof maybeAutoSync === 'function') maybeAutoSync(); };
+}
+if(getSyncToken()){ downloadFromCloud(null); }
+</script>
+
 </body>
 </html>
