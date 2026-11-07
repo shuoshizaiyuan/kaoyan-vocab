@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2017 英语一新题型 Part B · 段落排序 · 交互式单词标注练习</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Microsoft YaHei',system-ui,sans-serif;background:#f4f6fb;color:#1f2937;line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding:20px 16px 90px}
+.card{background:#fff;border:1px solid #e5e9f2;border-radius:14px;box-shadow:0 1px 4px rgba(15,23,42,.06);padding:20px 24px;margin-bottom:18px}
+.hero .tag{display:inline-block;background:#eef2ff;color:#4338ca;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;margin-bottom:10px}
+h1{font-size:26px;color:#0f172a;letter-spacing:.5px}
+.sub{color:#64748b;font-size:14px;margin-top:6px}
+details.summary{background:#f8fafc;border:1px solid #e5e9f2;border-radius:12px;padding:12px 16px;font-size:14px;color:#475569;margin-bottom:18px}
+details.summary summary{cursor:pointer;font-weight:600;color:#0f172a}
+details.summary li{margin:4px 0 4px 18px}
+.controlbar{position:sticky;top:10px;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px)}
+.ctrl-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.rtab{border:1px solid #dbe1ec;background:#fff;color:#475569;padding:6px 12px;border-radius:999px;font-size:13px;cursor:pointer;transition:.15s;font-family:inherit}
+.rtab:hover{border-color:#93c5fd;color:#1d4ed8}
+.rtab.cur{border-style:dashed;border-color:#f59e0b;color:#b45309;background:#fffbeb}
+.rtab.active{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:none;border-radius:10px;padding:8px 16px;font-size:14px;cursor:pointer;transition:.15s;font-family:inherit}
+.btn.primary{background:#1d4ed8;color:#fff}
+.btn.primary:hover{background:#1e40af}
+.btn.secondary{background:#eef2ff;color:#4338ca}
+.btn.secondary:hover{background:#e0e7ff}
+.btn.ghost{background:#fff;border:1px solid #cbd5e1;color:#475569}
+.btn.ghost:hover{border-color:#94a3b8}
+.btn.mini{padding:4px 10px;font-size:12.5px;border-radius:8px}
+.btn.big{font-size:16px;padding:14px 30px;border-radius:12px;box-shadow:0 4px 14px rgba(29,78,216,.25)}
+.btn.danger{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
+.btn.danger:not(:disabled):hover{background:#fee2e2}
+.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.ctrl-row2{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{background:#f1f5f9;border-radius:999px;padding:4px 12px;font-size:13px;color:#334155}
+.banner{background:#fefce8;border:1px solid #fde68a;color:#92400e;border-radius:10px;padding:6px 14px;font-size:13px}
+.banner a{color:#1d4ed8;cursor:pointer;font-weight:600}
+.hidden{display:none!important}
+h2{font-size:19px;color:#0f172a;margin-bottom:10px;border-left:4px solid #1d4ed8;padding-left:10px}
+.passage p{font-size:18px;line-height:1.4;margin-bottom:22px;color:#111827}
+.phead{font-size:16px;font-weight:700;color:#1d4ed8;margin:6px 0 10px}
+.phead .pnum{color:#94a3b8;font-family:Consolas,monospace;margin-right:4px}
+.optline{font-size:18px;line-height:1.5;margin-bottom:14px;color:#111827;background:#f8fafc;border:1px solid #eef2f7;border-radius:12px;padding:12px 14px}
+.optline b{color:#1d4ed8;margin-right:6px;font-family:Georgia,serif}
+w{display:inline-block;vertical-align:top;text-align:center;background:#fef08a;border-radius:6px;padding:2px 6px 3px;margin:0 2px 8px;cursor:pointer;transition:background .25s;line-height:1.22;word-break:keep-all;font-size:18px;color:#111827}
+w:hover{background:#fde047}
+w .ph{display:block;font-size:11px;line-height:1.2;color:#b45309;font-style:italic;font-weight:normal}
+w .zh{display:block;font-size:12px;line-height:1.2;color:#92400e;font-weight:normal}
+w.known{background:transparent;padding:2px 0 3px}
+w.known .ph, w.known .zh{display:none}
+w.known:hover{background:#f1f5f9;outline:1px dashed #cbd5e1;outline-offset:1px}
+w.flash{animation:flashbg 1.3s ease}
+@keyframes flashbg{0%{background:#fbbf24}100%{background:transparent}}
+w:not(.known).flash{animation:flashbg2 1.3s ease}
+@keyframes flashbg2{0%{background:#fbbf24}100%{background:#fef08a}}
+.qblock{margin-bottom:14px;padding:12px 14px;background:#f8fafc;border:1px solid #eef2f7;border-radius:12px}
+.qhead{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.qstem{font-weight:600;font-size:17px;margin-bottom:6px}
+.pick{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.pick button{width:36px;height:34px;border:1px solid #dbe1ec;background:#fff;color:#475569;border-radius:9px;font-size:15px;font-family:Georgia,serif;cursor:pointer;transition:.15s}
+.pick button:hover{border-color:#93c5fd;color:#1d4ed8;background:#f0f6ff}
+.pick button.on{background:#1d4ed8;color:#fff;border-color:#1d4ed8;font-weight:700}
+.pick button.right{background:#dcfce7;border-color:#16a34a;color:#15803d;font-weight:700}
+.pick button.wrong{background:#fee2e2;border-color:#dc2626;color:#b91c1c;font-weight:700}
+.pick button.ans{background:#f0fdf4;border-style:dashed;border-color:#86efac;color:#15803d;font-weight:700}
+.gap{background:#fee2e2;color:#b91c1c;font-weight:700;padding:0 6px;border-radius:6px}
+.chainrow .chfix{background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:8px;margin-right:6px}
+.chainrow .chq{background:#fef9c3;color:#a16207;padding:2px 8px;border-radius:8px;margin-right:6px}
+.opt{margin:2px 0;font-size:16px}
+.opt b{color:#1d4ed8;margin-right:4px;font-family:Georgia,serif}
+.endbar{text-align:center;margin:26px 0}
+.sumcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.sumcard{background:#f8fafc;border:1px solid #e5e9f2;border-radius:12px;padding:10px 12px;text-align:center}
+.scname{font-weight:700;color:#0f172a;font-size:14px;margin-bottom:6px}
+.scrow{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
+.ok{color:#16a34a;font-weight:600}.no{color:#dc2626;font-weight:600}
+.scp{font-size:12px;color:#64748b}
+.stats-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:6px}
+.tblwrap{overflow-x:auto;border:1px solid #e5e9f2;border-radius:12px;max-height:520px;overflow-y:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:820px}
+th,td{padding:8px 10px;border-bottom:1px solid #eef2f7;text-align:left}
+thead th{background:#0f172a;color:#fff;position:sticky;top:0;font-weight:600;white-space:nowrap;z-index:1}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:#f0f6ff}
+td.num{text-align:center;color:#64748b;font-family:Consolas,monospace}
+td.ok{color:#16a34a;font-weight:700;text-align:center}
+td.no{color:#dc2626;font-weight:700;text-align:center}
+.wmain{font-weight:600;white-space:nowrap}
+.phcell{color:#b45309;font-style:italic;white-space:nowrap}
+.forms{color:#94a3b8;font-weight:400;font-size:12px;margin-left:4px}
+.zhcell{color:#334155}
+.legend{font-size:12.5px;color:#64748b;margin-top:10px}
+.answers{margin-top:14px}
+#answerBox{margin-top:8px;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;border-radius:10px;padding:10px 14px;font-size:15px;font-weight:600}
+#toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:#0f172a;color:#fff;padding:10px 20px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:90vw;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
+.modal-box{background:#fff;border-radius:16px;max-width:440px;width:100%;padding:22px 24px;box-shadow:0 20px 60px rgba(0,0,0,.3);animation:pop .18s ease}
+@keyframes pop{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-box h3{font-size:18px;color:#0f172a;margin-bottom:10px}
+.modal-box p{font-size:14px;color:#475569;margin-bottom:14px}
+.modal-box p b{color:#dc2626}
+.ck{display:flex;gap:8px;align-items:flex-start;font-size:14px;color:#334155;cursor:pointer;background:#f8fafc;border:1px solid #e5e9f2;border-radius:10px;padding:10px 12px;margin-bottom:16px;user-select:none}
+.ck input{width:16px;height:16px;margin-top:3px;accent-color:#dc2626;cursor:pointer}
+.modal-btns{display:flex;justify-content:flex-end;gap:10px}
+footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:30px}
+@media (max-width:640px){.passage p,.optline{font-size:16px}.controlbar{position:static}w{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="card hero">
+    <div class="tag">考研英语一 · 新题型 Part B · 段落排序（2017）</div>
+    <h1>2017 英语一 · 新题型 Part B 练习（段落排序）</h1>
+    <p class="sub">默认<b>纯英文阅读</b>（所有标注隐藏）——遇到不认识的词<b>点一下</b>，卡片显示音标 + 本文释义（记 ✗ 不认识）；读懂的词保持隐藏（记 ✓ 认识）。<b>同原型含语法变形的词会一起点开/收起</b>。文末可作答 41–45、查看每轮掌握情况。</p>
+  </header>
+
+  <details class="summary">
+    <summary>使用说明</summary>
+    <ol style="padding-left:18px">
+      <li>开始新一轮 / 重置本轮后：<b>全部标注隐藏</b>，只显示英文原文，先自己读、检验自己。</li>
+      <li>遇到不认识的词 <b>点一下</b> → 卡片展开（单词 / 音标 / 本文释义），该词记作 <b>✗ 不认识</b>；同原型词（含语法变形 is/are/been→be、claims/claimed→claim 等）会一起展开。</li>
+      <li>读懂的词保持隐藏 = <b>✓ 认识</b>。再点一下已展开的卡片可收起（改判为认识，误点可撤销）。</li>
+      <li>由<b>词根词缀</b>变化出的新词不算同一个词：captive / captivity 各自独立计数（同原型才联动）。</li>
+      <li>顶部按钮：<b>全部显示</b>、<b>全部隐藏</b>、<b>重置本轮</b>、<b>开始新一轮</b>；轮次标签可<b>回溯任意一轮</b>。</li>
+      <li>题目区：为 41–45 各点选一个字母（A–G），点「<b>显示参考答案</b>」核对——选对变绿 ✓，选错变红 ✗；选择自动保存在本机。</li>
+      <li>「查看点击情况」可展开/收起，并可<b>导出掌握情况 CSV</b>（每轮 ✓/✗、音标、释义、出现次数、累计点击、掌握率）。</li>
+      <li>「彻底清空」需弹窗勾选确认，防止误触；数据自动保存在浏览器本地，刷新不丢。</li>
+    </ol>
+  </details>
+
+  <div class="controlbar card" id="controlbar">
+    <div class="ctrl-row">
+      <div id="roundTabs" class="tabs" style="margin-right:auto"></div>
+      <div class="btns">
+        <button class="btn secondary" onclick="showAll()">全部显示</button>
+        <button class="btn secondary" onclick="hideAll()">全部隐藏</button>
+        <button class="btn secondary" onclick="resetRound()">↺ 重置本轮</button>
+        <button class="btn primary" onclick="startNewRound()">开始新一轮</button>
+      </div>
+    </div>
+    <div class="ctrl-row2">
+      <span class="chip" id="pKnown"></span>
+      <span class="chip" id="pHidden"></span>
+      <span id="viewBanner" class="banner hidden"></span>
+      <button class="btn ghost" onclick="goHome()">🏠 返回总页</button>
+      <span style="flex:1"></span>
+      <button class="btn ghost" onclick="exportProgress()">⬇ 备份进度</button>
+      <label class="btn ghost" style="cursor:pointer;margin:0">⬆ 恢复进度<input type="file" accept=".json,application/json" style="display:none" onchange="importProgress(event)"></label>
+      <button class="btn ghost" onclick="exportSyncCode()">📋 复制同步码</button>
+      <button class="btn ghost" onclick="importSyncCode()">📥 粘贴同步码</button>
+      <button class="btn ghost" id="cloudBtn" onclick="toggleCloud()">☁ 云同步：关</button>
+      <button class="btn ghost" onclick="undoRound()">↩ 退回一轮</button>
+      <button class="btn ghost" onclick="clearArticle()">🗑 清空本篇</button>
+    </div>
+  </div>
+
+<section class="card passage artpanel" id="artA">
+  <div class="tag">2017 · 考研英语一 · 新题型 Part B · 段落排序</div>
+  <h2>正文 · Part B</h2>
+  <div id="passageAreaA">
+<div class="phead">Directions</div>
+<p>Part B Directions: The following paragraphs are given in a wrong order. For questions 41 -45, you are required to reorganize these paragraphs into a coherent text by choosing from the list A-G and filling them into the numbered boxes. Paragraphs B and D have been correctly placed. Mark your answers on the ANSWER SHEET. (10 points)</p>
+<div class="chainrow"><div class="phead">排序链（已预给 1 个段落位置）</div><span class="chq">41 → <b>？</b></span> <span class="chq">42 → <b>？</b></span> <span class="chq">43 → <b>？</b></span> <span class="chfix">44 → <b>B</b></span></div>
+  </div>
+
+  <h2 style="margin-top:26px">选项 A–G（其中 2 项多余）</h2>
+  <div id="optionArea">
+<p class="optline"><b>[A]</b> <w data-l="the">The<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="first">first<span class="ph">/fɜːst/</span><span class="zh">第一</span></w> <w data-l="publish">published<span class="ph">/ˈpʌblɪʃt/</span><span class="zh">发表的</span></w> <w data-l="sketched">sketch<span class="ph">/sketʃ/</span><span class="zh">素描， 草图， 小品\nv. 描绘略（sketched）</span></w>, "<w data-l="a">A<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="dinners">Dinner<span class="ph">/'dinә/</span><span class="zh">晚餐， 正餐， 宴会（dinners）</span></w> <w data-l="at">at<span class="ph">/æt/</span><span class="zh">在（某处/某时）</span></w> <w data-l="poplars">Poplar<span class="ph">/'pɒplә/</span><span class="zh">杨树， 杨木\n[医] 杨属植物(通（poplars）</span></w> <w data-l="walked">Walk<span class="ph">/wɒːk/</span><span class="zh">走， 散步， 步行， 行走的路程， </span></w>" <w data-l="bring">brought<span class="ph">/brɔːt/</span><span class="zh">带来（bring的过去分词）</span></w> <w data-l="tear">tears<span class="ph">/tiәz/</span><span class="zh">眼泪（tear）</span></w> <w data-l="to">to<span class="ph">/tuː/</span><span class="zh">到；（不定式标志）</span></w> <w data-l="dicken">Dickens's<span class="ph">/'dikinzz/</span><span class="zh">魔鬼（dicken）的</span></w> <w data-l="eye">eyes<span class="ph">/aɪz/</span><span class="zh">眼睛（eye的复数）</span></w> <w data-l="when">when<span class="ph">/wen/</span><span class="zh">当……时</span></w> <w data-l="he">he<span class="ph">/hiː/</span><span class="zh">他</span></w> <w data-l="discover">discovered<span class="ph">/dis'kʌvә/</span><span class="zh">发现， 找到（discover的过去</span></w> <w data-l="it">it<span class="ph">/ɪt/</span><span class="zh">它</span></w> <w data-l="in">in<span class="ph">/ɪn/</span><span class="zh">在……（里）</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="page">pages<span class="ph">/ˈpeɪdʒɪz/</span><span class="zh">纸张（page的复数）</span></w> <w data-l="of">of<span class="ph">/ɒv/</span><span class="zh">……的</span></w> <w data-l="the">The<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="month">Monthly<span class="ph">/'mʌnθli/</span><span class="zh">月（month 的变形）</span></w> <w data-l="magazines">Magazine<span class="ph">/.mægә'ziːn/</span><span class="zh">杂志， 仓库， 弹盒， 胶卷盒\n[（magazines）</span></w>. <w data-l="from">From<span class="ph">/frɒm/</span><span class="zh">从</span></w> <w data-l="then">then<span class="ph">/ðen/</span><span class="zh">那时</span></w> <w data-l="on">on<span class="ph">/ɒn/</span><span class="zh">……上；继续</span></w> <w data-l="he">his<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="sketch">sketches<span class="ph">/sketʃiz/</span><span class="zh">草图( sketch的名词复数 )</span></w>, <w data-l="which">which<span class="ph">/wɪtʃ/</span><span class="zh">……的（引导从句）</span></w> <w data-l="appear">appeared<span class="ph">/əˈpɪə(r)/</span><span class="zh">显得（appear 的变形）</span></w> <w data-l="under">under<span class="ph"></span><span class="zh">under</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="penned">pen<span class="ph">/pen/</span><span class="zh">钢笔， 笔， 笔调， 笔杆子， 作家（penned）</span></w> <w data-l="name">name<span class="ph">/neɪm/</span><span class="zh">名字</span></w> "<w data-l="boz">Boz<span class="ph">/bɔz/</span><span class="zh">博兹(Charles Dickens</span></w>" <w data-l="in">in<span class="ph">/ɪn/</span><span class="zh">在……（里）</span></w> <w data-l="the">The<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="even">Evening<span class="ph">/'iːvniŋ/</span><span class="zh">甚至（even 的变形）</span></w> <w data-l="chronicled">Chronicle<span class="ph">/'krɒnikl/</span><span class="zh">年代记， 记录， 编年史\nvt. （chronicled）</span></w>, <w data-l="earn">earned<span class="ph">/ɜːnd/</span><span class="zh">赚得（earn的过去分词）</span></w> <w data-l="he">him<span class="ph">/hɪm/</span><span class="zh">他（宾格）</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="modest">modest<span class="ph">/ˈmɒdɪst/</span><span class="zh">适度的</span></w> <w data-l="reputation">reputation<span class="ph">/ˌrepjuˈteɪʃn/</span><span class="zh">声誉</span></w>.</p>
+<p class="optline"><b>[B]</b> <w data-l="the">The<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="runaways">runaway<span class="ph">/'rʌnә.wei/</span><span class="zh">逃跑， 逃走的人， 逃亡， 压倒性的</span></w> <w data-l="success">success<span class="ph">/səkˈses/</span><span class="zh">成功</span></w> <w data-l="of">of<span class="ph">/ɒv/</span><span class="zh">……的</span></w> <w data-l="the">The<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="pickwick">Pickwick<span class="ph">/'pikwik/</span><span class="zh">Dickens 著 Pickwick</span></w> <w data-l="paper">Papers<span class="ph">/ˈpeɪpəz/</span><span class="zh">论文（paper的复数）</span></w>, <w data-l="as">as<span class="ph">/æz/</span><span class="zh">如同；作为</span></w> <w data-l="it">it<span class="ph">/ɪt/</span><span class="zh">它</span></w> <w data-l="be">is<span class="ph">/ɪz/</span><span class="zh">是</span></w> <w data-l="general">generally<span class="ph">/ˈdʒenrəli/</span><span class="zh">总体而言</span></w> <w data-l="know">known<span class="ph">/nəʊn/</span><span class="zh">称为</span></w> <w data-l="today">today<span class="ph">/təˈdeɪ/</span><span class="zh">今天</span></w>, <w data-l="secure">secured<span class="ph">/sɪˈkjʊəd/</span><span class="zh">获得</span></w> <w data-l="dicken">Dickens's<span class="ph">/'dikinzz/</span><span class="zh">魔鬼（dicken）的</span></w> <w data-l="fame">fame<span class="ph">/feim/</span><span class="zh">名望， 名声， 传说</span></w>. <w data-l="there">There<span class="ph">/ðeə(r)/</span><span class="zh">那里；（there be 有）</span></w> <w data-l="be">were<span class="ph">/wɜː(r)/</span><span class="zh">是（过去式）</span></w> <w data-l="pickwick">Pickwick<span class="ph">/'pikwik/</span><span class="zh">Dickens 著 Pickwick</span></w> <w data-l="coat">coats<span class="ph">/kәut/</span><span class="zh">外套（coat的复数）</span></w> <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="pickwick">Pickwick<span class="ph">/'pikwik/</span><span class="zh">Dickens 著 Pickwick</span></w> <w data-l="cigar">cigars<span class="ph">/si'gɑː/</span><span class="zh">雪茄烟（cigar的复数）</span></w>, <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="plumped">plump<span class="ph">/plʌmp/</span><span class="zh">圆胖的， 丰满的， 直接下落的， 直</span></w>, <w data-l="spectacle">spectacled<span class="ph">/'spektәkld/</span><span class="zh">戴了眼镜的， 有眼镜状斑纹的</span></w> <w data-l="heroes">hero<span class="ph">/'hiәrәu/</span><span class="zh">英雄， 超越常人者， 男主角（heroes）</span></w>, <w data-l="Samuel">Samuel<span class="ph">/ˈsæmjuəl/</span><span class="zh">塞缪尔，人名</span></w> <w data-l="pickwick">Pickwick<span class="ph">/'pikwik/</span><span class="zh">Dickens 著 Pickwick</span></w>, <w data-l="become">became<span class="ph">/bi'keim/</span><span class="zh">变得（become 的变形）</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="national">national<span class="ph">/ˈnæʃnəl/</span><span class="zh">国家的</span></w> <w data-l="figure">figure<span class="ph">/ˈfɪɡə(r)/</span><span class="zh">人物</span></w>.</p>
+<p class="optline"><b>[C]</b> <w data-l="soon">Soon<span class="ph">/suːn/</span><span class="zh">很快</span></w> <w data-l="after">after<span class="ph">/ˈɑːftə(r)/</span><span class="zh">在……之后</span></w> <w data-l="sketch">Sketches<span class="ph">/sketʃiz/</span><span class="zh">草图( sketch的名词复数 )</span></w> <w data-l="by">by<span class="ph">/baɪ/</span><span class="zh">由；通过</span></w> <w data-l="boz">Boz<span class="ph">/bɔz/</span><span class="zh">博兹(Charles Dickens</span></w> <w data-l="appear">appeared<span class="ph">/əˈpɪə(r)/</span><span class="zh">显得（appear 的变形）</span></w>, <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="publish">publishing<span class="ph">/ˈpʌblɪʃɪŋ/</span><span class="zh">出版的</span></w> <w data-l="firm">firm<span class="ph">/fɜːm/</span><span class="zh">公司</span></w> <w data-l="approach">approached<span class="ph">/əˈprəʊtʃ/</span><span class="zh">方法（approach 的变形）</span></w> <w data-l="dicken">Dickens<span class="ph">/'dikinz/</span><span class="zh">魔鬼（dicken）</span></w> <w data-l="to">to<span class="ph">/tuː/</span><span class="zh">到；（不定式标志）</span></w> <w data-l="write">write<span class="ph">/rait/</span><span class="zh">写道（write的第三人称）（writes 的变形）</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="story">story<span class="ph">/ˈstɔːri/</span><span class="zh">事件</span></w> <w data-l="in">in<span class="ph">/ɪn/</span><span class="zh">在……（里）</span></w> <w data-l="month">monthly<span class="ph">/'mʌnθli/</span><span class="zh">月（month 的变形）</span></w> <w data-l="installment">installments<span class="ph">/inˈstɔːlmənts/</span><span class="zh">部分( installment的复数</span></w>, <w data-l="as">as<span class="ph">/æz/</span><span class="zh">如同；作为</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="backdropped">backdrop<span class="ph">/'bækdrɒp/</span><span class="zh">背景幕， 背景（backdropped）</span></w> <w data-l="for">for<span class="ph">/fɔː(r)/</span><span class="zh">为了；对于</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="series">series<span class="ph">/ˈsɪəriːz/</span><span class="zh">剧集</span></w> <w data-l="of">of<span class="ph">/ɒv/</span><span class="zh">……的</span></w> <w data-l="woodcut">woodcuts<span class="ph">/'wudkʌt/</span><span class="zh">(woodcut 的复数) n. 木</span></w> <w data-l="by">by<span class="ph">/baɪ/</span><span class="zh">由；通过</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="then-famous">then-famous<span class="ph"></span><span class="zh">当时颇有名气的</span></w> <w data-l="artists">artist<span class="ph">/'ɑːtist/</span><span class="zh">艺术家， 画家（artists）</span></w> <w data-l="Robert">Robert<span class="ph">/ˈrɒbət/</span><span class="zh">罗伯特（人名）</span></w> <w data-l="seymour">Seymour<span class="ph">/'siːmɔː, 'seimɔː/</span><span class="zh">西摩（男子名）</span></w>, <w data-l="who">who<span class="ph">/huː/</span><span class="zh">……的人</span></w> <w data-l="have">had<span class="ph">/hæd/</span><span class="zh">有；已经（过去式）</span></w> <w data-l="originate">originated<span class="ph">/əˈridʒineitid/</span><span class="zh">起源于， 来自， 产生( origi（originate）</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="idea">idea<span class="ph">/aɪˈdɪə/</span><span class="zh">想法</span></w> <w data-l="for">for<span class="ph">/fɔː(r)/</span><span class="zh">为了；对于</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="story">story<span class="ph">/ˈstɔːri/</span><span class="zh">事件</span></w>. <w data-l="with">With<span class="ph">/wɪð/</span><span class="zh">和……一起</span></w> <w data-l="characteristic">characteristic<span class="ph">/.kærәktә'ristik/</span><span class="zh">特征（characteristic的复数）（characteristics 的变形）</span></w> <w data-l="confidence">confidence<span class="ph">/ˈkɒnfɪdəns/</span><span class="zh">信心</span></w>, <w data-l="dicken">Dickens<span class="ph">/'dikinz/</span><span class="zh">魔鬼（dicken）</span></w> <w data-l="successfully">successfully<span class="ph">/səkˈsesfəli/</span><span class="zh">成功地</span></w> <w data-l="insist">insisted<span class="ph">/ɪnˈsɪstɪd/</span><span class="zh">坚持说（insist的过去式）</span></w> <w data-l="that">that<span class="ph">/ðæt/</span><span class="zh">那；引导从句</span></w> <w data-l="seymour">Seymour's<span class="ph">/'siːmɔː, 'seimɔːz/</span><span class="zh">西摩（男子名）的</span></w> <w data-l="picture">pictures<span class="ph">/'piktʃә/</span><span class="zh">电影院（picture）</span></w> <w data-l="illustrate">illustrate<span class="ph">/ˈɪləstreɪt/</span><span class="zh">说明</span></w> <w data-l="he">his<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="own">own<span class="ph">/əʊn/</span><span class="zh">自己的（one’s own）</span></w> <w data-l="story">story<span class="ph">/ˈstɔːri/</span><span class="zh">事件</span></w> <w data-l="instead">instead<span class="ph">/ɪnˈsted/</span><span class="zh">相反</span></w>. <w data-l="after">After<span class="ph">/ˈɑːftə(r)/</span><span class="zh">在……之后</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="first">first<span class="ph">/fɜːst/</span><span class="zh">第一</span></w> <w data-l="installments">installment<span class="ph">/in'stɒːlmәnt/</span><span class="zh">就职， 装设， 分期付款\n[经] （installments）</span></w>, <w data-l="dicken">Dickens<span class="ph">/'dikinz/</span><span class="zh">魔鬼（dicken）</span></w> <w data-l="write">wrote<span class="ph">/rəʊt/</span><span class="zh">写道（write的过去式）</span></w> <w data-l="to">to<span class="ph">/tuː/</span><span class="zh">到；（不定式标志）</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="artists">artist<span class="ph">/'ɑːtist/</span><span class="zh">艺术家， 画家（artists）</span></w> <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="ask">asked<span class="ph">/ɑːskt/</span><span class="zh">要求（ask的过去分词）</span></w> <w data-l="he">him<span class="ph">/hɪm/</span><span class="zh">他（宾格）</span></w> <w data-l="to">to<span class="ph">/tuː/</span><span class="zh">到；（不定式标志）</span></w> <w data-l="corrected">correct<span class="ph">/kә'rekt/</span><span class="zh">正确的， 合适的\nvt. 改正， </span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="draw">drawing<span class="ph">/'drɒːiŋ/</span><span class="zh">吸引（draw attention to）（draw 的变形）</span></w> <w data-l="dicken">Dickens<span class="ph">/'dikinz/</span><span class="zh">魔鬼（dicken）</span></w> <w data-l="feel">felt<span class="ph">/felt/</span><span class="zh">感觉（feel 的变形）</span></w> <w data-l="be">was<span class="ph">/wɒz/</span><span class="zh">是（过去式）</span></w> <w data-l="not">not<span class="ph">/nɒt/</span><span class="zh">不</span></w> <w data-l="faithfuls">faithful<span class="ph">/'feiθful/</span><span class="zh">忠实的， 详确的， 可靠的\nn. </span></w> <w data-l="enough">enough<span class="ph">/ɪˈnʌf/</span><span class="zh">足够的</span></w> <w data-l="to">to<span class="ph">/tuː/</span><span class="zh">到；（不定式标志）</span></w> <w data-l="he">his<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="proses">prose<span class="ph">/prәuz/</span><span class="zh">散文\nv. 写散文\na. 散文的</span></w>. <w data-l="seymour">Seymour<span class="ph">/'siːmɔː, 'seimɔː/</span><span class="zh">西摩（男子名）</span></w> <w data-l="make">made<span class="ph">/meɪd/</span><span class="zh">作出（make的过去分词）</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="change">change<span class="ph">/tʃeɪndʒ/</span><span class="zh">改变</span></w>, <w data-l="go">went<span class="ph">/went/</span><span class="zh">去（go的过去式）</span></w> <w data-l="into">into<span class="ph">/ˈɪntuː/</span><span class="zh">进入</span></w> <w data-l="he">his<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="backyards">backyard<span class="ph">/'bæk'jɑːd/</span><span class="zh">后院， 后庭（backyards）</span></w>, <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="express">expressed<span class="ph">/ɪkˈsprest/</span><span class="zh">表达的（express的过去分词）</span></w> <w data-l="he">his<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="displeasures">displeasure<span class="ph">/dis'pleʒә/</span><span class="zh">不愉快， 生气， 不满（displeasures）</span></w> <w data-l="by">by<span class="ph">/baɪ/</span><span class="zh">由；通过</span></w> <w data-l="commit">committing<span class="ph">/kә'mit/</span><span class="zh">犯（错误）（commit）</span></w> <w data-l="suicides">suicide<span class="ph">/'sjuisaid/</span><span class="zh">自杀， 自杀者\nv. 自杀\na.（suicides）</span></w>. <w data-l="dicken">Dickens<span class="ph">/'dikinz/</span><span class="zh">魔鬼（dicken）</span></w> <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="he">his<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="publisher">publishers<span class="ph">/ˈpʌblɪʃə(r)/</span><span class="zh">发行人（publisher 的变形）</span></w> <w data-l="simply">simply<span class="ph">/ˈsɪmpli/</span><span class="zh">只是，简单地</span></w> <w data-l="press">pressed<span class="ph">/prest/</span><span class="zh">继续，press on=继续进行（press 的变形）</span></w> <w data-l="on">on<span class="ph">/ɒn/</span><span class="zh">……上；继续</span></w> <w data-l="with">with<span class="ph">/wɪð/</span><span class="zh">和……一起</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="new">new<span class="ph">/njuː/</span><span class="zh">新的</span></w> <w data-l="artists">artist<span class="ph">/'ɑːtist/</span><span class="zh">艺术家， 画家（artists）</span></w>. <w data-l="the">The<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="comics">comic<span class="ph">/'kɒmik/</span><span class="zh">连环漫画， 喜剧演员， 滑稽的人\n</span></w> <w data-l="novel">novel<span class="ph">/ˈnɒvl/</span><span class="zh">新颖的</span></w>, <w data-l="the">The<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="posthumous">Posthumous<span class="ph">/'pɒstjumәs/</span><span class="zh">遗腹的， 死后的\n[医] 遗腹的</span></w> <w data-l="paper">Papers<span class="ph">/ˈpeɪpəz/</span><span class="zh">论文（paper的复数）</span></w> <w data-l="of">of<span class="ph">/ɒv/</span><span class="zh">……的</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="pickwick">Pickwick<span class="ph">/'pikwik/</span><span class="zh">Dickens 著 Pickwick</span></w> <w data-l="Club">Club<span class="ph">/klʌb/</span><span class="zh">俱乐部（书名）</span></w>, <w data-l="appear">appeared<span class="ph">/əˈpɪə(r)/</span><span class="zh">显得（appear 的变形）</span></w> <w data-l="serially">serially<span class="ph"></span><span class="zh">可连续地</span></w> <w data-l="in">in<span class="ph">/ɪn/</span><span class="zh">在……（里）</span></w> 1836 <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> 1837 <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="be">was<span class="ph">/wɒz/</span><span class="zh">是（过去式）</span></w> <w data-l="first">first<span class="ph">/fɜːst/</span><span class="zh">第一</span></w> <w data-l="publish">published<span class="ph">/ˈpʌblɪʃt/</span><span class="zh">发表的</span></w> <w data-l="in">in<span class="ph">/ɪn/</span><span class="zh">在……（里）</span></w> <w data-l="book">book<span class="ph">/bʊk/</span><span class="zh">书</span></w> <w data-l="form">form<span class="ph">/fɔːm/</span><span class="zh">形式</span></w> <w data-l="in">in<span class="ph">/ɪn/</span><span class="zh">在……（里）</span></w> 1837.</p>
+<p class="optline"><b>[D]</b> <w data-l="Charles">Charles<span class="ph">/tʃɑːlz/</span><span class="zh">查尔斯（人名）</span></w> <w data-l="dicken">Dickens<span class="ph">/'dikinz/</span><span class="zh">魔鬼（dicken）</span></w> <w data-l="be">is<span class="ph">/ɪz/</span><span class="zh">是</span></w> <w data-l="probably">probably<span class="ph">/ˈprɒbəbli/</span><span class="zh">可能</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="best-known">best-known<span class="ph">/'bestn'əʊn/</span><span class="zh">众所周知的， 著名的</span></w> <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w>, <w data-l="to">to<span class="ph">/tuː/</span><span class="zh">到；（不定式标志）</span></w> <w data-l="many">many<span class="ph">/ˈmeni/</span><span class="zh">许多</span></w> <w data-l="people">people<span class="ph">/ˈpiːpl/</span><span class="zh">人们</span></w>, <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="great">greatest<span class="ph">/'^reitist/</span><span class="zh">巨大的（great 的变形）</span></w> <w data-l="English">English<span class="ph">/ˈɪŋɡlɪʃ/</span><span class="zh">英国的</span></w> <w data-l="novelists">novelist<span class="ph">/'nɒvәlist/</span><span class="zh">小说家（novelists）</span></w> <w data-l="of">of<span class="ph">/ɒv/</span><span class="zh">……的</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> 19<w data-l="th">th<span class="ph"></span><span class="zh">钍(90号元素)</span></w> <w data-l="century">century<span class="ph">/ˈsentʃəri/</span><span class="zh">世纪</span></w>. <w data-l="a">A<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="moralists">moralist<span class="ph">/'mɒrәlist/</span><span class="zh">道德家， 讲道德的人， 伦理学者</span></w>, <w data-l="satirists">satirist<span class="ph">/'sætәrist/</span><span class="zh">讽刺作者， 爱挖苦的人</span></w>, <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="social">social<span class="ph">/ˈsəʊʃl/</span><span class="zh">社会的</span></w> <w data-l="reform">reformer<span class="ph">/ri'fɒːmә/</span><span class="zh">改革（reform 的变形）</span></w>, <w data-l="dicken">Dickens<span class="ph">/'dikinz/</span><span class="zh">魔鬼（dicken）</span></w> <w data-l="craft">crafted<span class="ph">/krɑːft/</span><span class="zh">手艺，技艺（craft 的变形）</span></w> <w data-l="complex">complex<span class="ph">/ˈkɒmpleks/</span><span class="zh">复杂的</span></w> <w data-l="plot">plots<span class="ph">/plɒt/</span><span class="zh">情节（plot）</span></w> <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="strike">striking<span class="ph">/'straikiŋ/</span><span class="zh">醒目的， 惊人的， 打击的， 罢工的</span></w> <w data-l="character">characters<span class="ph">/ˈkærəktə(r)/</span><span class="zh">特征（character 的变形）</span></w> <w data-l="that">that<span class="ph">/ðæt/</span><span class="zh">那；引导从句</span></w> <w data-l="captured">capture<span class="ph">/'kæptʃә/</span><span class="zh">抓取， 战利品， 捕获之物\nvt.（captured）</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="panoramas">panorama<span class="ph">/.pænә'rɑːmә/</span><span class="zh">全景， 全貌， 概论， 范围（panoramas）</span></w> <w data-l="of">of<span class="ph">/ɒv/</span><span class="zh">……的</span></w> <w data-l="English">English<span class="ph">/ˈɪŋɡlɪʃ/</span><span class="zh">英国的</span></w> <w data-l="society">society<span class="ph">/səˈsaɪəti/</span><span class="zh">社会</span></w>.</p>
+<p class="optline"><b>[E]</b> <w data-l="soon">Soon<span class="ph">/suːn/</span><span class="zh">很快</span></w> <w data-l="after">after<span class="ph">/ˈɑːftə(r)/</span><span class="zh">在……之后</span></w> <w data-l="he">his<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="fathered">father's<span class="ph">/'fɑːðәz/</span><span class="zh">父亲， 祖先， 长辈， 神父， 创始（fathered）的</span></w> <w data-l="release">release<span class="ph">/ri'liːs/</span><span class="zh">发布的（release的过去分词）（released 的变形）</span></w> <w data-l="from">from<span class="ph">/frɒm/</span><span class="zh">从</span></w> <w data-l="prison">prison<span class="ph">/ˈprɪzn/</span><span class="zh">监狱</span></w>, <w data-l="dicken">Dickens<span class="ph">/'dikinz/</span><span class="zh">魔鬼（dicken）</span></w> <w data-l="get">got<span class="ph">/ɡɒt/</span><span class="zh">获得（get的过去式）</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="good">better<span class="ph">/ˈbetə(r)/</span><span class="zh">更好的（good的比较级）</span></w> <w data-l="job">job<span class="ph">/dʒɒb/</span><span class="zh">工作</span></w> <w data-l="as">as<span class="ph">/æz/</span><span class="zh">如同；作为</span></w> <w data-l="errands">errand<span class="ph">/'erәnd/</span><span class="zh">任务， 差使， 使命（errands）</span></w> <w data-l="boys">boy<span class="ph">/bɒi/</span><span class="zh">男孩\n[法] 男孩， 少年， 儿子（boys）</span></w> <w data-l="in">in<span class="ph">/ɪn/</span><span class="zh">在……（里）</span></w> <w data-l="law">law<span class="ph">/lɔː/</span><span class="zh">法律</span></w> <w data-l="office">offices<span class="ph">/ˈɒfɪsɪz/</span><span class="zh">办公楼（office的复数）</span></w>. <w data-l="he">He<span class="ph">/hiː/</span><span class="zh">他</span></w> <w data-l="teach">taught<span class="ph">/tɒːt/</span><span class="zh">teach的过去式和过去分词</span></w> <w data-l="himself">himself<span class="ph">/hɪmˈself/</span><span class="zh">他自己</span></w> <w data-l="shorthanded">shorthand<span class="ph">/'ʃɒːthænd/</span><span class="zh">速记\n[法] 速记法， 速记， 记（shorthanded）</span></w> <w data-l="to">to<span class="ph">/tuː/</span><span class="zh">到；（不定式标志）</span></w> <w data-l="get">get<span class="ph">/ɡet/</span><span class="zh">得到，获得</span></w> <w data-l="a">an<span class="ph">/ən/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="even">even<span class="ph">/ˈiːvn/</span><span class="zh">甚至</span></w> <w data-l="good">better<span class="ph">/ˈbetə(r)/</span><span class="zh">更好的（good的比较级）</span></w> <w data-l="job">job<span class="ph">/dʒɒb/</span><span class="zh">工作</span></w> <w data-l="late">later<span class="ph">/ˈleɪtə(r)/</span><span class="zh">后来</span></w> <w data-l="as">as<span class="ph">/æz/</span><span class="zh">如同；作为</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="court">court<span class="ph">/kɔːt/</span><span class="zh">法院</span></w> <w data-l="stenographers">stenographer<span class="ph">/stә'nɒgrәfә/</span><span class="zh">速记员（stenographers）</span></w> <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="as">as<span class="ph">/æz/</span><span class="zh">如同；作为</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="report">reporter<span class="ph">/ri'pɒːtә/</span><span class="zh">报到，汇报（report 的变形）</span></w> <w data-l="in">in<span class="ph">/ɪn/</span><span class="zh">在……（里）</span></w> <w data-l="parliament">Parliament<span class="ph">/ˈpɑːləmənt/</span><span class="zh">议会</span></w>. <w data-l="at">At<span class="ph">/æt/</span><span class="zh">在（某处/某时）</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="same">same<span class="ph">/seɪm/</span><span class="zh">同样的</span></w> <w data-l="time">time<span class="ph">/taɪm/</span><span class="zh">时间</span></w>, <w data-l="dicken">Dickens<span class="ph">/'dikinz/</span><span class="zh">魔鬼（dicken）</span></w>, <w data-l="who">who<span class="ph">/huː/</span><span class="zh">……的人</span></w> <w data-l="have">had<span class="ph">/hæd/</span><span class="zh">有；已经（过去式）</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="report">reporter's<span class="ph">/ri'pɒːtәz/</span><span class="zh">报到，汇报（report 的变形）的</span></w> <w data-l="eye">eye<span class="ph">/aɪ/</span><span class="zh">眼睛，keep an eye on=留意</span></w> <w data-l="for">for<span class="ph">/fɔː(r)/</span><span class="zh">为了；对于</span></w> <w data-l="transcribe">transcribing<span class="ph">/trænˈskraɪbɪŋ/</span><span class="zh">（用不同的录音手段）转录( tran</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="life">life<span class="ph">/laɪf/</span><span class="zh">生活</span></w> <w data-l="around">around<span class="ph">/əˈraʊnd/</span><span class="zh">在……周围</span></w> <w data-l="he">him<span class="ph">/hɪm/</span><span class="zh">他（宾格）</span></w>, <w data-l="especially">especially<span class="ph">/ɪˈspeʃəli/</span><span class="zh">尤其</span></w> <w data-l="anything">anything<span class="ph">/ˈeniθɪŋ/</span><span class="zh">任何事物</span></w> <w data-l="comics">comic<span class="ph">/'kɒmik/</span><span class="zh">连环漫画， 喜剧演员， 滑稽的人\n</span></w> <w data-l="or">or<span class="ph">/ɔː(r)/</span><span class="zh">或者</span></w> <w data-l="odd">odd<span class="ph">/ɒd/</span><span class="zh">奇怪的</span></w>, <w data-l="submit">submitted<span class="ph">/sәb'mit/</span><span class="zh">递交（submit）</span></w> <w data-l="short">short<span class="ph">/ʃɔːt/</span><span class="zh">短的；不足的</span></w> <w data-l="sketch">sketches<span class="ph">/sketʃiz/</span><span class="zh">草图( sketch的名词复数 )</span></w> <w data-l="to">to<span class="ph">/tuː/</span><span class="zh">到；（不定式标志）</span></w> <w data-l="obscure">obscure<span class="ph">/əbˈskjʊə(r)/</span><span class="zh">模糊的，不明确的</span></w> <w data-l="magazine">magazines<span class="ph">/.mægә'ziːn/</span><span class="zh">杂志（magazine的复数）</span></w>.</p>
+<p class="optline"><b>[F]</b> <w data-l="dicken">Dickens<span class="ph">/'dikinz/</span><span class="zh">魔鬼（dicken）</span></w> <w data-l="be">was<span class="ph">/wɒz/</span><span class="zh">是（过去式）</span></w> <w data-l="bear">born<span class="ph">/bɒːn/</span><span class="zh">施加（bear on）（bear 的变形）</span></w> <w data-l="in">in<span class="ph">/ɪn/</span><span class="zh">在……（里）</span></w> <w data-l="portsmouth">Portsmouth<span class="ph">/'pɔːtsmәθ/</span><span class="zh">朴茨茅斯（英国港市， 美国港市）</span></w>, <w data-l="on">on<span class="ph">/ɒn/</span><span class="zh">……上；继续</span></w> <w data-l="England">England's<span class="ph">/ˈɪŋləndz/</span><span class="zh">英格兰的</span></w> <w data-l="southern">southern<span class="ph">/ˈsʌðən/</span><span class="zh">南部的</span></w> <w data-l="coasted">coast<span class="ph">/kәust/</span><span class="zh">海岸， 滑坡\nv. 沿海岸而行（coasted）</span></w>. <w data-l="he">His<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="fathered">father<span class="ph">/'fɑːðә/</span><span class="zh">父亲， 祖先， 长辈， 神父， 创始（fathered）</span></w> <w data-l="be">was<span class="ph">/wɒz/</span><span class="zh">是（过去式）</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="clerked">clerk<span class="ph">/klәːk/</span><span class="zh">办事员， 职员， 文书\nvi. 当（clerked）</span></w> <w data-l="in">in<span class="ph">/ɪn/</span><span class="zh">在……（里）</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="British">British<span class="ph">/ˈbrɪtɪʃ/</span><span class="zh">英国的</span></w> <w data-l="navies">Navy<span class="ph">/'neivi/</span><span class="zh">海军， 海军人员， 海军军力， 烟蒂（navies）</span></w> <w data-l="pay">pay<span class="ph">/peɪ/</span><span class="zh">薪酬</span></w> <w data-l="office">office<span class="ph">/ˈɒfɪs/</span><span class="zh">办公室</span></w> – <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="respectable">respectable<span class="ph">/rɪˈspektəbl/</span><span class="zh">体面的，值得尊敬的</span></w> <w data-l="position">position<span class="ph">/pəˈzɪʃn/</span><span class="zh">职位</span></w>, <w data-l="but">but<span class="ph">/bʌt/</span><span class="zh">但是</span></w> <w data-l="with">with<span class="ph">/wɪð/</span><span class="zh">和……一起</span></w> <w data-l="little">little<span class="ph">/ˈlɪtl/</span><span class="zh">很少的</span></w> <w data-l="social">social<span class="ph">/ˈsəʊʃl/</span><span class="zh">社会的</span></w> <w data-l="status">status<span class="ph">/ˈsteɪtəs/</span><span class="zh">身份，地位</span></w>. <w data-l="he">His<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="paternal">paternal<span class="ph">/pә'tәːnl/</span><span class="zh">父亲的， 父系的， 似父亲的， 得自</span></w> <w data-l="grandparent">grandparents<span class="ph">/'grændperәnt/</span><span class="zh">外祖父母（grandparent）</span></w>, <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="stewarded">steward<span class="ph">/'stjuːwәd/</span><span class="zh">管理人， 招待员， 管家， 乘务员\（stewarded）</span></w> <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="housekeepers">housekeeper<span class="ph">/'hauskiːpә/</span><span class="zh">主妇， 女管家（housekeepers）</span></w>, <w data-l="possess">possessed<span class="ph">/pә'zest/</span><span class="zh">中邪魔的， 被妖魔缠住的</span></w> <w data-l="even">even<span class="ph">/ˈiːvn/</span><span class="zh">甚至</span></w> <w data-l="less">less<span class="ph">/les/</span><span class="zh">更少的</span></w> <w data-l="status">status<span class="ph">/ˈsteɪtəs/</span><span class="zh">身份，地位</span></w>, <w data-l="have">having<span class="ph">/'hæviŋ/</span><span class="zh">有；已经（助动词）（have 的变形）</span></w> <w data-l="be">been<span class="ph">/biːn/</span><span class="zh">是（过去分词）</span></w> <w data-l="servant">servants<span class="ph">/ˈsɜːvənts/</span><span class="zh">仆人，servants=公务员</span></w>, <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="dicken">Dickens<span class="ph">/'dikinz/</span><span class="zh">魔鬼（dicken）</span></w> <w data-l="late">later<span class="ph">/ˈleɪtə(r)/</span><span class="zh">后来</span></w> <w data-l="conceal">concealed<span class="ph">/kәn'siːl/</span><span class="zh">隐蔽的， 隐匿的</span></w> <w data-l="they">their<span class="ph">/ðeə(r)/</span><span class="zh">他们的</span></w> <w data-l="background">background<span class="ph">/ˈbækɡraʊnd/</span><span class="zh">背景</span></w>. <w data-l="dicken">Dickens's<span class="ph">/'dikinzz/</span><span class="zh">魔鬼（dicken）的</span></w> <w data-l="mothered">mother<span class="ph">/'mʌðә/</span><span class="zh">母亲， 修女院长\nvt. 产生， （mothered）</span></w> <w data-l="suppose">supposedly<span class="ph">/sә'pәuzidli/</span><span class="zh">本应（be supposed to）（supposed 的变形）</span></w> <w data-l="come">came<span class="ph">/keɪm/</span><span class="zh">来（come的过去式）</span></w> <w data-l="from">from<span class="ph">/frɒm/</span><span class="zh">从</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="more">more<span class="ph">/mɔː(r)/</span><span class="zh">更多</span></w> <w data-l="respectable">respectable<span class="ph">/rɪˈspektəbl/</span><span class="zh">体面的，值得尊敬的</span></w> <w data-l="family">family<span class="ph">/ˈfæməli/</span><span class="zh">家庭</span></w>. <w data-l="yet">Yet<span class="ph">/jet/</span><span class="zh">然而，但是</span></w> <w data-l="two">two<span class="ph">/tuː/</span><span class="zh">两个</span></w> <w data-l="year">years<span class="ph">/jɪəz/</span><span class="zh">年（复数）</span></w> <w data-l="before">before<span class="ph">/bɪˈfɔː(r)/</span><span class="zh">在……之前</span></w> <w data-l="dicken">Dickens's<span class="ph">/'dikinzz/</span><span class="zh">魔鬼（dicken）的</span></w> <w data-l="birthed">birth<span class="ph">/bәːθ/</span><span class="zh">出生， 起源\n[医] 生产， 分娩（birthed）</span></w>, <w data-l="he">his<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="mothered">mother's<span class="ph">/'mʌðәz/</span><span class="zh">母亲， 修女院长\nvt. 产生， （mothered）的</span></w> <w data-l="fathered">father<span class="ph">/'fɑːðә/</span><span class="zh">父亲， 祖先， 长辈， 神父， 创始（fathered）</span></w> <w data-l="be">was<span class="ph">/wɒz/</span><span class="zh">是（过去式）</span></w> <w data-l="catch">caught<span class="ph">/kɒːt/</span><span class="zh">赶上（catch 的变形）</span></w> <w data-l="steal">stealing<span class="ph">/'stiːliŋ/</span><span class="zh">偷窃， 贼赃\na. 有偷窃行为的</span></w> <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="flee">fled<span class="ph">/fled/</span><span class="zh">消逝（flee）</span></w> <w data-l="to">to<span class="ph">/tuː/</span><span class="zh">到；（不定式标志）</span></w> <w data-l="Europe">Europe<span class="ph">/ˈjʊərəp/</span><span class="zh">欧洲</span></w>, <w data-l="never">never<span class="ph">/ˈnevə(r)/</span><span class="zh">从不</span></w> <w data-l="to">to<span class="ph">/tuː/</span><span class="zh">到；（不定式标志）</span></w> <w data-l="return">return<span class="ph">/rɪˈtɜːn/</span><span class="zh">回报（in return for）</span></w>. <w data-l="the">The<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="family">family's<span class="ph">/ˈfæməliz/</span><span class="zh">家庭的</span></w> <w data-l="increase">increasing<span class="ph">/ɪnˈkriːsɪŋ/</span><span class="zh">增长的</span></w> <w data-l="poverty">poverty<span class="ph">/'pɒvәti/</span><span class="zh">贫穷， 贫困， 缺乏\n[医] 贫乏</span></w> <w data-l="force">forced<span class="ph">/fɔːst/</span><span class="zh">迫使（force的过去分词）</span></w> <w data-l="dicken">Dickens<span class="ph">/'dikinz/</span><span class="zh">魔鬼（dicken）</span></w> <w data-l="out">out<span class="ph">/aʊt/</span><span class="zh">出去，set out=着手</span></w> <w data-l="of">of<span class="ph">/ɒv/</span><span class="zh">……的</span></w> <w data-l="school">school<span class="ph">/skuːl/</span><span class="zh">学校</span></w> <w data-l="at">at<span class="ph">/æt/</span><span class="zh">在（某处/某时）</span></w> <w data-l="age">age<span class="ph">/eɪdʒ/</span><span class="zh">时代</span></w> 12 <w data-l="to">to<span class="ph">/tuː/</span><span class="zh">到；（不定式标志）</span></w> <w data-l="work">work<span class="ph">/wɜːk/</span><span class="zh">工作；起作用</span></w> <w data-l="in">in<span class="ph">/ɪn/</span><span class="zh">在……（里）</span></w> <w data-l="warrens">Warren's<span class="ph">/'wɒrәnz/</span><span class="zh">养兔场， 拥挤的地区的</span></w> <w data-l="black">Blacking<span class="ph">/'blækiŋ/</span><span class="zh">黑色鞋油， 黑色涂料\n[机] 涂黑（black）</span></w> <w data-l="warehouse">Warehouse<span class="ph">/ˈweəhaʊs/</span><span class="zh">仓库</span></w>, <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="shoe-polishes">shoe-polish<span class="ph"></span><span class="zh">鞋油（shoe-polishes）</span></w> <w data-l="factory">factory<span class="ph">/'fæktәri/</span><span class="zh">工厂（factory的复数）（factories 的变形）</span></w>, <w data-l="where">where<span class="ph"></span><span class="zh">where</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="other">other<span class="ph">/ˈʌðə(r)/</span><span class="zh">其他的</span></w> <w data-l="work">working<span class="ph">/ˈwɜːkɪŋ/</span><span class="zh">研究，work out=想出</span></w> <w data-l="boy">boys<span class="ph">/bɒi/</span><span class="zh">男孩子们（boy）</span></w> <w data-l="mock">mocked<span class="ph">/mɔkt/</span><span class="zh">愚弄， 嘲弄( mock的过去式和过</span></w> <w data-l="he">him<span class="ph">/hɪm/</span><span class="zh">他（宾格）</span></w> <w data-l="as">as<span class="ph">/æz/</span><span class="zh">如同；作为</span></w> "<w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="young">young<span class="ph">/jʌŋ/</span><span class="zh">年轻的</span></w> <w data-l="gentlemen">gentleman<span class="ph">/'dʒentlmәn/</span><span class="zh">绅士， 先生（gentlemen）</span></w>." <w data-l="he">His<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="fathered">father<span class="ph">/'fɑːðә/</span><span class="zh">父亲， 祖先， 长辈， 神父， 创始（fathered）</span></w> <w data-l="be">was<span class="ph">/wɒz/</span><span class="zh">是（过去式）</span></w> <w data-l="then">then<span class="ph">/ðen/</span><span class="zh">那时</span></w> <w data-l="imprison">imprisoned<span class="ph">/ɪmˈprɪzənd/</span><span class="zh">下狱， 监禁( imprison的过</span></w> <w data-l="for">for<span class="ph">/fɔː(r)/</span><span class="zh">为了；对于</span></w> <w data-l="debt">debt<span class="ph">/det/</span><span class="zh">债务</span></w>. <w data-l="the">The<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="humiliation">humiliations<span class="ph">/hjuːˌmɪliːˈeɪʃənz/</span><span class="zh">丢脸( humiliation的复数</span></w> <w data-l="of">of<span class="ph">/ɒv/</span><span class="zh">……的</span></w> <w data-l="he">his<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="fathered">father's<span class="ph">/'fɑːðәz/</span><span class="zh">父亲， 祖先， 长辈， 神父， 创始（fathered）的</span></w> <w data-l="imprisonments">imprisonment<span class="ph">/im'priznmәnt/</span><span class="zh">监禁， 下狱， 坐牢\n[法] 监禁（imprisonments）</span></w> <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="he">his<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="Labor">labor<span class="ph">/ˈleɪbə(r)/</span><span class="zh">工党（Labor Party）</span></w> <w data-l="in">in<span class="ph">/ɪn/</span><span class="zh">在……（里）</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="black">blacking<span class="ph">/'blækiŋ/</span><span class="zh">黑色鞋油， 黑色涂料\n[机] 涂黑（black）</span></w> <w data-l="factory">factory<span class="ph">/'fæktәri/</span><span class="zh">工厂（factory的复数）（factories 的变形）</span></w> <w data-l="form">formed<span class="ph">/fɔːmd/</span><span class="zh">组建（form的过去式）</span></w> <w data-l="dicken">Dickens's<span class="ph">/'dikinzz/</span><span class="zh">魔鬼（dicken）的</span></w> <w data-l="great">greatest<span class="ph">/'^reitist/</span><span class="zh">巨大的（great 的变形）</span></w> <w data-l="wind">wound<span class="ph">/wuːnd/</span><span class="zh">创伤， 伤口， 伤疤， 伤害， 痛苦（wind）</span></w> <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="become">became<span class="ph">/bi'keim/</span><span class="zh">变得（become 的变形）</span></w> <w data-l="he">his<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="deep">deepest<span class="ph">/dipɪst/</span><span class="zh">深的（deep 的变形）</span></w> <w data-l="secret">secret<span class="ph">/ˈsiːkrət/</span><span class="zh">秘密</span></w>. <w data-l="he">He<span class="ph">/hiː/</span><span class="zh">他</span></w> <w data-l="can">could<span class="ph">/kʊd/</span><span class="zh">可能（can 的过去式）</span></w> <w data-l="not">not<span class="ph">/nɒt/</span><span class="zh">不</span></w> <w data-l="confided">confide<span class="ph">/kәn'faid/</span><span class="zh">吐露， 委托\nvi. 信赖（confided）</span></w> <w data-l="they">them<span class="ph">/ðem/</span><span class="zh">他们（宾格）</span></w> <w data-l="even">even<span class="ph">/ˈiːvn/</span><span class="zh">甚至</span></w> <w data-l="to">to<span class="ph">/tuː/</span><span class="zh">到；（不定式标志）</span></w> <w data-l="he">his<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="wives">wife<span class="ph">/waif/</span><span class="zh">妻子， 太太， 夫人\n[法] 妻子（wives）</span></w>, <w data-l="although">although<span class="ph">/ɔːlˈðəʊ/</span><span class="zh">虽然</span></w> <w data-l="they">they<span class="ph">/ðeɪ/</span><span class="zh">他们</span></w> <w data-l="provide">provide<span class="ph">/prəˈvaɪd/</span><span class="zh">提供</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="unacknowledged">unacknowledged<span class="ph">/.ʌnәk'nɒlidʒd/</span><span class="zh">未被承认的， 未被公认的， 未答复的</span></w> <w data-l="foundation">foundation<span class="ph">/faʊnˈdeɪʃn/</span><span class="zh">基金会</span></w> <w data-l="of">of<span class="ph">/ɒv/</span><span class="zh">……的</span></w> <w data-l="he">his<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="fiction">fiction<span class="ph">/ˈfɪkʃn/</span><span class="zh">虚构</span></w>.</p>
+<p class="optline"><b>[G]</b> <w data-l="after">After<span class="ph">/ˈɑːftə(r)/</span><span class="zh">在……之后</span></w> <w data-l="pickwick">Pickwick<span class="ph">/'pikwik/</span><span class="zh">Dickens 著 Pickwick</span></w>, <w data-l="dicken">Dickens<span class="ph">/'dikinz/</span><span class="zh">魔鬼（dicken）</span></w> <w data-l="plunge">plunged<span class="ph">/plʌndʒd/</span><span class="zh">颠簸( plunge的过去式和过去分</span></w> <w data-l="into">into<span class="ph">/ˈɪntuː/</span><span class="zh">进入</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="bleak">bleaker<span class="ph">/bliːkə/</span><span class="zh">阴冷的( bleak的比较级 )</span></w> <w data-l="world">world<span class="ph">/wɜːld/</span><span class="zh">世界</span></w>. <w data-l="in">In<span class="ph">/ɪn/</span><span class="zh">在……（里）</span></w> <w data-l="oliver">Oliver<span class="ph">/'ɒlivә/</span><span class="zh">脚踏铁锤</span></w> <w data-l="twisted">Twist<span class="ph">/twist/</span><span class="zh">一扭， 扭曲， 曲折， 歪曲， 螺旋（twisted）</span></w>, <w data-l="he">he<span class="ph">/hiː/</span><span class="zh">他</span></w> <w data-l="trace">traces<span class="ph">/treis/</span><span class="zh">痕迹（trace）</span></w> <w data-l="a">an<span class="ph">/ən/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="orphaning">orphan's<span class="ph">/'ɒːfәnz/</span><span class="zh">孤儿\na. 无双亲的， 孤儿的\n的</span></w> <w data-l="progress">progress<span class="ph">/ˈprəʊɡres/</span><span class="zh">进步</span></w> <w data-l="from">from<span class="ph">/frɒm/</span><span class="zh">从</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="workhouses">workhouse<span class="ph">/'w\\\\ːkhajs/</span><span class="zh">(英)贫民习艺所， 济贫院， (美)（workhouses）</span></w> <w data-l="to">to<span class="ph">/tuː/</span><span class="zh">到；（不定式标志）</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="criminal">criminal<span class="ph">/ˈkrɪmɪnl/</span><span class="zh">犯罪的</span></w> <w data-l="slum">slums<span class="ph">/slʌmz/</span><span class="zh">贫民窟， 贫民区( slum的名词复</span></w> <w data-l="of">of<span class="ph">/ɒv/</span><span class="zh">……的</span></w> <w data-l="London">London<span class="ph">/ˈlʌndən/</span><span class="zh">伦敦</span></w>. <w data-l="nicholas">Nicholas<span class="ph">/'nikәlәs/</span><span class="zh">尼古拉斯（男子名）</span></w> <w data-l="Nickleby">Nickleby<span class="ph">/ˈnɪklbi/</span><span class="zh">尼克贝尔（人名，Nicholas Nickleby）</span></w>, <w data-l="he">his<span class="ph">/hɪz/</span><span class="zh">他的</span></w> <w data-l="next">next<span class="ph">/nekst/</span><span class="zh">接下来</span></w> <w data-l="novel">novel<span class="ph">/ˈnɒvl/</span><span class="zh">新颖的</span></w>, <w data-l="combine">combines<span class="ph">/kəmˈbainz/</span><span class="zh">结合（combine 的变形）</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="darkness">darkness<span class="ph">/'dɑːknis/</span><span class="zh">黑暗， 暗， 深色， 隐密， 模糊，</span></w> <w data-l="of">of<span class="ph">/ɒv/</span><span class="zh">……的</span></w> <w data-l="oliver">Oliver<span class="ph">/'ɒlivә/</span><span class="zh">脚踏铁锤</span></w> <w data-l="twisted">Twist<span class="ph">/twist/</span><span class="zh">一扭， 扭曲， 曲折， 歪曲， 螺旋（twisted）</span></w> <w data-l="with">with<span class="ph">/wɪð/</span><span class="zh">和……一起</span></w> <w data-l="the">the<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="sunlight">sunlight<span class="ph">/'sʌnlait/</span><span class="zh">日光\n[医] 日光， 太阳光</span></w> <w data-l="of">of<span class="ph">/ɒv/</span><span class="zh">……的</span></w> <w data-l="pickwick">Pickwick<span class="ph">/'pikwik/</span><span class="zh">Dickens 著 Pickwick</span></w>. <w data-l="the">The<span class="ph">/ðə/</span><span class="zh">这（定冠词）</span></w> <w data-l="popularity">popularity<span class="ph">/ˌpɒpjuˈlærəti/</span><span class="zh">受欢迎度</span></w> <w data-l="of">of<span class="ph">/ɒv/</span><span class="zh">……的</span></w> <w data-l="this">these<span class="ph">/ðiːz/</span><span class="zh">这些</span></w> <w data-l="novel">novels<span class="ph">/'nɔvәlz/</span><span class="zh">新颖的（novel 的变形）</span></w> <w data-l="consolidate">consolidated<span class="ph">/kәn'sɔlideitid/</span><span class="zh">整理过的</span></w> <w data-l="dicken">Dickens<span class="ph">/'dikinz/</span><span class="zh">魔鬼（dicken）</span></w> <w data-l="as">as<span class="ph">/æz/</span><span class="zh">如同；作为</span></w> <w data-l="a">a<span class="ph">/ə/</span><span class="zh">一个（不定冠词）</span></w> <w data-l="national">nationally<span class="ph">/'næʃәnәli/</span><span class="zh">国家的（national 的变形）</span></w> <w data-l="and">and<span class="ph">/ænd/</span><span class="zh">和；并且</span></w> <w data-l="international">internationally<span class="ph">/.intә'næʃәnәli/</span><span class="zh">国际的（international 的变形）</span></w> <w data-l="celebrate">celebrated<span class="ph">/'selibreitid/</span><span class="zh">驰名的， 有名的</span></w> <w data-l="man">man<span class="ph">/mæn/</span><span class="zh">人类</span></w> <w data-l="of">of<span class="ph">/ɒv/</span><span class="zh">……的</span></w> <w data-l="letter">letters<span class="ph">/ˈletəz/</span><span class="zh">信件（letter的复数）</span></w>.</p>
+  </div>
+
+  <h2 style="margin-top:26px">作答 · 41–45</h2>
+  <div id="questionsAreaA">
+<div class="qblock"><div class="qhead"><div class="qstem">41. 填入排序位置</div><button type="button" class="btn ghost mini" onclick="clearPick('41')">清除</button></div><div class="pick" id="pick41"><button type="button" onclick="pick('41','A')" data-q="41" data-l="A">A</button><button type="button" onclick="pick('41','B')" data-q="41" data-l="B">B</button><button type="button" onclick="pick('41','C')" data-q="41" data-l="C">C</button><button type="button" onclick="pick('41','D')" data-q="41" data-l="D">D</button><button type="button" onclick="pick('41','E')" data-q="41" data-l="E">E</button><button type="button" onclick="pick('41','F')" data-q="41" data-l="F">F</button><button type="button" onclick="pick('41','G')" data-q="41" data-l="G">G</button></div></div>
+<div class="qblock"><div class="qhead"><div class="qstem">42. 填入排序位置</div><button type="button" class="btn ghost mini" onclick="clearPick('42')">清除</button></div><div class="pick" id="pick42"><button type="button" onclick="pick('42','A')" data-q="42" data-l="A">A</button><button type="button" onclick="pick('42','B')" data-q="42" data-l="B">B</button><button type="button" onclick="pick('42','C')" data-q="42" data-l="C">C</button><button type="button" onclick="pick('42','D')" data-q="42" data-l="D">D</button><button type="button" onclick="pick('42','E')" data-q="42" data-l="E">E</button><button type="button" onclick="pick('42','F')" data-q="42" data-l="F">F</button><button type="button" onclick="pick('42','G')" data-q="42" data-l="G">G</button></div></div>
+<div class="qblock"><div class="qhead"><div class="qstem">43. 填入排序位置</div><button type="button" class="btn ghost mini" onclick="clearPick('43')">清除</button></div><div class="pick" id="pick43"><button type="button" onclick="pick('43','A')" data-q="43" data-l="A">A</button><button type="button" onclick="pick('43','B')" data-q="43" data-l="B">B</button><button type="button" onclick="pick('43','C')" data-q="43" data-l="C">C</button><button type="button" onclick="pick('43','D')" data-q="43" data-l="D">D</button><button type="button" onclick="pick('43','E')" data-q="43" data-l="E">E</button><button type="button" onclick="pick('43','F')" data-q="43" data-l="F">F</button><button type="button" onclick="pick('43','G')" data-q="43" data-l="G">G</button></div></div>
+<div class="qblock"><div class="qhead"><div class="qstem">44. 填入排序位置</div><button type="button" class="btn ghost mini" onclick="clearPick('44')">清除</button></div><div class="pick" id="pick44"><button type="button" onclick="pick('44','A')" data-q="44" data-l="A">A</button><button type="button" onclick="pick('44','B')" data-q="44" data-l="B">B</button><button type="button" onclick="pick('44','C')" data-q="44" data-l="C">C</button><button type="button" onclick="pick('44','D')" data-q="44" data-l="D">D</button><button type="button" onclick="pick('44','E')" data-q="44" data-l="E">E</button><button type="button" onclick="pick('44','F')" data-q="44" data-l="F">F</button><button type="button" onclick="pick('44','G')" data-q="44" data-l="G">G</button></div></div>
+<div class="qblock"><div class="qhead"><div class="qstem">45. 填入排序位置</div><button type="button" class="btn ghost mini" onclick="clearPick('45')">清除</button></div><div class="pick" id="pick45"><button type="button" onclick="pick('45','A')" data-q="45" data-l="A">A</button><button type="button" onclick="pick('45','B')" data-q="45" data-l="B">B</button><button type="button" onclick="pick('45','C')" data-q="45" data-l="C">C</button><button type="button" onclick="pick('45','D')" data-q="45" data-l="D">D</button><button type="button" onclick="pick('45','E')" data-q="45" data-l="E">E</button><button type="button" onclick="pick('45','F')" data-q="45" data-l="F">F</button><button type="button" onclick="pick('45','G')" data-q="45" data-l="G">G</button></div></div>
+  </div>
+  <div class="answers">
+    <button class="btn ghost" id="answerBtnA" onclick="toggleAns('A')">显示参考答案</button>
+    <div id="answerBoxA" class="hidden">41-F　42-E　43-A　44-C　45-G　（多余项：B、D）</div>
+  </div>
+</section>
+
+  <div class="endbar">
+    <button class="btn big primary" id="statsBtn" onclick="toggleStats()">📊 查看点击情况（单词掌握表）</button>
+  </div>
+
+  <section id="stats" class="hidden">
+    <div class="card">
+      <h2>点击情况 · 单词掌握表</h2>
+      <div class="stats-toolbar">
+        <div id="roundSummary" class="sumcards" style="flex:1;margin:0"></div>
+        <button class="btn secondary" onclick="exportCSV()">⬇ 导出掌握情况 CSV</button>
+      </div>
+      <div class="tblwrap">
+        <table id="wordTable">
+          <thead><tr></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="legend">✓ = 认识（卡片未点开）　✗ = 不认识（卡片点开过）　点击表格任意行可定位到文中对应单词并闪烁提示。数据已自动保存在浏览器本地；可用上方按钮导出 CSV。</p>
+      <button class="btn danger" onclick="openClearModal()">🗑 彻底清空全部数据</button>
+    </div>
+  </section>
+
+  <footer>2022 年考研英语一 · 新题型 Part B（观点匹配：动物园之争）· 交互式单词标注练习</footer>
+</div>
+
+<div id="clearModal" class="modal hidden">
+  <div class="modal-box">
+    <h3>⚠ 彻底清空确认</h3>
+    <p>此操作会<b>彻底清空全部轮次记录、点击记录与掌握情况</b>，回到初始纯英文状态，且<b>不可恢复</b>。确定要继续吗？</p>
+    <label class="ck"><input type="checkbox" id="clearConfirmCk"> 我已确认，知道此操作不可恢复，执行彻底清空</label>
+    <div class="modal-btns">
+      <button class="btn ghost" onclick="closeClearModal()">取消</button>
+      <button class="btn danger" id="clearOkBtn" disabled onclick="doClearAll()">确定清空</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+var LS_KEY = 'wb2017partb_v1';
+function $(s){ return document.querySelector(s); }
+function $$(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
+
+var lemmaInfo = new Map();
+var order = [];
+
+function buildLemmaInfo(){
+  lemmaInfo.clear(); order.length = 0;
+  $$w().forEach(function(el){
+    var l = el.getAttribute('data-l');
+    var f = (el.childNodes[0] && el.childNodes[0].textContent || '').trim();
+    var zhEl = el.querySelector('.zh');
+    var phEl = el.querySelector('.ph');
+    var zh = zhEl ? zhEl.textContent : '';
+    var ph = phEl ? phEl.textContent : '';
+    if(!lemmaInfo.has(l)){
+      lemmaInfo.set(l, {zh: zh, ph: ph, forms:new Set(), count:0, first:el});
+      order.push(l);
+    }
+    var info = lemmaInfo.get(l);
+    info.count++;
+    if(f) info.forms.add(f);
+  });
+}
+
+var state = {rounds:[], shown:[], clicks:{}, view:null};
+
+function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} }
+function load(){
+  try{
+    var s = JSON.parse(localStorage.getItem(LS_KEY));
+    if(s && s.rounds && s.shown && s.clicks){ state = s; return; }
+  }catch(e){}
+  state = {rounds:[], shown:[], clicks:{}, view:null};
+}
+function shownSetFor(){
+  if(state.view == null) return new Set(state.shown);
+  var r = state.rounds[state.view];
+  return new Set(r ? r.shown : []);
+}
+function applyView(){
+  var ss = shownSetFor();
+  $$w().forEach(function(el){ el.classList.toggle('known', !ss.has(el.getAttribute('data-l'))); });
+  var banner = $('#viewBanner');
+  if(state.view != null){
+    banner.textContent = '正在浏览第' + (state.view+1) + '轮记录（只读）· ';
+    var a = document.createElement('a');
+    a.href = 'javascript:void(0)';
+    a.textContent = '回到当前轮';
+    a.onclick = backToCurrent;
+    banner.appendChild(a);
+    banner.classList.remove('hidden');
+  } else {
+    banner.classList.add('hidden');
+  }
+  updateAll();
+}
+function setLemmaShown(l, shown){
+  $$w().forEach(function(el){ if(el.getAttribute('data-l') === l) el.classList.toggle('known', !shown); });
+}
+function backToCurrent(){ state.view = null; save(); applyView(); toast('已回到当前轮'); }
+
+document.addEventListener('click', function(e){
+  var w = e.target.closest ? e.target.closest('w') : null;
+  if(!w) return;
+  var l = w.getAttribute('data-l');
+  if(state.view != null){ toast('正在浏览历史轮次，请先点击「回到当前轮」再继续练习'); return; }
+  state.clicks[l] = (state.clicks[l] || 0) + 1;
+  var isShown = !w.classList.contains('known');
+  if(isShown){
+    state.shown = state.shown.filter(function(x){ return x !== l; });
+    setLemmaShown(l, false);
+    toast('✓ 认识 ' + l + '：卡片已收起（文中 ' + lemmaInfo.get(l).count + ' 处一起隐藏）');
+  } else {
+    if(state.shown.indexOf(l) === -1) state.shown.push(l);
+    setLemmaShown(l, true);
+    var info = lemmaInfo.get(l);
+    toast('✗ 不认识 ' + l + ' ' + (info.ph || '') + '「' + (info.zh || '') + '」——已显示（文中 ' + info.count + ' 处一起展开）');
+  }
+  save(); updateAll();
+});
+
+function showAll(){
+  if(state.view != null){ toast('正在浏览历史轮次，请先回到当前轮'); return; }
+  state.shown = order.slice();
+  save(); applyView();
+  toast('已全部显示（本轮全部记 ✗ 不认识）');
+}
+function hideAll(){
+  if(state.view != null){ toast('正在浏览历史轮次，请先回到当前轮'); return; }
+  state.shown = [];
+  save(); applyView();
+  toast('已全部隐藏，回到纯英文（全部记 ✓ 认识）');
+}
+function startNewRound(){
+  state.rounds.push({shown: state.shown.slice()});
+  state.shown = [];
+  state.view = null;
+  save(); applyView();
+  toast('已开始第 ' + (state.rounds.length+1) + ' 轮：全部隐藏，纯英文自测开始');
+}
+function resetRound(){
+  state.view = null;
+  state.shown = [];
+  save(); applyView();
+  toast('已重置本轮：回到纯英文，全部记 ✓ 认识');
+}
+function openClearModal(){
+  $('#clearConfirmCk').checked = false;
+  $('#clearOkBtn').disabled = true;
+  $('#clearModal').classList.remove('hidden');
+}
+function closeClearModal(){
+  $('#clearModal').classList.add('hidden');
+}
+$('#clearConfirmCk').addEventListener('change', function(){
+  $('#clearOkBtn').disabled = !this.checked;
+});
+function doClearAll(){
+  state = {rounds:[], shown:[], clicks:{}, view:null};
+  try{ localStorage.removeItem(LS_KEY); }catch(e){}
+  closeClearModal();
+  applyView();
+  toast('已彻底清空全部数据，回到初始纯英文状态');
+}
+
+function updateProgress(){
+  var total = lemmaInfo.size;
+  var ss = shownSetFor();
+  var noN = ss.size, okN = total - noN;
+  $('#pKnown').textContent = '认识 ✓ ' + okN + ' · 不认识 ✗ ' + noN + '（共 ' + total + ' 词）';
+  $('#pHidden').textContent = '已隐藏卡片 ' + okN + ' 处 · 点开查看 ' + noN + ' 处';
+}
+
+function renderTabs(){
+  var box = $('#roundTabs');
+  box.innerHTML = '';
+  var total = state.rounds.length + 1;
+  var allLemmas = order.length;
+  for(var i = 0; i < total; i++){
+    var saved = i < state.rounds.length;
+    var n = saved ? (allLemmas - state.rounds[i].shown.length) : (allLemmas - state.shown.length);
+    var active = saved ? (state.view === i) : (state.view === null);
+    var btn = document.createElement('button');
+    btn.className = 'rtab' + (saved ? '' : ' cur') + (active ? ' active' : '');
+    btn.textContent = saved ? ('第' + (i+1) + '轮 ✓' + n) : ('第' + (i+1) + '轮·进行中 ✓' + n);
+    (function(idx, isSaved){
+      btn.onclick = function(){
+        state.view = isSaved ? idx : null;
+        save(); applyView();
+      };
+    })(i, saved);
+    box.appendChild(btn);
+  }
+}
+
+function renderTable(){
+  var thead = document.querySelector('#wordTable thead tr');
+  var tbody = document.querySelector('#wordTable tbody');
+  var h = '<th>#</th><th>单词（原型）</th><th>音标</th><th>出现次数</th><th>文中释义</th>';
+  for(var i = 0; i < state.rounds.length; i++) h += '<th>第' + (i+1) + '轮</th>';
+  h += '<th>第' + (state.rounds.length+1) + '轮<br><small>进行中</small></th>';
+  h += '<th>累计点击</th>';
+  thead.innerHTML = h;
+
+  var rows = '';
+  order.forEach(function(l, idx){
+    var info = lemmaInfo.get(l);
+    var formsArr = [];
+    info.forms.forEach(function(x){ formsArr.push(x); });
+    var forms = formsArr.join(' / ');
+    var cells = '';
+    for(var i = 0; i < state.rounds.length; i++){
+      var sh = state.rounds[i].shown.indexOf(l) !== -1;
+      cells += '<td class="' + (sh ? 'no' : 'ok') + '">' + (sh ? '✗' : '✓') + '</td>';
+    }
+    var shCur = state.shown.indexOf(l) !== -1;
+    cells += '<td class="' + (shCur ? 'no' : 'ok') + '">' + (shCur ? '✗' : '✓') + '</td>';
+    cells += '<td class="num">' + (state.clicks[l] || 0) + '</td>';
+    rows += '<tr data-l="' + l + '">'
+      + '<td class="num">' + (idx+1) + '</td>'
+      + '<td class="wmain">' + l + (forms && forms !== l ? '<span class="forms">（' + forms + '）</span>' : '') + '</td>'
+      + '<td class="phcell">' + (info.ph || '') + '</td>'
+      + '<td class="num">' + info.count + '</td>'
+      + '<td class="zhcell">' + (info.zh || '') + '</td>'
+      + cells + '</tr>';
+  });
+  tbody.innerHTML = rows;
+
+  tbody.querySelectorAll('tr').forEach(function(tr){
+    tr.addEventListener('click', function(){ flashLemma(tr.getAttribute('data-l')); });
+  });
+
+  var sum = '';
+  for(var r = 0; r < state.rounds.length; r++){
+    sum += roundCard('第' + (r+1) + '轮', state.rounds[r].shown);
+  }
+  sum += roundCard('第' + (state.rounds.length+1) + '轮（进行中）', state.shown);
+  $('#roundSummary').innerHTML = sum;
+}
+
+function roundCard(name, shownArr){
+  var ss = new Set(shownArr);
+  var ok = 0, no = 0;
+  order.forEach(function(l){ if(ss.has(l)){ no++; } else { ok++; } });
+  var pct = order.length ? Math.round(ok * 100 / order.length) : 0;
+  return '<div class="sumcard">'
+    + '<div class="scname">' + name + '</div>'
+    + '<div class="scrow"><span class="ok">✓ 认识 ' + ok + '</span><span class="no">✗ 未识 ' + no + '</span></div>'
+    + '<div class="scp">掌握率 ' + pct + '% · 点开 ' + no + ' 词</div></div>';
+}
+
+function flashLemma(l){
+  var info = lemmaInfo.get(l);
+  if(!info) return;
+  info.first.scrollIntoView({behavior:'smooth', block:'center'});
+  $$w().forEach(function(el){
+    if(el.getAttribute('data-l') === l){
+      el.classList.remove('flash');
+      void el.offsetWidth;
+      el.classList.add('flash');
+    }
+  });
+  setTimeout(function(){
+    $$w().forEach(function(el){
+      if(el.getAttribute('data-l') === l) el.classList.remove('flash');
+    });
+  }, 1400);
+}
+
+function toggleStats(){
+  var s = $('#stats');
+  var btn = $('#statsBtn');
+  if(s.classList.contains('hidden')){
+    s.classList.remove('hidden');
+    btn.textContent = '📊 收起点击情况';
+    s.scrollIntoView({behavior:'smooth'});
+  } else {
+    s.classList.add('hidden');
+    btn.textContent = '📊 查看点击情况（单词掌握表）';
+  }
+}
+
+function exportCSV(){
+  var rows = [];
+  var head = ['序号','单词(原型)','文中形态','音标','出现次数','文中释义'];
+  for(var i = 0; i < state.rounds.length; i++) head.push('第' + (i+1) + '轮');
+  head.push('第' + (state.rounds.length+1) + '轮(进行中)');
+  head.push('累计点击','认识轮数','掌握率');
+  rows.push(head);
+
+  var totalRounds = state.rounds.length + 1;
+  order.forEach(function(l, idx){
+    var info = lemmaInfo.get(l);
+    var formsArr = [];
+    info.forms.forEach(function(x){ formsArr.push(x); });
+    var row = [idx+1, l, formsArr.join('/'), info.ph || '', info.count, info.zh || ''];
+    var knownCount = 0;
+    for(var i = 0; i < state.rounds.length; i++){
+      var sh = state.rounds[i].shown.indexOf(l) !== -1;
+      if(!sh) knownCount++;
+      row.push(sh ? '不认识' : '认识');
+    }
+    var shCur = state.shown.indexOf(l) !== -1;
+    if(!shCur) knownCount++;
+    row.push(shCur ? '不认识' : '认识');
+    row.push(state.clicks[l] || 0, knownCount, Math.round(knownCount * 100 / totalRounds) + '%');
+    rows.push(row);
+  });
+
+  var csv = '\ufeff' + rows.map(function(r){
+    return r.map(function(c){
+      c = String(c);
+      return /[",\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c;
+    }).join(',');
+  }).join('\r\n');
+
+  var d = new Date();
+  var ymd = d.getFullYear() + ('0' + (d.getMonth()+1)).slice(-2) + ('0' + d.getDate()).slice(-2);
+  var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '2022英语一新题型PartB_单词掌握情况_' + ymd + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+  toast('已导出掌握情况 CSV（共 ' + order.length + ' 词，' + totalRounds + ' 轮）');
+}
+
+function updateAll(){ updateProgress(); renderTabs(); renderTable(); }
+
+var toastTimer = null;
+function toast(msg){
+  var t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+}
+
+var ART = {
+  A: {ls:'wb2022partb_v1', csv:'2022英语一新题型PartB_单词掌握情况', header:'2022 Part B'}
+};
+var CUR = 'A';
+function $$w(){ return Array.prototype.slice.call(document.querySelectorAll('.artpanel:not(.hidden) w')); }
+
+function toggleAns(k){
+  var box = document.getElementById('answerBox' + k);
+  var hidden = box.classList.toggle('hidden');
+  document.getElementById('answerBtn' + k).textContent = hidden ? '显示参考答案' : '隐藏参考答案';
+  gradePicks(!hidden);
+}
+function goHome(){
+  if(location.protocol === 'file:'){
+    alert('本地文件没有总页面。网上总页：\nhttps://shuoshizaiyuan.github.io/kaoyan-vocab/xintixing.html');
+    return;
+  }
+  location.href = '../xintixing.html';
+}
+function exportProgress(){
+  var d = new Date();
+  var ymd = d.getFullYear() + ('0'+(d.getMonth()+1)).slice(-2) + ('0'+d.getDate()).slice(-2);
+  var blob = new Blob([JSON.stringify(state)], {type:'application/json'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '2022新题型PartB_进度备份_' + ymd + '.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+  toast('已备份进度（' + state.rounds.length + ' 轮）');
+}
+function collectAllStates(){
+  var full = {};
+  for(var k in ART){
+    try{ var raw = localStorage.getItem(ART[k].ls); if(raw){ full[ART[k].ls] = JSON.parse(raw); } }catch(e){}
+  }
+  return full;
+}
+function exportSyncCode(){
+  var full = collectAllStates();
+  var txt = JSON.stringify(full);
+  var done = function(){ toast('已复制同步码，去另一台设备点「粘贴同步码」即可'); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(done, function(){ prompt('自动复制失败，请手动复制以下内容：', txt); });
+  } else {
+    prompt('请复制以下内容（这是你的进度同步码）：', txt);
+  }
+}
+function importSyncCode(){
+  var txt = prompt('把另一台设备复制的同步码粘贴到这里：');
+  if(!txt) return;
+  try{
+    var full = JSON.parse(txt);
+    var n = 0;
+    for(var k in ART){ if(full[ART[k].ls] && full[ART[k].ls].rounds){ localStorage.setItem(ART[k].ls, JSON.stringify(full[ART[k].ls])); n++; } }
+    if(n === 0){ toast('同步码里没有识别到进度，请确认完整复制'); return; }
+    toast('已导入进度，刷新页面生效');
+    if(full[ART[CUR].ls] && full[ART[CUR].ls].rounds){ state = JSON.parse(JSON.stringify(full[ART[CUR].ls])); save(); applyView(); }
+  }catch(e){ toast('同步码无效，请完整复制后再试'); }
+}
+var SYNC_MODE_KEY = 'wb_sync_mode_v1';
+var SYNC_TOKEN_KEY = 'wb_sync_token_v1';
+var SYNC_FILE = 'progress.json';
+function getSyncMode(){ try{ return localStorage.getItem(SYNC_MODE_KEY) || 'local'; }catch(e){ return 'local'; } }
+function getSyncToken(){ try{ return localStorage.getItem(SYNC_TOKEN_KEY) || ''; }catch(e){ return ''; } }
+function setSyncMode(m){ try{ localStorage.setItem(SYNC_MODE_KEY, m); }catch(e){} }
+function setSyncToken(t){ try{ localStorage.setItem(SYNC_TOKEN_KEY, t); }catch(e){} }
+function syncApi(method, payload, cb){
+  var token = getSyncToken();
+  var xhr = new XMLHttpRequest();
+  xhr.open(method, 'https://api.github.com/repos/shuoshizaiyuan/kaoyan-xintixing/contents/' + SYNC_FILE);
+  xhr.setRequestHeader('Accept', 'application/vnd.github+json');
+  if(token) xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+  if(payload) xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function(){ cb && cb(xhr.status, xhr.responseText); };
+  xhr.onerror = function(){ cb && cb(0, ''); };
+  xhr.send(payload ? JSON.stringify(payload) : null);
+}
+function b64e(s){ return btoa(unescape(encodeURIComponent(s))); }
+function b64d(s){ return decodeURIComponent(escape(atob(s))); }
+function uploadToCloud(done){
+  var full = collectAllStates();
+  syncApi('GET', null, function(st, resp){
+    var sha = '';
+    if(st === 200){ try{ sha = JSON.parse(resp).sha; }catch(e){} }
+    var body = {message:'sync progress', content:b64e(JSON.stringify(full)), branch:'main'};
+    if(sha) body.sha = sha;
+    syncApi('PUT', body, function(st2){
+      if(st2 === 200 || st2 === 201){ if(done) done(true); }
+      else { toast('☁ 上传失败（' + st2 + '），请检查密钥'); if(done) done(false); }
+    });
+  });
+}
+function downloadFromCloud(done){
+  syncApi('GET', null, function(st, resp){
+    if(st !== 200){ if(done) done(false); return; }
+    try{
+      var full = JSON.parse(b64d(JSON.parse(resp).content));
+      var n = 0;
+      for(var k in ART){ if(full[ART[k].ls] && full[ART[k].ls].rounds){ localStorage.setItem(ART[k].ls, JSON.stringify(full[ART[k].ls])); n++; } }
+      toast('☁ 已从云端拉取 ' + n + ' 篇进度');
+      if(full[ART[CUR].ls] && full[ART[CUR].ls].rounds){ state = JSON.parse(JSON.stringify(full[ART[CUR].ls])); save(); applyView(); }
+      if(done) done(true);
+    }catch(e){ if(done) done(false); }
+  });
+}
+function toggleCloud(){
+  if(getSyncToken()){
+    if(confirm('当前已开启云同步（自动保存 / 自动读取）。\n\n点「确定」= 更换同步码；点「取消」= 保持现状。')){
+      var t = prompt('粘贴新的 GitHub 密钥（github_pat_ 开头）：');
+      if(t && t.trim()){ setSyncToken(t.trim()); setSyncMode('cloud'); toast('☁ 同步码已更新'); }
+    }
+    syncBtnLabel();
+    return;
+  }
+  var t = prompt('输入你的 GitHub 密钥（github_pat_ 开头；总页门户上也有统一设置入口）：');
+  if(!t || !t.trim()) return;
+  setSyncToken(t.trim());
+  setSyncMode('cloud');
+  syncBtnLabel();
+  toast('☁ 正在连接云端…');
+  downloadFromCloud(function(){ uploadToCloud(null); });
+}
+function syncBtnLabel(){
+  var b = document.getElementById('cloudBtn');
+  if(b) b.textContent = getSyncToken() ? '☁ 云同步：开' : '☁ 云同步：关';
+}
+function blankState(){ return {rounds:[], shown:[], clicks:{}, view:null}; }
+function dangerConfirm(opt, onOk){
+  var old = document.getElementById('dangerDlg');
+  if(old && old.parentNode){ old.parentNode.removeChild(old); }
+  var dlg = document.createElement('div');
+  dlg.id = 'dangerDlg';
+  dlg.setAttribute('style', 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,.5);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px');
+  var box = document.createElement('div');
+  box.setAttribute('style', 'background:#ffffff;border-radius:16px;padding:22px 24px;max-width:460px;width:100%;box-shadow:0 16px 48px rgba(15,23,42,.3);font-family:inherit;color:#1f2937;box-sizing:border-box');
+  var esc = function(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+  var html = ''
+    + '<div style="font-size:17px;font-weight:700;margin-bottom:10px">' + esc(opt.title) + '</div>'
+    + '<div style="font-size:14px;line-height:1.9;color:#475569">' + esc(opt.desc) + '</div>'
+    + '<div style="font-size:13.5px;line-height:1.7;color:#92400e;background:#fef3c7;border:1px solid #fcd34d;border-radius:10px;padding:10px 12px;margin:12px 0 14px">⚠️ 此操作<b>不可撤销</b>，执行后无法恢复。</div>'
+    + '<label style="display:flex;align-items:flex-start;gap:9px;font-size:14px;color:#374151;cursor:pointer;margin-bottom:18px;line-height:1.6"><input type="checkbox" id="dangerChk" style="width:17px;height:17px;margin-top:2px;flex:none"> <span>我已知悉上述情况，确认要执行该操作</span></label>'
+    + '<div style="display:flex;gap:10px;justify-content:flex-end;align-items:center">'
+    + '<button id="dangerCancel" style="padding:9px 18px;border:1px solid #d1d5db;background:#fff;color:#374151;border-radius:9px;font-size:14px;cursor:pointer">取消</button>'
+    + '<button id="dangerOk" disabled style="padding:9px 20px;border:none;background:#cbd5e1;color:#f8fafc;border-radius:9px;font-size:14px;font-weight:700;cursor:not-allowed">' + esc(opt.btnText || '确认执行') + '</button>'
+    + '</div>';
+  box.innerHTML = html;
+  dlg.appendChild(box);
+  document.body.appendChild(dlg);
+  var chk = document.getElementById('dangerChk');
+  var ok = document.getElementById('dangerOk');
+  var cancel = document.getElementById('dangerCancel');
+  function close(){ if(dlg.parentNode){ dlg.parentNode.removeChild(dlg); } }
+  chk.onchange = function(){
+    ok.disabled = !chk.checked;
+    if(chk.checked){ ok.style.background = '#dc2626'; ok.style.cursor = 'pointer'; }
+    else { ok.style.background = '#cbd5e1'; ok.style.cursor = 'not-allowed'; }
+  };
+  cancel.onclick = close;
+  ok.onclick = function(){ if(ok.disabled) return; close(); onOk && onOk(); };
+  dlg.onclick = function(e){ if(e.target === dlg){ close(); } };
+}
+function undoRound(){
+  if(!state.rounds || state.rounds.length === 0){ toast('本篇还没有已完成的轮次可退回'); return; }
+  var last = state.rounds[state.rounds.length - 1];
+  var n = state.rounds.length;
+  var cnt = (last && last.shown) ? last.shown.length : 0;
+  dangerConfirm({
+    title: '退回一轮',
+    desc: '点击确认按钮将撤销最近的一轮练习（第 ' + n + ' 轮，共点开 ' + cnt + ' 个词），该轮的词卡点开记录将被移除，页面退回上一轮完成后的状态。',
+    btnText: '确认退回'
+  }, function(){
+    state.rounds.pop();
+    state.shown = [];
+    state.view = null;
+    save(); applyView();
+    toast('已退回：现在处于第 ' + (state.rounds.length + 1) + ' 轮·进行中');
+  });
+}
+function clearArticle(){
+  if(!state.rounds.length && !Object.keys(state.clicks).length){ toast('本篇本来就是干净的'); return; }
+  dangerConfirm({
+    title: '清空本篇进度',
+    desc: '点击确认按钮将彻底清空本页面的全部练习进度：所有轮次记录、点开过的词卡记录、掌握情况与统计都会归零，页面回到从未练过的全新状态。清空后从第 1 轮重新开始，此操作不可恢复。',
+    btnText: '确认清空'
+  }, function(){
+    try{ localStorage.removeItem(LS_KEY); localStorage.setItem(LS_KEY + '_inited', '1'); }catch(e){}
+    state = blankState();
+    save(); applyView();
+    toast('已彻底清空，从第 1 轮重新开始');
+  });
+}
+var _baseSave = save;
+save = function(){ _baseSave(); maybeAutoSync(); };
+var _syncTimer = null;
+function maybeAutoSync(){
+  if(getSyncMode() !== 'cloud') return;
+  clearTimeout(_syncTimer);
+  _syncTimer = setTimeout(function(){ uploadToCloud(null); }, 4000);
+}
+function importProgress(ev){
+  var f = ev.target.files && ev.target.files[0];
+  if(!f) return;
+  var rd = new FileReader();
+  rd.onload = function(){
+    try{
+      var s = JSON.parse(rd.result);
+      if(!(s && s.rounds && s.shown && s.clicks)) throw 0;
+      state = s;
+      save();
+      applyView();
+      toast('已恢复进度（' + state.rounds.length + ' 轮）');
+    }catch(e){ toast('备份文件格式不对，导入失败'); }
+  };
+  rd.readAsText(f);
+  ev.target.value = '';
+}
+
+buildLemmaInfo();
+load();
+applyView();
+syncBtnLabel();
+if(getSyncToken()){ downloadFromCloud(null); }
+</script>
+
+<script>
+/* ===== 作答（41–45 选 A–G，本机保存，可自动判分） ===== */
+var ANS_KEY = 'wb2017partb_ans_v1';
+var KEY = {41:'F', 42:'E', 43:'A', 44:'C', 45:'G'};
+var picks = {};
+try{ picks = JSON.parse(localStorage.getItem(ANS_KEY)) || {}; }catch(e){ picks = {}; }
+function savePicks(){ try{ localStorage.setItem(ANS_KEY, JSON.stringify(picks)); }catch(e){} }
+function pick(q, letter){
+  picks[q] = (picks[q] === letter) ? null : letter;
+  if(!picks[q]) delete picks[q];
+  savePicks(); renderPicks();
+}
+function clearPick(q){ delete picks[q]; savePicks(); renderPicks(); }
+function renderPicks(graded){
+  Object.keys(KEY).forEach(function(q){
+    var box = document.getElementById('pick' + q);
+    if(!box) return;
+    Array.prototype.forEach.call(box.querySelectorAll('button'), function(b){
+      var L = b.getAttribute('data-l');
+      var chosen = picks[q] === L;
+      if(!graded){
+        b.className = chosen ? 'on' : '';
+        return;
+      }
+      if(L === KEY[q]){ b.className = chosen ? 'right' : 'ans'; }
+      else { b.className = chosen ? 'wrong' : ''; }
+    });
+  });
+}
+function gradePicks(on){ renderPicks(!!on); }
+renderPicks(false);
+</script>
+
+<script>
+/* 全站同步补丁 v2：原有代码一行不动，仅在末尾覆盖同名函数；密钥只在浏览器本地使用 */
+var ALL_KEYS = ["wb2012text1_v2", "wb2012text2_v2", "wb2012text3_v2", "wb2012text4_v2", "wb2013text1_v4", "wb2013text2_v3", "wb2012text3_v3", "wb2013text4_v3", "wb2014text1_v2", "wb2014text2_v2", "wb2014text3_v2", "wb2014text4_v2", "wb2015text1_v1", "wb2015text2_v1", "wb2015text3_v1", "wb2015text4_v1", "wb2016text1_v1", "wb2016text2_v1", "wb2016text3_v1", "wb2016text4_v1", "wb2017text1_v1", "wb2017text2_v1", "wb2017text3_v1", "wb2017text4_v1", "wb2018text1_v1", "wb2018text2_v1", "wb2018text3_v1", "wb2018text4_v1", "wb2019text1_v1", "wb2019text2_v1", "wb2019text3_v1", "wb2019text4_v1", "wb2020text1_v1", "wb2020text2_v1", "wb2020text3_v1", "wb2020text4_v1", "wb2022partb_v1", "wb2022partb_ans_v1", "wb2021text1_v1", "wb2021text2_v1", "wb2021text3_v1", "wb2021text4_v1", "wb2022text1_v1", "wb2022text2_v1", "wb2022text3_v1", "wb2022text4_v1", "wb2023text1_v1", "wb2023text2_v1", "wb2023text3_v1", "wb2023text4_v1", "wb2024text1_v1", "wb2024text2_v1", "wb2024text3_v1", "wb2024text4_v1", "wb2025text1_v1", "wb2025text2_v1", "wb2025text3_v1", "wb2025text4_v1", "wb2026text1_v1", "wb2026text2_v1", "wb2026text3_v1", "wb2026text4_v1", "wb2013_partb_v1", "wb2013_partb_ans_v1", "wb2014_partb_v1", "wb2014_partb_ans_v1", "wb2015_partb_v1", "wb2015_partb_ans_v1", "wb2016_partb_v1", "wb2016_partb_ans_v1", "wb2017_partb_v1", "wb2017_partb_ans_v1", "wb2018_partb_v1", "wb2018_partb_ans_v1", "wb2019_partb_v1", "wb2019_partb_ans_v1", "wb2020_partb_v1", "wb2020_partb_ans_v1", "wb2021_partb_v1", "wb2021_partb_ans_v1", "wb2023_partb_v1", "wb2023_partb_ans_v1", "wb2024_partb_v1", "wb2024_partb_ans_v1", "wb2025_partb_v1", "wb2025_partb_ans_v1", "wb2026_partb_v1", "wb2026_partb_ans_v1"];
+var SYNC_REPO = 'shuoshizaiyuan/kaoyan-vocab';
+function wbRich(v){
+  if(!v || typeof v !== 'object') return -1;
+  if(v.rounds && Array.isArray(v.rounds)) return v.rounds.length * 100000 + Object.keys(v.clicks || {}).length;
+  return Object.keys(v).length;
+}
+function wbMerge(base, inc){
+  var out = {}, k;
+  for(k in base){ if(Object.prototype.hasOwnProperty.call(base, k)) out[k] = base[k]; }
+  for(k in inc){
+    if(Object.prototype.hasOwnProperty.call(inc, k)){
+      if(!(k in out) || wbRich(inc[k]) > wbRich(out[k])) out[k] = inc[k];
+    }
+  }
+  return out;
+}
+function wbLocal(){
+  var o = {};
+  for(var i = 0; i < ALL_KEYS.length; i++){
+    try{ var r = localStorage.getItem(ALL_KEYS[i]); if(r) o[ALL_KEYS[i]] = JSON.parse(r); }catch(e){}
+  }
+  return o;
+}
+function collectAllStates(){ return wbLocal(); }
+function syncApi(method, payload, cb){
+  var token = getSyncToken();
+  var xhr = new XMLHttpRequest();
+  xhr.open(method, 'https://api.github.com/repos/' + SYNC_REPO + '/contents/progress.json');
+  xhr.setRequestHeader('Accept', 'application/vnd.github+json');
+  if(token) xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+  if(payload) xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function(){ cb && cb(xhr.status, xhr.responseText); };
+  xhr.onerror = function(){ cb && cb(0, ''); };
+  xhr.send(payload ? JSON.stringify(payload) : null);
+}
+function uploadToCloud(done){
+  var local = wbLocal();
+  syncApi('GET', null, function(st, resp){
+    var cloud = {}, sha = '';
+    if(st === 200){
+      try{ sha = JSON.parse(resp).sha; }catch(e){}
+      try{ cloud = JSON.parse(b64d(JSON.parse(resp).content)); }catch(e){}
+    }
+    var merged = wbMerge(cloud, local);
+    var body = {message:'sync progress (merged)', content:b64e(JSON.stringify(merged)), branch:'main'};
+    if(sha) body.sha = sha;
+    syncApi('PUT', body, function(st2){
+      if(st2 === 200 || st2 === 201){ if(done) done(true); }
+      else { toast('☁ 上传失败（' + st2 + '），请检查密钥'); if(done) done(false); }
+    });
+  });
+}
+function wbRefresh(){
+  try{
+    var cur = localStorage.getItem(LS_KEY);
+    if(cur){
+      var s = JSON.parse(cur);
+      if(s && s.rounds && s.shown && s.clicks){
+        state = s;
+        if(typeof _baseSave === 'function') _baseSave(); else save();
+        if(typeof applyView === 'function') applyView();
+      }
+    }
+  }catch(e){}
+  if(typeof renderPicks === 'function'){
+    try{ picks = JSON.parse(localStorage.getItem(typeof ANS_KEY !== 'undefined' ? ANS_KEY : 'wb2022partb_ans_v1')) || {}; }catch(e){}
+    renderPicks();
+  }
+}
+function downloadFromCloud(done){
+  syncApi('GET', null, function(st, resp){
+    if(st !== 200){ if(done) done(false); return; }
+    try{
+      var cloud = JSON.parse(b64d(JSON.parse(resp).content));
+      var merged = wbMerge(wbLocal(), cloud);
+      for(var i = 0; i < ALL_KEYS.length; i++){
+        var k = ALL_KEYS[i];
+        if(merged[k] !== undefined){ try{ localStorage.setItem(k, JSON.stringify(merged[k])); }catch(e){} }
+      }
+      wbRefresh();
+      if(done) done(true);
+    }catch(e){ if(done) done(false); }
+  });
+}
+function importSyncCode(){
+  var txt = prompt('把另一台设备复制的同步码粘贴到这里：');
+  if(!txt) return;
+  try{
+    var inc = JSON.parse(txt);
+    var merged = wbMerge(wbLocal(), inc), n = 0;
+    for(var i = 0; i < ALL_KEYS.length; i++){
+      var k = ALL_KEYS[i];
+      if(inc[k] !== undefined) n++;
+      if(merged[k] !== undefined){ try{ localStorage.setItem(k, JSON.stringify(merged[k])); }catch(e){} }
+    }
+    if(n === 0){ toast('同步码里没有识别到进度，请确认完整复制'); return; }
+    wbRefresh();
+    toast('已导入 ' + n + ' 项全站进度，刷新页面生效');
+  }catch(e){ toast('同步码无效，请完整复制后再试'); }
+}
+if(typeof savePicks === 'function'){
+  var _wbOrigSavePicks = savePicks;
+  savePicks = function(){ _wbOrigSavePicks(); if(typeof maybeAutoSync === 'function') maybeAutoSync(); };
+}
+if(getSyncToken()){ downloadFromCloud(null); }
+</script>
+
+</body>
+</html>
