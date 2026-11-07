@@ -1064,8 +1064,8 @@ function importProgress(ev){
 </script>
 
 <script>
-/* 全站同步补丁：原有代码一行不动，仅在末尾覆盖同名函数；密钥只在浏览器本地使用 */
-var ALL_KEYS = ["wb2012text1_v2", "wb2012text2_v2", "wb2012text3_v2", "wb2012text4_v2", "wb2013text1_v4", "wb2013text2_v3", "wb2012text3_v3", "wb2013text4_v3", "wb2014text1_v2", "wb2014text2_v2", "wb2014text3_v2", "wb2014text4_v2", "wb2015text1_v1", "wb2015text2_v1", "wb2015text3_v1", "wb2015text4_v1", "wb2016text1_v1", "wb2016text2_v1", "wb2016text3_v1", "wb2016text4_v1", "wb2017text1_v1", "wb2017text2_v1", "wb2017text3_v1", "wb2017text4_v1", "wb2018text1_v1", "wb2018text2_v1", "wb2018text3_v1", "wb2018text4_v1", "wb2019text1_v1", "wb2019text2_v1", "wb2019text3_v1", "wb2019text4_v1", "wb2020text1_v1", "wb2020text2_v1", "wb2020text3_v1", "wb2020text4_v1", "wb2022partb_v1", "wb2022partb_ans_v1"];
+/* 全站同步补丁 v2：原有代码一行不动，仅在末尾覆盖同名函数；密钥只在浏览器本地使用 */
+var ALL_KEYS = ["wb2012text1_v2", "wb2012text2_v2", "wb2012text3_v2", "wb2012text4_v2", "wb2013text1_v4", "wb2013text2_v3", "wb2012text3_v3", "wb2013text4_v3", "wb2014text1_v2", "wb2014text2_v2", "wb2014text3_v2", "wb2014text4_v2", "wb2015text1_v1", "wb2015text2_v1", "wb2015text3_v1", "wb2015text4_v1", "wb2016text1_v1", "wb2016text2_v1", "wb2016text3_v1", "wb2016text4_v1", "wb2017text1_v1", "wb2017text2_v1", "wb2017text3_v1", "wb2017text4_v1", "wb2018text1_v1", "wb2018text2_v1", "wb2018text3_v1", "wb2018text4_v1", "wb2019text1_v1", "wb2019text2_v1", "wb2019text3_v1", "wb2019text4_v1", "wb2020text1_v1", "wb2020text2_v1", "wb2020text3_v1", "wb2020text4_v1", "wb2022partb_v1", "wb2022partb_ans_v1", "wb2021text1_v1", "wb2021text2_v1", "wb2021text3_v1", "wb2021text4_v1", "wb2022text1_v1", "wb2022text2_v1", "wb2022text3_v1", "wb2022text4_v1", "wb2023text1_v1", "wb2023text2_v1", "wb2023text3_v1", "wb2023text4_v1", "wb2024text1_v1", "wb2024text2_v1", "wb2024text3_v1", "wb2024text4_v1", "wb2025text1_v1", "wb2025text2_v1", "wb2025text3_v1", "wb2025text4_v1", "wb2026text1_v1", "wb2026text2_v1", "wb2026text3_v1", "wb2026text4_v1", "wb2013_partb_v1", "wb2013_partb_ans_v1", "wb2014_partb_v1", "wb2014_partb_ans_v1", "wb2015_partb_v1", "wb2015_partb_ans_v1", "wb2016_partb_v1", "wb2016_partb_ans_v1", "wb2017_partb_v1", "wb2017_partb_ans_v1", "wb2018_partb_v1", "wb2018_partb_ans_v1", "wb2019_partb_v1", "wb2019_partb_ans_v1", "wb2020_partb_v1", "wb2020_partb_ans_v1", "wb2021_partb_v1", "wb2021_partb_ans_v1", "wb2023_partb_v1", "wb2023_partb_ans_v1", "wb2024_partb_v1", "wb2024_partb_ans_v1", "wb2025_partb_v1", "wb2025_partb_ans_v1", "wb2026_partb_v1", "wb2026_partb_ans_v1"];
 var SYNC_REPO = 'shuoshizaiyuan/kaoyan-vocab';
 function wbRich(v){
   if(!v || typeof v !== 'object') return -1;
@@ -1131,7 +1131,7 @@ function wbRefresh(){
     }
   }catch(e){}
   if(typeof renderPicks === 'function'){
-    try{ picks = JSON.parse(localStorage.getItem('wb2022partb_ans_v1')) || {}; }catch(e){}
+    try{ picks = JSON.parse(localStorage.getItem(typeof ANS_KEY !== 'undefined' ? ANS_KEY : 'wb2022partb_ans_v1')) || {}; }catch(e){}
     renderPicks();
   }
 }
